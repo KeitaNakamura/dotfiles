@@ -1,0 +1,18 @@
+export PATH="/usr/local/sbin:$PATH"
+
+# use color
+autoload -Uz colors
+colors
+
+# vim
+# bindkey -v
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# complete
+autoload -Uz compinit
+compinit
+
+setopt auto_pushd
+setopt share_history
+setopt ignore_eof

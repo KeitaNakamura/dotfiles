@@ -1,0 +1,12 @@
+"***** General Setting ******************************************************************************
+" colorscheme jellybeans
+" colorscheme hybrid
+" colorscheme desert
+" colorscheme sonofobsidian
+" colorscheme Tomorrow-Night
+" set background=light
+" colorscheme solarized
+" set guifont=Monaco:h11
+set guifont=Ricty:h13
+"****************************************************************************************************
+
