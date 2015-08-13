@@ -95,6 +95,9 @@ Plugin 'chriskempson/vim-tomorrow-theme'  " tomorrow night
 Plugin 'vim-scripts/twilight'             " twilight
 Plugin 'w0ng/vim-hybrid'                  " hybrid
 
+"< Tmux Navigator >
+Plugin 'christoomey/vim-tmux-navigator'
+
 " }}}
 
 " All of your Plugins must be added before the following line
@@ -343,6 +346,7 @@ set laststatus=2
 set nowrap
 set cursorline
 set foldmethod=marker
+set mouse=a
 hi clear cursorLine
 set encoding=utf-8
 set fileencodings=utf-8,sjis
@@ -352,6 +356,19 @@ au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
+
+set backspace=indent,eol,start
+
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+inoremap <special> <Esc> <Esc>hl
+set guicursor+=i:blinkwait0
 
 " LOCAL SETTING {{{1
 
@@ -388,7 +405,8 @@ augroup END
 " python {{{2
 function! s:python()
     setlocal autoindent
-    setlocal smartindent
+    " setlocal smartindent
+	setlocal indentkeys+=0#
 endfunction
 
 augroup vimrc-phthon
