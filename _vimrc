@@ -98,6 +98,9 @@ Plugin 'w0ng/vim-hybrid'                  " hybrid
 "< Tmux Navigator >
 Plugin 'christoomey/vim-tmux-navigator'
 
+"< Tmux Navigator >
+" Plugin 'Shougo/vimshell.vim'
+
 " }}}
 
 " All of your Plugins must be added before the following line
