@@ -322,8 +322,7 @@ let g:ycm_semantic_triggers.tex = [
 
 " vim-template {{{2
 
-let g:templates_no_builtin_templates = 1
-let g:templates_directory = '~/.vim/template'
+let g:vimtex_indent_enabled = 0
 
 " }}}
 
@@ -359,18 +358,20 @@ au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
+let g:templates_no_builtin_templates = 1
+let g:templates_directory = '~/.vim/template'
 
-" set backspace=indent,eol,start
-"
-" if exists('$TMUX')
-"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" else
-"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
-"
-" inoremap <special> <Esc> <Esc>hl
+set backspace=indent,eol,start
+
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+inoremap <special> <Esc> <Esc>hl
 " set guicursor+=i:blinkwait0
 
 " LOCAL SETTING {{{1
