@@ -26,7 +26,7 @@ Plugin 'vim-jp/vimdoc-ja'
 "< File explorer >
 Plugin 'scrooloose/nerdtree'
 Plugin 'Shougo/unite.vim'
-" Plugin 'Shougo/vimfiler.vim'
+Plugin 'Shougo/vimfiler.vim'
 Plugin 'ujihisa/unite-colorscheme'
 Plugin 'Shougo/neomru.vim'
 
@@ -360,18 +360,18 @@ set spelllang=en,cjk
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 
-set backspace=indent,eol,start
-
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-inoremap <special> <Esc> <Esc>hl
-set guicursor+=i:blinkwait0
+" set backspace=indent,eol,start
+"
+" if exists('$TMUX')
+"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
+"
+" inoremap <special> <Esc> <Esc>hl
+" set guicursor+=i:blinkwait0
 
 " LOCAL SETTING {{{1
 
