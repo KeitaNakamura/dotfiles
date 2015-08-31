@@ -166,7 +166,7 @@ let g:indentLine_color_term = 239
 " Tagbar {{{2
 nmap <F8> :TagbarToggle<CR>
 
-" lightline-hybrid {{{2
+" Lightline {{{2
 " let g:lightline = {
 " \	'colorscheme': 'hybrid',
 " \	'component': {
