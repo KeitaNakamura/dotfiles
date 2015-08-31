@@ -3,5 +3,6 @@ colorscheme solarized
 set background=dark
 syntax on
 set guifont=Ricty:h14
+hi clear cursorLine
 "****************************************************************************************************
 

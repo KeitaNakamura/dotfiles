@@ -332,7 +332,7 @@ let g:user  = "K.Nakamura"
 let g:email = "nakamura-keita-kn@ynu.jp"
 
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+colorscheme solarized
 set background=dark
 syntax on
 
