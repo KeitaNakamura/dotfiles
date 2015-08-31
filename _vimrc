@@ -177,7 +177,7 @@ nmap <F8> :TagbarToggle<CR>
 " \	}
 
 let g:lightline = {
-      \ 'colorscheme': 'hybrid',
+      \ 'colorscheme': 'solarized',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -332,8 +332,9 @@ let g:user  = "K.Nakamura"
 let g:email = "nakamura-keita-kn@ynu.jp"
 
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+colorscheme solarized
 syntax on
+set background=dark
 
 set number
 set hlsearch
@@ -347,9 +348,9 @@ set colorcolumn=110
 set laststatus=2
 set nowrap
 set cursorline
+hi clear cursorLine
 set foldmethod=marker
 set mouse=a
-hi clear cursorLine
 set encoding=utf-8
 set fileencodings=utf-8,sjis
 vnoremap <silent> <C-p> "0p<CR>
