@@ -398,7 +398,7 @@ augroup END
 " tex {{{2
 function! s:tex()
     setlocal expandtab
-    setlocal autoindent
+    " setlocal autoindent
     setlocal spell
 endfunction
 
