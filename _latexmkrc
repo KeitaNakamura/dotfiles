@@ -1,3 +1,6 @@
 $latex = 'platex -kanji=utf8 -synctex=1 %O %S';
 $dvipdf = 'dvipdfmx %S';
 $bibtex = 'pbibtex -kanji=utf8 %O %B';
+# $latex = 'latex -synctex=1 %O %S';
+# $dvipdf = 'dvipdfmx %S';
+# $bibtex = 'bibtex %O %B';
