@@ -126,6 +126,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
 let g:ctrlp_root_markers = ['makefile']
+" nnoremap <C-f> :CtrlP <ENTER>
 " Prefix: f
 " nnoremap f <Nop>
 " nnoremap fa :<C-u>CtrlP<Space>
@@ -141,7 +142,7 @@ let g:ctrlp_root_markers = ['makefile']
 " let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
 
 " NERD tree {{{2
-noremap <C-e> :NERDTreeToggle<CR>
+nnoremap <C-e> :NERDTreeToggle<CR>
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
@@ -355,6 +356,8 @@ set encoding=utf-8
 set fileencodings=utf-8,sjis
 vnoremap <silent> <C-p> "0p<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
+" nnoremap <C-n> gt
+" nnoremap <C-p> gT
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
