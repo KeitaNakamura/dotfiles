@@ -348,6 +348,8 @@ set whichwrap=b,s,h,l,<,>,[,]
 set colorcolumn=110
 set laststatus=2
 set nowrap
+set noswapfile
+set scrolloff=2
 set cursorline
 hi clear cursorLine
 set foldmethod=marker
