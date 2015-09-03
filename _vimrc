@@ -348,7 +348,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 set colorcolumn=110
 set laststatus=2
 set nowrap
-set noswapfile
+" set noswapfile
 set scrolloff=2
 set cursorline
 hi clear cursorLine
@@ -360,6 +360,8 @@ vnoremap <silent> <C-p> "0p<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 " nnoremap <C-n> gt
 " nnoremap <C-p> gT
+nnoremap j gj
+nnoremap k gk
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
@@ -405,6 +407,8 @@ function! s:tex()
     setlocal expandtab
     " setlocal autoindent
     setlocal spell
+	" setlocal wrap
+	setlocal textwidth=85
 endfunction
 
 augroup vimrc-tex
