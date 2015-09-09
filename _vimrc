@@ -307,6 +307,7 @@ let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.12/Skim.app/Contents/MacOS/Skim'
+" let g:vimtex_view_general_viewer = '~/Applications/Skim.app/Contents/MacOS/Skim'
 " let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/MacOS/Skim'
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -360,8 +361,8 @@ vnoremap <silent> <C-p> "0p<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 " nnoremap <C-n> gt
 " nnoremap <C-p> gT
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
@@ -408,7 +409,7 @@ function! s:tex()
     " setlocal autoindent
     setlocal spell
 	" setlocal wrap
-	setlocal textwidth=85
+	setlocal textwidth=80
 endfunction
 
 augroup vimrc-tex
