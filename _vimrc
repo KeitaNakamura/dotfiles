@@ -306,9 +306,8 @@ let g:vimtex_latexmk_continuous = 1
 let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.12/Skim.app/Contents/MacOS/Skim'
-" let g:vimtex_view_general_viewer = '~/Applications/Skim.app/Contents/MacOS/Skim'
-" let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/MacOS/Skim'
+let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.12/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '@line @pdf @tex'
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif

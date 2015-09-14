@@ -1,6 +1,7 @@
 $latex = 'platex -kanji=utf8 -synctex=1 %O %S';
-# $latex = 'platex -kanji=utf8 %O %S';
+# $latex = 'pdflatex -synctex=1 %O %S';
 $dvipdf = 'dvipdfmx %O %S';
 $bibtex = 'pbibtex -kanji=utf8 %O %B';
+# $bibtex = 'bibtex %O %B';
 $pdf_mode = 3;
 $pvc_view_file_via_temporary = 0;
