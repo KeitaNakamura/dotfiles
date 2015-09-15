@@ -62,6 +62,15 @@ Plugin 'cocopon/lightline-hybrid.vim'
 "< Comment out >
 Plugin 'tyru/caw.vim'
 
+"< UltiSnips >
+Plugin 'SirVer/ultisnips'
+
+"< Snippets >
+Plugin 'honza/vim-snippets'
+
+"< Supertab >
+Plugin 'ervandew/supertab'
+
 "< Align >
 Plugin 'Align'
 
@@ -156,6 +165,8 @@ set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
+" let g:ycm_key_list_select_completion   = [<C-TAB>’  , <Down>’]
+" let g:ycm_key_list_previous_completion = [<C-S-TAB>’,‘<Up>’  ]
 
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:i:toggle)
@@ -324,6 +335,17 @@ let g:ycm_semantic_triggers.tex = [
 " vim-template {{{2
 
 let g:vimtex_indent_enabled = 0
+
+" }}}
+" UltiSnips {{{2
+
+" let g:UltiSnipsExpandTrigger="<s-cr>"
+" let g:UltiSnipsListSnippets="<c-s-tab>"
+
+" }}}
+" Supertab {{{2
+
+" let g:SuperTabDefaultCompletionType = ‘<C-Tab>’
 
 " }}}
 
