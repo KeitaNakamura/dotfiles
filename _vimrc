@@ -39,6 +39,9 @@ Plugin 'tpope/vim-fugitive'
 "< Auto close brackets >
 Plugin 'jiangmiao/auto-pairs'
 
+"< Jedi >
+Plugin 'davidhalter/jedi-vim'
+
 "< Auto complete >
 Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
@@ -63,13 +66,13 @@ Plugin 'cocopon/lightline-hybrid.vim'
 Plugin 'tyru/caw.vim'
 
 "< UltiSnips >
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 
 "< Snippets >
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 
 "< Supertab >
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 
 "< Align >
 Plugin 'Align'
