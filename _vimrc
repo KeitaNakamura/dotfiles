@@ -154,7 +154,7 @@ let g:ctrlp_root_markers = ['makefile']
 " let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
 
 " NERD tree {{{2
-nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
@@ -320,7 +320,7 @@ let g:vimtex_latexmk_continuous = 1
 let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.12/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.13/Skim.app/Contents/SharedSupport/displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -358,7 +358,7 @@ let g:user  = "K.Nakamura"
 let g:email = "nakamura-keita-kn@ynu.jp"
 
 let g:hybrid_use_Xresources = 1 " for GVim
-colorscheme solarized
+colorscheme hybrid
 set background=dark
 syntax on
 
