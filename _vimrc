@@ -48,6 +48,9 @@ Plugin 'Valloric/YouCompleteMe'
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.sh --clang-completer
 
+"< Syntastic >
+Plugin 'scrooloose/syntastic'
+
 "< Ctags >
 Plugin 'soramugi/auto-ctags.vim'
 
@@ -93,7 +96,8 @@ Plugin 'lervag/vimtex'
 Plugin 'aperezdc/vim-template'
 
 "< Color scheme (:Unite colorscheme -auto-preview) >
-Plugin 'altercation/vim-colors-solarized' " solarized
+" Plugin 'altercation/vim-colors-solarized' " solarized
+Plugin 'jwhitley/vim-colors-solarized'    " solarized for syntastic
 Plugin 'croaker/mustang-vim'              " mustang
 Plugin 'jeffreyiacono/vim-colors-wombat'  " wombat
 Plugin 'nanotech/jellybeans.vim'          " jellybeans
@@ -163,6 +167,9 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit<ENTER>
 " noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
 
+" Jedi {{{2
+let g:jedi#show_call_signatures = 2
+
 " YouCompleteMe {{{2
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -170,6 +177,9 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
 " let g:ycm_key_list_select_completion   = [<C-TAB>’  , <Down>’]
 " let g:ycm_key_list_previous_completion = [<C-S-TAB>’,‘<Up>’  ]
+
+" Syntastic {{{2
+let g:syntastic_python_checkers = ['flake8']
 
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:i:toggle)
@@ -373,6 +383,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 set colorcolumn=110
 set laststatus=2
 set nowrap
+set noshowmode
 " set noswapfile
 set scrolloff=2
 set cursorline
