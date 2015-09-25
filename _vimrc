@@ -330,7 +330,8 @@ let g:vimtex_latexmk_continuous = 1
 let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.13/Skim.app/Contents/SharedSupport/displayline'
+" let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.13/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -404,6 +405,7 @@ let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 let g:templates_no_builtin_templates = 1
 let g:templates_directory = '~/.vim/template'
+" let g:ycm_path_to_python_interpreter = '~/.pyenv/shims'
 
 set backspace=indent,eol,start
 
