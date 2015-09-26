@@ -39,6 +39,9 @@ Plugin 'tpope/vim-fugitive'
 "< Auto close brackets >
 Plugin 'jiangmiao/auto-pairs'
 
+"< Julia-vim >
+Plugin 'JuliaLang/julia-vim'
+
 "< Jedi >
 Plugin 'davidhalter/jedi-vim'
 
@@ -169,12 +172,14 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 
 " Jedi {{{2
 let g:jedi#show_call_signatures = 2
+" let g:jedi#completions_enabled = 0
 
 " YouCompleteMe {{{2
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
+let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 " let g:ycm_key_list_select_completion   = [<C-TAB>’  , <Down>’]
 " let g:ycm_key_list_previous_completion = [<C-S-TAB>’,‘<Up>’  ]
 
@@ -464,4 +469,16 @@ endfunction
 augroup vimrc-phthon
     autocmd!
     autocmd FileType python call s:python()
+augroup END
+
+" julia {{{2
+function! s:julia()
+    setlocal autoindent
+    setlocal smartindent
+	" setlocal indentkeys+=0#
+endfunction
+
+augroup vimrc-julia
+    autocmd!
+    autocmd FileType julia call s:julia()
 augroup END
