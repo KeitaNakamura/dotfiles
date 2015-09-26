@@ -182,6 +182,7 @@ let g:ycm_confirm_extra_conf = 1
 let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 " let g:ycm_key_list_select_completion   = [<C-TAB>’  , <Down>’]
 " let g:ycm_key_list_previous_completion = [<C-S-TAB>’,‘<Up>’  ]
+" let g:ycm_path_to_python_interpreter = '~/.pyenv/shims'
 
 " Syntastic {{{2
 let g:syntastic_python_checkers = ['flake8']
@@ -410,7 +411,6 @@ let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 let g:templates_no_builtin_templates = 1
 let g:templates_directory = '~/.vim/template'
-" let g:ycm_path_to_python_interpreter = '~/.pyenv/shims'
 
 set backspace=indent,eol,start
 
