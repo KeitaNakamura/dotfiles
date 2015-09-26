@@ -474,9 +474,6 @@ augroup END
 " julia {{{2
 function! s:julia()
     setlocal expandtab
-    " setlocal autoindent
-    " setlocal smartindent
-	" setlocal indentkeys+=0#
 endfunction
 
 augroup vimrc-julia
