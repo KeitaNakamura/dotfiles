@@ -473,8 +473,9 @@ augroup END
 
 " julia {{{2
 function! s:julia()
-    setlocal autoindent
-    setlocal smartindent
+    setlocal expandtab
+    " setlocal autoindent
+    " setlocal smartindent
 	" setlocal indentkeys+=0#
 endfunction
 
