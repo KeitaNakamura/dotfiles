@@ -5,9 +5,8 @@ colors
 # vim
 # bindkey -v
 
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 # complete
+fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -Uz compinit
 compinit
 
