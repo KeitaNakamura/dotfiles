@@ -471,6 +471,7 @@ augroup END
 " julia {{{2
 function! s:julia()
     setlocal expandtab
+	setlocal foldmethod=indent
 endfunction
 
 augroup vimrc-julia
