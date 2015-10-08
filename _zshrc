@@ -1,3 +1,5 @@
+# export PATH=$PATH:"/Applications/Julia-0.3.11.app/Contents/Resources/julia/bin"
+
 # use color
 autoload -Uz colors
 colors
@@ -13,3 +15,4 @@ compinit
 setopt auto_pushd
 setopt share_history
 setopt ignore_eof
+export PATH="/usr/local/sbin:$PATH"

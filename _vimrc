@@ -28,7 +28,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'ujihisa/unite-colorscheme'
-Plugin 'Shougo/neomru.vim'
 
 "< CtrlP >
 Plugin 'kien/ctrlp.vim'
