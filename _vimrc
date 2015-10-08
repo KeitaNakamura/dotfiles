@@ -376,7 +376,7 @@ let g:previm_show_header = 0
 augroup PrevimSetting
 	autocmd!
 	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-end
+augroup END
 
 " }}}
 
