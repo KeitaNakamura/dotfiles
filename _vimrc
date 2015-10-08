@@ -98,6 +98,9 @@ Plugin 'lervag/vimtex'
 "< Template >
 Plugin 'aperezdc/vim-template'
 
+"< Previm >
+Plugin 'kannokanno/previm'
+
 "< Color scheme (:Unite colorscheme -auto-preview) >
 " Plugin 'altercation/vim-colors-solarized' " solarized
 Plugin 'jwhitley/vim-colors-solarized'    " solarized for syntastic
@@ -365,6 +368,17 @@ let g:vimtex_indent_enabled = 0
 " let g:SuperTabDefaultCompletionType = ‘<C-Tab>’
 
 " }}}
+" Previm {{{2
+
+let g:previm_open_cmd = 'open -a Safari'
+let g:previm_show_header = 0
+" let g:previm_enable_realtime = 1
+augroup PrevimSetting
+	autocmd!
+	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+end
+
+" }}}
 
 " GLOBAL SETTING {{{1
 
@@ -384,7 +398,8 @@ set tabstop=4
 set shiftwidth=4
 set incsearch
 set whichwrap=b,s,h,l,<,>,[,]
-set colorcolumn=110
+" set colorcolumn=110
+set colorcolumn=80
 set laststatus=2
 set nowrap
 set noshowmode
