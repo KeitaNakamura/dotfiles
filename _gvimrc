@@ -1,5 +1,6 @@
 "***** General Setting ******************************************************************************
-colorscheme solarized
+" colorscheme solarized
+colorscheme molokai
 set background=dark
 syntax on
 set guifont=Ricty:h14

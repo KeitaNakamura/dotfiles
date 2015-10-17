@@ -48,7 +48,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
 " cd ~/.vim/bundle/YouCompleteMe
-" ./install.sh --clang-completer
+" ./install.py --clang-completer
 
 "< Syntastic >
 Plugin 'scrooloose/syntastic'
@@ -207,7 +207,7 @@ nmap <F8> :TagbarToggle<CR>
 " \	}
 
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'default',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -384,8 +384,9 @@ augroup END
 let g:user  = "K.Nakamura"
 let g:email = "nakamura-keita-kn@ynu.jp"
 
-let g:hybrid_use_Xresources = 1 " for GVim
-colorscheme hybrid
+" let g:hybrid_use_Xresources = 1 " for GVim
+" colorscheme hybrid
+colorscheme molokai
 set background=dark
 syntax on
 
