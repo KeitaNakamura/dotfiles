@@ -1,9 +1,9 @@
 "***** General Setting ******************************************************************************
 " colorscheme solarized
-colorscheme molokai
-set background=dark
-syntax on
+" colorscheme molokai
+" set background=dark
+" syntax on
+" hi clear cursorLine
 set guifont=Ricty:h14
-hi clear cursorLine
 "****************************************************************************************************
 

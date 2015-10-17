@@ -61,7 +61,7 @@ Plugin 'majutsushi/tagbar'
 
 "< Status line >
 Plugin 'itchyny/lightline.vim'
-Plugin 'cocopon/lightline-hybrid.vim'
+" Plugin 'cocopon/lightline-hybrid.vim'
 " Plugin 'bling/vim-airline'
 
 "< For using gdb debugger >
@@ -178,7 +178,8 @@ let g:jedi#show_call_signatures = 2
 
 " YouCompleteMe {{{2
 set completeopt=menuone
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
 let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
@@ -197,14 +198,14 @@ let g:indentLine_color_term = 239
 nmap <F8> :TagbarToggle<CR>
 
 " Lightline {{{2
-" let g:lightline = {
-" \	'colorscheme': 'hybrid',
-" \	'component': {
-" \		'readonly': '%{&readonly?"⭤":""}',
-" \	},
-" \	'separator': { 'left': '⮀', 'right': '⮂' },
-" \	'subseparator': { 'left': '⮁', 'right': '⮃' }
-" \	}
+let g:lightline = {
+\	'colorscheme': 'hybrid',
+\	'component': {
+\		'readonly': '%{&readonly?"⭤":""}',
+\	},
+\	'separator': { 'left': '⮀', 'right': '⮂' },
+\	'subseparator': { 'left': '⮁', 'right': '⮃' }
+\	}
 
 let g:lightline = {
       \ 'colorscheme': 'default',
@@ -387,9 +388,12 @@ let g:email = "nakamura-keita-kn@ynu.jp"
 " let g:hybrid_use_Xresources = 1 " for GVim
 " colorscheme hybrid
 colorscheme molokai
+let g:molokai_original = 1
 set background=dark
 syntax on
+hi clear cursorLine
 
+set vb t_vb=
 set number
 set hlsearch
 set ignorecase
@@ -406,7 +410,7 @@ set noshowmode
 " set noswapfile
 set scrolloff=2
 set cursorline
-hi clear cursorLine
+" hi clear cursorLine
 set foldmethod=marker
 set mouse=a
 set encoding=utf-8
@@ -436,6 +440,11 @@ endif
 
 inoremap <special> <Esc> <Esc>hl
 " set guicursor+=i:blinkwait0
+
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
 
 " LOCAL SETTING {{{1
 
