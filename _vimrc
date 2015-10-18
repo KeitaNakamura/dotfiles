@@ -146,7 +146,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
-let g:ctrlp_root_markers = ['makefile']
+" let g:ctrlp_root_markers = ['makefile']
 " nnoremap <C-f> :CtrlP <ENTER>
 " Prefix: f
 " nnoremap f <Nop>
@@ -164,6 +164,7 @@ let g:ctrlp_root_markers = ['makefile']
 
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+" nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
@@ -199,33 +200,47 @@ nmap <F8> :TagbarToggle<CR>
 
 " Lightline {{{2
 let g:lightline = {
-\	'colorscheme': 'hybrid',
-\	'component': {
-\		'readonly': '%{&readonly?"⭤":""}',
-\	},
-\	'separator': { 'left': '⮀', 'right': '⮂' },
-\	'subseparator': { 'left': '⮁', 'right': '⮃' }
-\	}
-
-let g:lightline = {
-      \ 'colorscheme': 'default',
-      \ 'mode_map': { 'c': 'NORMAL' },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'modified': 'LightLineModified',
-      \   'readonly': 'LightLineReadonly',
-      \   'fugitive': 'LightLineFugitive',
-      \   'filename': 'LightLineFilename',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
+\   'colorscheme': 'default',
+\   'mode_map': { 'c': 'NORMAL' },
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+\   },
+\   'component_function': {
+\     'modified': 'LightLineModified',
+\     'readonly': 'LightLineReadonly',
+\     'fugitive': 'LightLineFugitive',
+\     'filename': 'LightLineFilename',
+\     'fileformat': 'LightLineFileformat',
+\     'filetype': 'LightLineFiletype',
+\     'fileencoding': 'LightLineFileencoding',
+\     'mode': 'LightLineMode',
+\   },
+\     'component': {
+\     	'readonly': '%{&readonly?"⭤":""}',
+\     },
+\   }
+" let g:lightline = {
+" \   'colorscheme': 'default',
+" \   'mode_map': { 'c': 'NORMAL' },
+" \   'active': {
+" \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+" \   },
+" \   'component_function': {
+" \     'modified': 'LightLineModified',
+" \     'readonly': 'LightLineReadonly',
+" \     'fugitive': 'LightLineFugitive',
+" \     'filename': 'LightLineFilename',
+" \     'fileformat': 'LightLineFileformat',
+" \     'filetype': 'LightLineFiletype',
+" \     'fileencoding': 'LightLineFileencoding',
+" \     'mode': 'LightLineMode',
+" \   },
+" \     'component': {
+" \     	'readonly': '%{&readonly?"⭤":""}',
+" \     },
+" \   'separator': { 'left': '⮀', 'right': '⮂' },
+" \   'subseparator': { 'left': '⮁', 'right': '⮃' }
+" \   }
 
 function! LightLineModified()
   return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'

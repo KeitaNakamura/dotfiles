@@ -4,6 +4,7 @@
 " set background=dark
 " syntax on
 " hi clear cursorLine
-set guifont=Ricty:h14
+" set guifont=Ricty:h14
+set guifont=Monaco:h11
 "****************************************************************************************************
 
