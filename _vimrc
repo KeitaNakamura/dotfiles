@@ -180,9 +180,6 @@ let g:jedi#show_call_signatures = 2
 " YouCompleteMe {{{2
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
-" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 1
 let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 
 " Syntastic {{{2
