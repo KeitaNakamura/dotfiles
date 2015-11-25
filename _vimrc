@@ -51,7 +51,7 @@ Plugin 'Valloric/YouCompleteMe'
 " ./install.py --clang-completer
 
 "< Syntastic >
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 
 "< Ctags >
 Plugin 'soramugi/auto-ctags.vim'
@@ -176,6 +176,9 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " Jedi {{{2
 let g:jedi#show_call_signatures = 2
 " let g:jedi#completions_enabled = 0
+
+" Julia {{{2
+" let g:latex_to_unicode_auto = 1
 
 " YouCompleteMe {{{2
 set completeopt=menuone
