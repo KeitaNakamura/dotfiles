@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
-# Copyright (C) %DATE% %USER%, All rights reserved.
+# Created by %USER% on %DATE%.
 # e-mail: %MAIL%
 
 %HERE%

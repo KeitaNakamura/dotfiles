@@ -1,4 +1,4 @@
-# Copyright (C) %DATE% %USER%, All rights reserved.
+# Created by %USER% on %DATE%.
 # e-mail: %MAIL%
 
 %HERE%

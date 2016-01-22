@@ -42,13 +42,15 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'JuliaLang/julia-vim'
 
 "< Jedi >
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 
 "< Auto complete >
 Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
+
+" Plugin 'justmao945/vim-clang'
 
 "< Syntastic >
 " Plugin 'scrooloose/syntastic'
@@ -174,7 +176,7 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
 
 " Jedi {{{2
-let g:jedi#show_call_signatures = 2
+" let g:jedi#show_call_signatures = 2
 " let g:jedi#completions_enabled = 0
 
 " Julia {{{2
@@ -183,10 +185,14 @@ let g:jedi#show_call_signatures = 2
 " YouCompleteMe {{{2
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
-let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
+" let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
+
+" vim-clang {{{2
+let g:clang_c_options = '-std=gnu11'
+let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " Syntastic {{{2
-let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['flake8']
 
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:i:toggle)
@@ -332,14 +338,14 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
+" augroup AutoSyntastic
+"   autocmd!
+"   autocmd BufWritePost *.c,*.cpp call s:syntastic()
+" augroup END
+" function! s:syntastic()
+"   SyntasticCheck
+"   call lightline#update()
+" endfunction
 
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
@@ -431,12 +437,12 @@ set mouse=a
 set encoding=utf-8
 set fileencodings=utf-8,sjis
 vnoremap <silent> <C-p> "0p<CR>
-nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 " nnoremap <C-n> gt
 " nnoremap <C-p> gT
 " nnoremap j gj
 " nnoremap k gk
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+au QuickfixCmdPost grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
@@ -460,6 +466,7 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
+
 
 " LOCAL SETTING {{{1
 
@@ -487,7 +494,9 @@ function! s:tex()
     " setlocal autoindent
     setlocal spell
 	" setlocal wrap
-	setlocal textwidth=80
+	" setlocal textwidth=80
+	setlocal tabstop=2
+	setlocal shiftwidth=2
 endfunction
 
 augroup vimrc-tex
@@ -516,4 +525,23 @@ endfunction
 augroup vimrc-julia
     autocmd!
     autocmd FileType julia call s:julia()
+augroup END
+
+" fortran {{{2
+function! s:fortran()
+	let fortran_do_enddo=1
+	let fortran_free_source=1
+	let fortran_fold=1
+	filetype plugin indent on
+	setlocal smarttab
+    setlocal expandtab
+    setlocal smartindent
+    setlocal autoindent
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+endfunction
+
+augroup vimrc-fortran
+    autocmd!
+    autocmd FileType fortran call s:fortran()
 augroup END
