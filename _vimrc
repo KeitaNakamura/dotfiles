@@ -180,6 +180,9 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " let g:jedi#completions_enabled = 0
 
 " Julia {{{2
+" let g:latex_to_unicode_file_types = ".md"
+noremap <expr> <F7> LaTeXtoUnicode#Toggle()
+inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
 " let g:latex_to_unicode_auto = 1
 
 " YouCompleteMe {{{2
