@@ -13,9 +13,12 @@ export LC_ALL=ja_JP.UTF-8
 
 # complete
 fpath=(/usr/local/share/zsh-completions $fpath)
-autoload -Uz compinit
-compinit -u
+autoload -U compinit
+compinit
 
 setopt auto_pushd
 setopt share_history
 setopt ignore_eof
+
+# copy corrent directory path
+alias cpwd="pwd | tr -d '\n' | pbcopy"
