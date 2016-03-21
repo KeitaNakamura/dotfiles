@@ -64,7 +64,7 @@ Plugin 'majutsushi/tagbar'
 "< Status line >
 Plugin 'itchyny/lightline.vim'
 " Plugin 'cocopon/lightline-hybrid.vim'
-" Plugin 'bling/vim-airline'
+" Plugin 'vim-airline/vim-airline'
 
 "< For using gdb debugger >
 " Plugin 'vim-scripts/Conque-GDB'
@@ -95,6 +95,7 @@ Plugin 'rking/ag.vim'
 
 "< Latex >
 Plugin 'lervag/vimtex'
+" Plugin 'Konfekt/FastFold'
 
 "< Template >
 Plugin 'aperezdc/vim-template'
@@ -117,9 +118,14 @@ Plugin 'tomasr/molokai'                   " molokai
 Plugin 'chriskempson/vim-tomorrow-theme'  " tomorrow night
 Plugin 'vim-scripts/twilight'             " twilight
 Plugin 'w0ng/vim-hybrid'                  " hybrid
+Plugin 'freeo/vim-kalisi'                 " kalisi
+Plugin 'morhetz/gruvbox'                  " gruvbox
+Plugin 'toupeira/vim-desertink'           " desertink
+Plugin 'sjl/badwolf'                      " badwolf
+Plugin 'itchyny/landscape.vim'            " landscape
 
 "< Tmux Navigator >
-Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'christoomey/vim-tmux-navigator'
 
 "< Tmux Navigator >
 " Plugin 'Shougo/vimshell.vim'
@@ -167,6 +173,10 @@ endif
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
+augroup nerdtree-bugfix
+    autocmd!
+augroup END
+autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
@@ -356,10 +366,12 @@ let g:vimshell_force_overwrite_statusline = 0
 
 " vimtex {{{2
 let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_manual = 1
 let g:vimtex_latexmk_continuous = 1
 let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
+let g:vimtex_indent_enabled = 0
 " let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.13/Skim.app/Contents/SharedSupport/displayline'
 let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
@@ -378,7 +390,6 @@ let g:ycm_semantic_triggers.tex = [
 
 " vim-template {{{2
 
-let g:vimtex_indent_enabled = 0
 
 " }}}
 " UltiSnips {{{2
@@ -436,6 +447,7 @@ set scrolloff=2
 set cursorline
 " hi clear cursorLine
 set foldmethod=marker
+
 set mouse=a
 set encoding=utf-8
 set fileencodings=utf-8,sjis
@@ -465,10 +477,16 @@ endif
 inoremap <special> <Esc> <Esc>hl
 " set guicursor+=i:blinkwait0
 
+" disable left and right sides scroll bar
 set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
 
 
 " LOCAL SETTING {{{1
@@ -498,6 +516,7 @@ function! s:tex()
     setlocal spell
 	" setlocal wrap
 	" setlocal textwidth=80
+	" setlocal foldmethod=manual
 	setlocal tabstop=2
 	setlocal shiftwidth=2
 endfunction
