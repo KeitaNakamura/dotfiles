@@ -1,8 +1,8 @@
-"*********************************************************************
+"************************************************
 " File:        .vimrc
-" Description: A vim setting file which is compatible with Mac OS X.
+" Description: A vim setting file for Mac OS X.
 " Author:      Keita Nakamura
-"*********************************************************************
+"************************************************
 
 " SETTING FOR PLUGIN MANAGER 'VUNDLE' {{{1
 
@@ -41,19 +41,11 @@ Plugin 'jiangmiao/auto-pairs'
 "< Julia-vim >
 Plugin 'JuliaLang/julia-vim'
 
-"< Jedi >
-" Plugin 'davidhalter/jedi-vim'
-
 "< Auto complete >
 Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
-
-" Plugin 'justmao945/vim-clang'
-
-"< Syntastic >
-" Plugin 'scrooloose/syntastic'
 
 "< Ctags >
 Plugin 'soramugi/auto-ctags.vim'
@@ -66,20 +58,8 @@ Plugin 'itchyny/lightline.vim'
 " Plugin 'cocopon/lightline-hybrid.vim'
 " Plugin 'vim-airline/vim-airline'
 
-"< For using gdb debugger >
-" Plugin 'vim-scripts/Conque-GDB'
-
 "< Comment out >
 Plugin 'tyru/caw.vim'
-
-"< UltiSnips >
-" Plugin 'SirVer/ultisnips'
-
-"< Snippets >
-" Plugin 'honza/vim-snippets'
-
-"< Supertab >
-" Plugin 'ervandew/supertab'
 
 "< Align >
 Plugin 'Align'
@@ -99,9 +79,6 @@ Plugin 'lervag/vimtex'
 
 "< Template >
 Plugin 'aperezdc/vim-template'
-
-"< Previm >
-Plugin 'kannokanno/previm'
 
 "< Color scheme (:Unite colorscheme -auto-preview) >
 " Plugin 'altercation/vim-colors-solarized' " solarized
@@ -123,12 +100,6 @@ Plugin 'morhetz/gruvbox'                  " gruvbox
 Plugin 'toupeira/vim-desertink'           " desertink
 Plugin 'sjl/badwolf'                      " badwolf
 Plugin 'itchyny/landscape.vim'            " landscape
-
-"< Tmux Navigator >
-" Plugin 'christoomey/vim-tmux-navigator'
-
-"< Tmux Navigator >
-" Plugin 'Shougo/vimshell.vim'
 
 " }}}
 
@@ -154,25 +125,9 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
-" let g:ctrlp_root_markers = ['makefile']
-" nnoremap <C-f> :CtrlP <ENTER>
-" Prefix: f
-" nnoremap f <Nop>
-" nnoremap fa :<C-u>CtrlP<Space>
-" nnoremap fb :<C-u>CtrlPBuffer<CR>
-" nnoremap fd :<C-u>CtrlPDir<CR>
-" nnoremap ff :<C-u>CtrlP<CR>
-" nnoremap fl :<C-u>CtrlPLine<CR>
-" nnoremap fm :<C-u>CtrlPMRUFiles<CR>
-" nnoremap fq :<C-u>CtrlPQuickfix<CR>
-" nnoremap fs :<C-u>CtrlPMixed<CR>
-" nnoremap ft :<C-u>CtrlPTag<CR>
-" let g:ctrlp_map = '<Nop>'
-" let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
 
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
-" nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
 augroup nerdtree-bugfix
     autocmd!
 augroup END
@@ -185,10 +140,6 @@ autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
 " noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit<ENTER>
 " noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
 
-" Jedi {{{2
-" let g:jedi#show_call_signatures = 2
-" let g:jedi#completions_enabled = 0
-
 " Julia {{{2
 " let g:latex_to_unicode_file_types = ".md"
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
@@ -199,13 +150,6 @@ inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
-
-" vim-clang {{{2
-let g:clang_c_options = '-std=gnu11'
-let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
-
-" Syntastic {{{2
-" let g:syntastic_python_checkers = ['flake8']
 
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:i:toggle)
@@ -238,28 +182,6 @@ let g:lightline = {
 \     	'readonly': '%{&readonly?"⭤":""}',
 \     },
 \   }
-" let g:lightline = {
-" \   'colorscheme': 'default',
-" \   'mode_map': { 'c': 'NORMAL' },
-" \   'active': {
-" \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-" \   },
-" \   'component_function': {
-" \     'modified': 'LightLineModified',
-" \     'readonly': 'LightLineReadonly',
-" \     'fugitive': 'LightLineFugitive',
-" \     'filename': 'LightLineFilename',
-" \     'fileformat': 'LightLineFileformat',
-" \     'filetype': 'LightLineFiletype',
-" \     'fileencoding': 'LightLineFileencoding',
-" \     'mode': 'LightLineMode',
-" \   },
-" \     'component': {
-" \     	'readonly': '%{&readonly?"⭤":""}',
-" \     },
-" \   'separator': { 'left': '⮀', 'right': '⮂' },
-" \   'subseparator': { 'left': '⮁', 'right': '⮃' }
-" \   }
 
 function! LightLineModified()
   return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -382,37 +304,9 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
             \ ]
 
-" ConqueGdb {{{2
-" let g:ConqueGdb_Leader = '<Space>'
-" let g:ConqueTerm_Color = 2         " 1: strip color after 200 lines, 2: always with color
-" let g:ConqueTerm_CloseOnEnd = 1    " close conque when program ends running
-" let g:ConqueTerm_StartMessages = 0 " display warning messages if conqueTerm is configured incorrectly 
-
 " vim-template {{{2
-
-
-" }}}
-" UltiSnips {{{2
-
-" let g:UltiSnipsExpandTrigger="<s-cr>"
-" let g:UltiSnipsListSnippets="<c-s-tab>"
-
-" }}}
-" Supertab {{{2
-
-" let g:SuperTabDefaultCompletionType = ‘<C-Tab>’
-
-" }}}
-" Previm {{{2
-
-let g:previm_open_cmd = 'open -a Safari'
-let g:previm_show_header = 0
-" let g:previm_enable_realtime = 1
-augroup PrevimSetting
-	autocmd!
-	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
-
+let g:templates_no_builtin_templates = 1
+let g:templates_directory = '~/.vim/template'
 " }}}
 
 " GLOBAL SETTING {{{1
@@ -437,45 +331,24 @@ set tabstop=4
 set shiftwidth=4
 set incsearch
 set whichwrap=b,s,h,l,<,>,[,]
-" set colorcolumn=110
 set colorcolumn=80
 set laststatus=2
 set nowrap
 set noshowmode
-" set noswapfile
 set scrolloff=2
 set cursorline
-" hi clear cursorLine
 set foldmethod=marker
 
 set mouse=a
 set encoding=utf-8
 set fileencodings=utf-8,sjis
-vnoremap <silent> <C-p> "0p<CR>
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
-" nnoremap <C-n> gt
-" nnoremap <C-p> gT
-" nnoremap j gj
-" nnoremap k gk
 au QuickfixCmdPost grep,grepadd,vimgrep copen
 set spelllang=en,cjk
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
-let g:templates_no_builtin_templates = 1
-let g:templates_directory = '~/.vim/template'
 
 set backspace=indent,eol,start
-
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-inoremap <special> <Esc> <Esc>hl
-" set guicursor+=i:blinkwait0
 
 " disable left and right sides scroll bar
 set guioptions-=r
@@ -512,10 +385,7 @@ augroup END
 " tex {{{2
 function! s:tex()
     setlocal expandtab
-    " setlocal autoindent
     setlocal spell
-	" setlocal wrap
-	" setlocal textwidth=80
 	" setlocal foldmethod=manual
 	setlocal tabstop=2
 	setlocal shiftwidth=2
