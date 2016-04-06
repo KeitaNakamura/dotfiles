@@ -100,6 +100,9 @@ Plugin 'morhetz/gruvbox'                  " gruvbox
 Plugin 'toupeira/vim-desertink'           " desertink
 Plugin 'sjl/badwolf'                      " badwolf
 Plugin 'itchyny/landscape.vim'            " landscape
+Plugin 'joshdick/onedark.vim'             " onedark in atom
+Plugin 'gosukiwi/vim-atom-dark'           " atom-dark
+
 
 " }}}
 
@@ -152,8 +155,8 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 
 " caw (comment out plugin) {{{2
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
+nmap <Leader>c <Plug>(caw:hatpos:toggle)
+vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 " indentLine {{{2
 let g:indentLine_color_term = 239
@@ -163,7 +166,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " Lightline {{{2
 let g:lightline = {
-\   'colorscheme': 'default',
+\   'colorscheme': 'wombat',
 \   'mode_map': { 'c': 'NORMAL' },
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -316,11 +319,13 @@ let g:email = "nakamura-keita-kn@ynu.jp"
 
 " let g:hybrid_use_Xresources = 1 " for GVim
 " colorscheme hybrid
-colorscheme molokai
+" colorscheme molokai
+colorscheme onedark
+" colorscheme solarized
 let g:molokai_original = 1
 set background=dark
 syntax on
-hi clear cursorLine
+" hi clear cursorLine
 
 set vb t_vb=
 set number
@@ -336,7 +341,7 @@ set laststatus=2
 set nowrap
 set noshowmode
 set scrolloff=2
-set cursorline
+" set cursorline
 set foldmethod=marker
 
 set mouse=a
