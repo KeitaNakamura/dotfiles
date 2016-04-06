@@ -42,7 +42,9 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'JuliaLang/julia-vim'
 
 "< Auto complete >
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+" Plugin 'ajh17/VimCompletesMe'
+" Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer
@@ -154,6 +156,16 @@ set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 
+" NeoComplete {{{2
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_enable_camel_case_completion = 0
+" if !exists('g:neocomplete#keyword_patterns')
+" 	let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns._ = '\h\w*'
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
@@ -301,11 +313,27 @@ let g:vimtex_indent_enabled = 0
 let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers.tex = [
-            \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
-            \ ]
+	\ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+	\ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+	\ 're!\\hyperref\[[^]]*',
+	\ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+	\ 're!\\(include(only)?|input){[^}]*'
+	\ ]
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.tex =
+	\ '\v\\%('
+	\ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+	\ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
+	\ . '|hyperref\s*\[[^]]*'
+	\ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+	\ . '|%(include%(only)?|input)\s*\{[^}]*'
+	\ . ')'
 
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
