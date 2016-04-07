@@ -43,6 +43,8 @@ Plugin 'JuliaLang/julia-vim'
 
 "< Auto complete >
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neoinclude.vim'
+Plugin 'justmao945/vim-clang'
 " Plugin 'ajh17/VimCompletesMe'
 " Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
@@ -166,6 +168,39 @@ let g:neocomplete#enable_enable_camel_case_completion = 0
 " endif
 " let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" neoinclude {{{2
+if !exists('g:neoinclude#exts')
+  let g:neoinclude#exts = {}
+endif
+let g:neoinclude#exts.cpp = ['', 'h', 'hpp', 'hxx']
+" let g:neoinclude#_paths = '/usr/local/include/'
+
+" vim-clang {{{2
+" disable auto completion for vim-clang
+let g:clang_auto = 0
+let g:clang_check_syntax_auto = 1
+" default 'longest' can not work with neocomplete
+" let g:clang_c_completeopt = 'menuone,preview'
+" let g:clang_cpp_completeopt = 'menuone,preview'
+let g:clang_c_completeopt = 'menuone'
+let g:clang_cpp_completeopt = 'menuone'
+
+" use neocomplete
+" input patterns
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+" for c and c++
+let g:neocomplete#force_omni_input_patterns.c =
+	  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+	  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
+
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
