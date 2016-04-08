@@ -1,182 +1,130 @@
 "************************************************
-" File:        .vimrc
-" Description: A vim setting file for Mac OS X.
-" Author:      Keita Nakamura
+let g:user  = "K.Nakamura"
+let g:email = "nakamura-keita-kn@ynu.jp"
 "************************************************
 
-" SETTING FOR PLUGIN MANAGER 'VUNDLE' {{{1
+" Installed plugins {{{1
+call plug#begin('~/.vim/plugged')
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+Plug 'vim-jp/vimdoc-ja'
+Plug 'jiangmiao/auto-pairs' " auto close brackets
+Plug 'tyru/caw.vim' " comment out
+Plug 'rking/ag.vim' " for ag in 'ctrlp'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-fugitive'
+Plug 'aperezdc/vim-template'
+Plug 'Align'
+Plug 'JuliaLang/julia-vim'
+Plug 'lervag/vimtex',        {'for': 'tex'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Add plugin from here {{{
-
-"< Help in Japanese >
-Plugin 'vim-jp/vimdoc-ja'
-
-"< File explorer >
-Plugin 'scrooloose/nerdtree'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimfiler.vim'
-Plugin 'ujihisa/unite-colorscheme'
-
-"< CtrlP >
-Plugin 'kien/ctrlp.vim'
-
-"< fugitive >
-Plugin 'tpope/vim-fugitive'
-
-"< Auto close brackets >
-Plugin 'jiangmiao/auto-pairs'
-
-"< Julia-vim >
-Plugin 'JuliaLang/julia-vim'
-
-"< Auto complete >
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neoinclude.vim'
-Plugin 'justmao945/vim-clang'
-Plugin 'davidhalter/jedi-vim'
-" Plugin 'ajh17/VimCompletesMe'
-" Plugin 'Valloric/YouCompleteMe'
-" You need to compile YCM with semantic support for C-family languages:
-" cd ~/.vim/bundle/YouCompleteMe
-" ./install.py --clang-completer
-
-"< Ctags >
-Plugin 'soramugi/auto-ctags.vim'
-
-"< Tagbar >
-Plugin 'majutsushi/tagbar'
-
-"< Status line >
-Plugin 'itchyny/lightline.vim'
-" Plugin 'cocopon/lightline-hybrid.vim'
-" Plugin 'vim-airline/vim-airline'
-
-"< Comment out >
-Plugin 'tyru/caw.vim'
-
-"< Align >
-Plugin 'Align'
-
-"< Tag highlight >
-Plugin 'skroll/vim-taghighlight'
-
-"< Indent line >
-Plugin 'Yggdroot/indentLine'
-
-"< Ag >
-Plugin 'rking/ag.vim'
-
-"< Latex >
-Plugin 'lervag/vimtex'
-" Plugin 'Konfekt/FastFold'
-
-"< Template >
-Plugin 'aperezdc/vim-template'
-
-"< Color scheme (:Unite colorscheme -auto-preview) >
-" Plugin 'altercation/vim-colors-solarized' " solarized
-Plugin 'jwhitley/vim-colors-solarized'    " solarized for syntastic
-Plugin 'croaker/mustang-vim'              " mustang
-Plugin 'jeffreyiacono/vim-colors-wombat'  " wombat
-Plugin 'nanotech/jellybeans.vim'          " jellybeans
-Plugin 'vim-scripts/Lucius'               " lucius
-Plugin 'vim-scripts/Zenburn'              " zenburn
-Plugin 'mrkn/mrkn256.vim'                 " mrkn256
-Plugin 'jpo/vim-railscasts-theme'         " railscasts
-Plugin 'therubymug/vim-pyte'              " pyte
-Plugin 'tomasr/molokai'                   " molokai
-Plugin 'chriskempson/vim-tomorrow-theme'  " tomorrow night
-Plugin 'vim-scripts/twilight'             " twilight
-Plugin 'w0ng/vim-hybrid'                  " hybrid
-Plugin 'freeo/vim-kalisi'                 " kalisi
-Plugin 'morhetz/gruvbox'                  " gruvbox
-Plugin 'toupeira/vim-desertink'           " desertink
-Plugin 'sjl/badwolf'                      " badwolf
-Plugin 'itchyny/landscape.vim'            " landscape
-Plugin 'joshdick/onedark.vim'             " onedark in atom
-Plugin 'gosukiwi/vim-atom-dark'           " atom-dark
-
-
+" File explorer {{{2
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'Shougo/unite.vim'
+Plug 'ujihisa/unite-colorscheme'
+" Plug 'Shougo/vimfiler.vim'
+Plug 'kien/ctrlp.vim'
+" }}}
+" Status line {{{2
+Plug 'itchyny/lightline.vim'
+" Plug 'cocopon/lightline-hybrid.vim'
+" Plug 'vim-airline/vim-airline'
+" }}}
+" Auto completion {{{2
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" }}}
+" Color scheme (:Unite colorscheme -auto-preview) {{{2
+Plug 'altercation/vim-colors-solarized' " solarized
+Plug 'croaker/mustang-vim'              " mustang
+Plug 'jeffreyiacono/vim-colors-wombat'  " wombat
+Plug 'nanotech/jellybeans.vim'          " jellybeans
+Plug 'vim-scripts/Lucius'               " lucius
+Plug 'vim-scripts/Zenburn'              " zenburn
+Plug 'mrkn/mrkn256.vim'                 " mrkn256
+Plug 'jpo/vim-railscasts-theme'         " railscasts
+Plug 'therubymug/vim-pyte'              " pyte
+Plug 'tomasr/molokai'                   " molokai
+Plug 'chriskempson/vim-tomorrow-theme'  " tomorrow night
+Plug 'vim-scripts/twilight'             " twilight
+Plug 'w0ng/vim-hybrid'                  " hybrid
+Plug 'freeo/vim-kalisi'                 " kalisi
+Plug 'morhetz/gruvbox'                  " gruvbox
+Plug 'toupeira/vim-desertink'           " desertink
+Plug 'sjl/badwolf'                      " badwolf
+Plug 'itchyny/landscape.vim'            " landscape
+Plug 'joshdick/onedark.vim'             " onedark in atom
+Plug 'gosukiwi/vim-atom-dark'           " atom-dark
 " }}}
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call plug#end()
 
-" SETTING FOR PLUGINS {{{1
+" Setting for each plugin {{{1
+" caw (comment out plugin) {{{2
+nmap <Leader>c <Plug>(caw:hatpos:toggle)
+vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
-" CtrlP {{{2
-if executable('ag')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
-endif
+" indentLine {{{2
+let g:indentLine_color_term = 239
 
-" NERD tree {{{2
-nnoremap <silent> <C-e> :NERDTreeToggle<CR>
-augroup nerdtree-bugfix
-    autocmd!
-augroup END
-autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
-
-" vimfiler {{{2
-" noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
-" noremap <C-e> :VimFilerBufferDir -simple -toggle <ENTER>
-" noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit -toggle <ENTER>
-" noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit<ENTER>
-" noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
+" vim-template {{{2
+let g:templates_no_builtin_templates = 1
+let g:templates_directory = '~/.vim/template'
 
 " Julia {{{2
-" let g:latex_to_unicode_file_types = ".md"
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
 inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
-" let g:latex_to_unicode_auto = 1
 
-" YouCompleteMe {{{2
-set completeopt=menuone
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
-" let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
-
-" NeoComplete {{{2
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_ignore_case = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_enable_camel_case_completion = 0
-" if !exists('g:neocomplete#keyword_patterns')
-" 	let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns._ = '\h\w*'
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-" neoinclude {{{2
-if !exists('g:neoinclude#exts')
-  let g:neoinclude#exts = {}
+" vimtex {{{2
+let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_manual = 1 " improve performance
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_latexmk_background = 1
+let g:vimtex_latexmk_options = '-pdfdvi'
+let g:vimtex_quickfix_mode = 0
+let g:vimtex_indent_enabled = 0
+let g:vimtex_latexmk_build_dir = ''
+let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
+let g:vimtex_view_general_options = '@line @pdf @tex'
+" for NeoComplete {{{3
+if !exists('g:neocomplete#sources#omni#input_patterns')
+let g:neocomplete#sources#omni#input_patterns = {}
 endif
-let g:neoinclude#exts.cpp = ['', 'h', 'hpp', 'hxx']
-" let g:neoinclude#_paths = '/usr/local/include/'
+let g:neocomplete#sources#omni#input_patterns.tex =
+	\ '\v\\%('
+	\ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+	\ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
+	\ . '|hyperref\s*\[[^]]*'
+	\ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+	\ . '|%(include%(only)?|input)\s*\{[^}]*'
+	\ . ')'
+" }}}
+" for YouCompleteMe {{{3
+if !exists('g:ycm_semantic_triggers')
+let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = [
+	\ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+	\ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+	\ 're!\\hyperref\[[^]]*',
+	\ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+	\ 're!\\(include(only)?|input){[^}]*'
+	\ ]
+" }}}
+
+" jedi-vim {{{2
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+" for NeoComplete {{{3
+if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" }}}
 
 " vim-clang {{{2
 " disable auto completion for vim-clang
@@ -202,24 +150,25 @@ let g:neocomplete#force_omni_input_patterns.cpp =
 
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
-" jedi-vim {{{2
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
+" NERD tree {{{2
+nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+augroup nerdtree-bugfix
+    autocmd!
+augroup END
+autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
+" vimfiler {{{2
+" noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
+" noremap <C-e> :VimFilerBufferDir -simple -toggle <ENTER>
+" noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit -toggle <ENTER>
+" noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit<ENTER>
+" noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
+
+" CtrlP {{{2
+if executable('ag')
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
-
-" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-" caw (comment out plugin) {{{2
-nmap <Leader>c <Plug>(caw:hatpos:toggle)
-vmap <Leader>c <Plug>(caw:hatpos:toggle)
-
-" indentLine {{{2
-let g:indentLine_color_term = 239
 
 " Lightline {{{2
 let g:lightline = {
@@ -346,61 +295,40 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-" vimtex {{{2
-let g:vimtex_fold_enabled = 1
-let g:vimtex_fold_manual = 1
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_latexmk_background = 1
-let g:vimtex_latexmk_options = '-pdfdvi'
-let g:vimtex_quickfix_mode = 0
-let g:vimtex_indent_enabled = 0
-" let g:vimtex_view_general_viewer = '/opt/homebrew-cask/Caskroom/skim/1.4.13/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
-let g:vimtex_view_general_options = '@line @pdf @tex'
-if !exists('g:ycm_semantic_triggers')
-let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-	\ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-	\ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-	\ 're!\\hyperref\[[^]]*',
-	\ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-	\ 're!\\(include(only)?|input){[^}]*'
-	\ ]
+" NeoComplete {{{2
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_enable_camel_case_completion = 0
+" if !exists('g:neocomplete#keyword_patterns')
+" 	let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns._ = '\h\w*'
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-if !exists('g:neocomplete#sources#omni#input_patterns')
-let g:neocomplete#sources#omni#input_patterns = {}
+" neoinclude {{{2
+if !exists('g:neoinclude#exts')
+  let g:neoinclude#exts = {}
 endif
-let g:neocomplete#sources#omni#input_patterns.tex =
-	\ '\v\\%('
-	\ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
-	\ . '|hyperref\s*\[[^]]*'
-	\ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|%(include%(only)?|input)\s*\{[^}]*'
-	\ . ')'
+let g:neoinclude#exts.cpp = ['', 'h', 'hpp', 'hxx']
+" let g:neoinclude#_paths = '/usr/local/include/'
 
-" vim-template {{{2
-let g:templates_no_builtin_templates = 1
-let g:templates_directory = '~/.vim/template'
+" YouCompleteMe {{{2
+set completeopt=menuone
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
+" let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 " }}}
 
-" GLOBAL SETTING {{{1
+" Global setting {{{1
 
-let g:user  = "K.Nakamura"
-let g:email = "nakamura-keita-kn@ynu.jp"
-
-" let g:hybrid_use_Xresources = 1 " for GVim
-" colorscheme hybrid
-" colorscheme molokai
 colorscheme onedark
-" colorscheme solarized
-let g:molokai_original = 1
 set background=dark
 syntax on
 " hi clear cursorLine
 
 set vb t_vb=
+set pumheight=10
 set number
 set hlsearch
 set ignorecase
@@ -447,8 +375,7 @@ else
 	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" LOCAL SETTING {{{1
-
+" Local setting {{{1
 " c++ {{{2
 function! s:cpp()
     setlocal expandtab
