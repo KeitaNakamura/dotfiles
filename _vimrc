@@ -45,6 +45,7 @@ Plugin 'JuliaLang/julia-vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neoinclude.vim'
 Plugin 'justmao945/vim-clang'
+Plugin 'davidhalter/jedi-vim'
 " Plugin 'ajh17/VimCompletesMe'
 " Plugin 'Valloric/YouCompleteMe'
 " You need to compile YCM with semantic support for C-family languages:
@@ -201,15 +202,24 @@ let g:neocomplete#force_omni_input_patterns.cpp =
 
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
+" jedi-vim {{{2
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 " indentLine {{{2
 let g:indentLine_color_term = 239
-
-" Tagbar {{{2
-nmap <F8> :TagbarToggle<CR>
 
 " Lightline {{{2
 let g:lightline = {
