@@ -19,6 +19,7 @@ Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
+" Plug 'Shougo/vimshell.vim'
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -327,6 +328,7 @@ set background=dark
 syntax on
 " hi clear cursorLine
 
+set shell=/bin/bash
 set vb t_vb=
 set pumheight=10
 set number
@@ -429,6 +431,7 @@ endfunction
 augroup vimrc-julia
     autocmd!
     autocmd FileType julia call s:julia()
+	" autocmd FileType julia nnoremap <buffer> <Leader>r :exec '!clear; julia' shellescape(@%, 1)<cr>
 augroup END
 
 " fortran {{{2
