@@ -322,53 +322,33 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " }}}
 
 " Global setting {{{1
-
+" Color {{{2
 colorscheme onedark
 set background=dark
 syntax on
-" hi clear cursorLine
-
-set shell=/bin/bash
-set vb t_vb=
-set pumheight=10
-set number
-set hlsearch
+set cursorline " highlight current line
+hi clear CursorLine
+set colorcolumn=80
+" }}}
+" Search {{{2
+set hlsearch " highlight for search
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 set ignorecase
 set smartcase
-set tabstop=4
-set shiftwidth=4
 set incsearch
-set whichwrap=b,s,h,l,<,>,[,]
-set colorcolumn=80
+" }}}
+" View {{{2
+set pumheight=10 " number of lists of completion
+set number " line number
 set laststatus=2
 set nowrap
 set noshowmode
-set scrolloff=2
-" set cursorline
-set foldmethod=marker
-
-set mouse=a
-set encoding=utf-8
-set fileencodings=utf-8,sjis
-nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
-au QuickfixCmdPost grep,grepadd,vimgrep copen
-set spelllang=en,cjk
-let g:tex_conceal = ''
-let g:tex_flavor = 'latex'
-
-set backspace=indent,eol,start
-
 " disable left and right sides scroll bar
 set guioptions-=r
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
-
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-
+" shape of cursor in CUI
 if exists('$TMUX')
 	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -376,6 +356,29 @@ else
 	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+" }}}
+" Movement {{{2
+set whichwrap=b,s,h,l,<,>,[,]
+set mouse=a " enable mouse
+set scrolloff=2
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+" }}}
+" Others {{{2
+set shell=/bin/bash
+set foldmethod=marker
+set vb t_vb= " disable beep sound
+set tabstop=4 " number of space for tab
+set shiftwidth=4 " width of auto indent
+set backspace=indent,eol,start
+set encoding=utf-8
+set fileencodings=utf-8,sjis
+set spelllang=en,cjk
+let g:tex_conceal = ''
+let g:tex_flavor = 'latex'
+" }}}
 
 " Local setting {{{1
 " c++ {{{2
