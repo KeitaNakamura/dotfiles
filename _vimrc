@@ -8,17 +8,22 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-jp/vimdoc-ja'
 Plug 'jiangmiao/auto-pairs' " auto close brackets
-Plug 'tyru/caw.vim' " comment out
 Plug 'rking/ag.vim' " for ag in 'ctrlp'
+Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'aperezdc/vim-template'
-Plug 'Align'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Plug 'kannokanno/previm', {'for': 'markdown'}
+Plug 'tyru/open-browser.vim'
 Plug 'JuliaLang/julia-vim'
 Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'Shougo/vimproc.vim',   {'do': 'make'}
 " Plug 'Shougo/vimshell.vim'
 
 " File explorer {{{2
@@ -63,10 +68,150 @@ Plug 'gosukiwi/vim-atom-dark'           " atom-dark
 
 call plug#end()
 
+" Global setting {{{1
+" Color {{{2
+colorscheme onedark
+set background=dark
+syntax on
+set cursorline " highlight current line
+hi clear CursorLine
+set colorcolumn=80
+" }}}
+" Search {{{2
+set hlsearch " highlight for search
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
+set ignorecase
+set smartcase
+set incsearch
+" }}}
+" View {{{2
+set pumheight=10 " number of lists of completion
+set number " line number
+set laststatus=2
+set nowrap
+set noshowmode
+" disable left and right sides scroll bar
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+" shape of cursor in CUI
+if exists('$TMUX')
+	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" }}}
+" Movement {{{2
+set whichwrap=b,s,h,l,<,>,[,]
+set mouse=a " enable mouse
+set scrolloff=5
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+" }}}
+" Others {{{2
+set shell=/bin/bash
+set foldmethod=marker
+set vb t_vb= " disable beep sound
+set tabstop=4 " number of space for tab
+set shiftwidth=4 " width of auto indent
+set backspace=indent,eol,start
+set encoding=utf-8
+set fileencodings=utf-8,sjis
+set spelllang=en,cjk
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+let g:tex_conceal = ''
+let g:tex_flavor = 'latex'
+" }}}
+
+" Local setting {{{1
+" c++ {{{2
+function! s:cpp()
+	setlocal path+=/usr/local/include/eigen3
+    setlocal expandtab
+    setlocal autoindent
+    setlocal smartindent
+    setlocal cinoptions+=:0,g0
+	" setlocal foldmethod=syntax
+	" setlocal foldcolumn=1
+    " nnoremap <F5> :make build_run<cr>
+    " nnoremap <F6> :make run<cr>
+    nnoremap <buffer> <F7> :make<cr>
+endfunction
+
+augroup vimrc-cpp
+    autocmd!
+    autocmd FileType cpp call s:cpp()
+augroup END
+
+" tex {{{2
+function! s:tex()
+    setlocal expandtab
+    setlocal spell
+	" setlocal foldmethod=manual
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+endfunction
+
+augroup vimrc-tex
+    autocmd!
+    autocmd FileType tex call s:tex()
+augroup END
+
+" python {{{2
+function! s:python()
+    setlocal autoindent
+    " setlocal smartindent
+	setlocal indentkeys+=0#
+endfunction
+
+augroup vimrc-phthon
+    autocmd!
+    autocmd FileType python call s:python()
+augroup END
+
+" julia {{{2
+function! s:julia()
+    setlocal expandtab
+	setlocal foldmethod=indent
+endfunction
+
+augroup vimrc-julia
+    autocmd!
+    autocmd FileType julia call s:julia()
+	" autocmd FileType julia nnoremap <buffer> <Leader>r :exec '!clear; julia' shellescape(@%, 1)<cr>
+augroup END
+
+" fortran {{{2
+function! s:fortran()
+	let fortran_do_enddo=1
+	let fortran_free_source=1
+	let fortran_fold=1
+	filetype plugin indent on
+	setlocal smarttab
+    setlocal expandtab
+    setlocal smartindent
+    setlocal autoindent
+	setlocal tabstop=2
+	setlocal shiftwidth=2
+endfunction
+
+augroup vimrc-fortran
+    autocmd!
+    autocmd FileType fortran call s:fortran()
+augroup END
 " Setting for each plugin {{{1
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
+
+" nerdcommenter {{{2
+let g:NERDSpaceDelims = 1
+let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt': '=#' }}
 
 " indentLine {{{2
 let g:indentLine_color_term = 239
@@ -74,6 +219,37 @@ let g:indentLine_color_term = 239
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
 let g:templates_directory = '~/.vim/template'
+
+" syntastic {{{2
+let g:syntastic_quiet_messages = { "level": "warnings" }
+let g:syntastic_error_symbol = '✗✗'
+
+" tagbar {{{2
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_julia = {
+    \ 'ctagstype' : 'julia',
+    \ 'kinds'     : ['a:abstract', 'i:immutable', 't:type', 'f:function', 'm:macro']
+    \ }
+let g:tagbar_type_tex = {
+	\ 'ctagstype' : 'latex',
+	\ 'kinds'     : [
+		\ 's:sections',
+		\ 'g:graphics:0:0',
+		\ 'l:labels',
+		\ 'r:refs:1:0',
+		\ 'p:pagerefs:1:0'
+	\ ],
+	\ 'sort'    : 0,
+\ }
+let g:tagbar_iconchars = ['▸', '▾']
+" for onedark color scheme with tagbar
+highlight TagbarSignature term=bold ctermfg=59 gui=italic guifg=#5C6670
+
+" previm {{{2
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
 
 " Julia {{{2
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
@@ -320,138 +496,3 @@ set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
 " }}}
-
-" Global setting {{{1
-" Color {{{2
-colorscheme onedark
-set background=dark
-syntax on
-set cursorline " highlight current line
-hi clear CursorLine
-set colorcolumn=80
-" }}}
-" Search {{{2
-set hlsearch " highlight for search
-nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
-set ignorecase
-set smartcase
-set incsearch
-" }}}
-" View {{{2
-set pumheight=10 " number of lists of completion
-set number " line number
-set laststatus=2
-set nowrap
-set noshowmode
-" disable left and right sides scroll bar
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-" shape of cursor in CUI
-if exists('$TMUX')
-	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-" }}}
-" Movement {{{2
-set whichwrap=b,s,h,l,<,>,[,]
-set mouse=a " enable mouse
-set scrolloff=2
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-" }}}
-" Others {{{2
-set shell=/bin/bash
-set foldmethod=marker
-set vb t_vb= " disable beep sound
-set tabstop=4 " number of space for tab
-set shiftwidth=4 " width of auto indent
-set backspace=indent,eol,start
-set encoding=utf-8
-set fileencodings=utf-8,sjis
-set spelllang=en,cjk
-let g:tex_conceal = ''
-let g:tex_flavor = 'latex'
-" }}}
-
-" Local setting {{{1
-" c++ {{{2
-function! s:cpp()
-    setlocal expandtab
-    setlocal autoindent
-    setlocal smartindent
-    setlocal cinoptions+=:0,g0
-	" setlocal foldmethod=syntax
-	" setlocal foldcolumn=1
-    " nnoremap <F5> :make build_run<cr>
-    " nnoremap <F6> :make run<cr>
-    nnoremap <buffer> <F7> :make<cr>
-endfunction
-
-augroup vimrc-cpp
-    autocmd!
-    autocmd FileType cpp call s:cpp()
-augroup END
-
-" tex {{{2
-function! s:tex()
-    setlocal expandtab
-    setlocal spell
-	" setlocal foldmethod=manual
-	setlocal tabstop=2
-	setlocal shiftwidth=2
-endfunction
-
-augroup vimrc-tex
-    autocmd!
-    autocmd FileType tex call s:tex()
-augroup END
-
-" python {{{2
-function! s:python()
-    setlocal autoindent
-    " setlocal smartindent
-	setlocal indentkeys+=0#
-endfunction
-
-augroup vimrc-phthon
-    autocmd!
-    autocmd FileType python call s:python()
-augroup END
-
-" julia {{{2
-function! s:julia()
-    setlocal expandtab
-	setlocal foldmethod=indent
-endfunction
-
-augroup vimrc-julia
-    autocmd!
-    autocmd FileType julia call s:julia()
-	" autocmd FileType julia nnoremap <buffer> <Leader>r :exec '!clear; julia' shellescape(@%, 1)<cr>
-augroup END
-
-" fortran {{{2
-function! s:fortran()
-	let fortran_do_enddo=1
-	let fortran_free_source=1
-	let fortran_fold=1
-	filetype plugin indent on
-	setlocal smarttab
-    setlocal expandtab
-    setlocal smartindent
-    setlocal autoindent
-	setlocal tabstop=2
-	setlocal shiftwidth=2
-endfunction
-
-augroup vimrc-fortran
-    autocmd!
-    autocmd FileType fortran call s:fortran()
-augroup END
