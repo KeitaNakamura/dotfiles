@@ -7,6 +7,8 @@ let g:email = "nakamura-keita-kn@ynu.jp"
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-jp/vimdoc-ja'
+set helplang=ja,en
+
 Plug 'jiangmiao/auto-pairs' " auto close brackets
 Plug 'rking/ag.vim' " for ag in 'ctrlp'
 Plug 'scrooloose/nerdcommenter'
@@ -15,14 +17,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'aperezdc/vim-template'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
-Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-Plug 'kannokanno/previm', {'for': 'markdown'}
-Plug 'tyru/open-browser.vim'
+" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'kannokanno/previm',       {'for': 'markdown'}
+Plug 'tyru/open-browser.vim',   {'for': 'markdown'}
+Plug 'scrooloose/syntastic'
 Plug 'JuliaLang/julia-vim'
+Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
+Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
 Plug 'Shougo/vimproc.vim',   {'do': 'make'}
 " Plug 'Shougo/vimshell.vim'
 
@@ -40,7 +44,6 @@ Plug 'itchyny/lightline.vim'
 " }}}
 " Auto completion {{{2
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 " }}}
 " Color scheme (:Unite colorscheme -auto-preview) {{{2
@@ -108,6 +111,10 @@ endif
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a " enable mouse
 set scrolloff=5
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
@@ -131,7 +138,7 @@ let g:tex_flavor = 'latex'
 " Local setting {{{1
 " c++ {{{2
 function! s:cpp()
-	setlocal path+=/usr/local/include/eigen3
+	" setlocal path+=/usr/local/include/eigen3
     setlocal expandtab
     setlocal autoindent
     setlocal smartindent
@@ -150,6 +157,9 @@ augroup END
 
 " tex {{{2
 function! s:tex()
+	setlocal nocursorline
+	setlocal wrap
+	setlocal linebreak
     setlocal expandtab
     setlocal spell
 	" setlocal foldmethod=manual
@@ -204,6 +214,15 @@ augroup vimrc-fortran
     autocmd!
     autocmd FileType fortran call s:fortran()
 augroup END
+" markdown {{{2
+function! s:markdown()
+	setlocal wrap
+endfunction
+
+augroup vimrc-markdown
+    autocmd!
+    autocmd FileType markdown call s:markdown()
+augroup END
 " Setting for each plugin {{{1
 " caw (comment out plugin) {{{2
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
@@ -244,6 +263,9 @@ let g:tagbar_type_tex = {
 let g:tagbar_iconchars = ['▸', '▾']
 " for onedark color scheme with tagbar
 highlight TagbarSignature term=bold ctermfg=59 gui=italic guifg=#5C6670
+
+" vim-markdown {{{2
+let g:vim_markdown_folding_style_pythonic = 1
 
 " previm {{{2
 augroup PrevimSettings
@@ -474,9 +496,9 @@ let g:vimshell_force_overwrite_statusline = 0
 
 " NeoComplete {{{2
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_ignore_case = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_enable_camel_case_completion = 0
+" let g:neocomplete#enable_ignore_case = 1
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#enable_enable_camel_case_completion = 0
 " if !exists('g:neocomplete#keyword_patterns')
 " 	let g:neocomplete#keyword_patterns = {}
 " endif
