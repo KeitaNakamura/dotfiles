@@ -1,3 +1,5 @@
+#!/bin/bash
+
 default_setting() {
     warn_battery=20
     warn_color="31m"     # red
