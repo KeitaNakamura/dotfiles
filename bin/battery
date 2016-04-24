@@ -1,0 +1,42 @@
+default_setting() {
+    warn_battery=20
+    warn_color="31m"     # red
+    charging_color="32m" # green
+    normal_color="34m"   # blue
+}
+
+battery_info() {
+    PCT="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
+    if [ $PCT -lt 25 ]; then
+        BLOCK="\U2581"
+    elif [ $PCT -ge 25 ] && [ $PCT -lt 50 ]; then
+        BLOCK="\U2583"
+    elif [ $PCT -ge 50 ] && [ $PCT -lt 75 ]; then
+        BLOCK="\U2585"
+    elif [ $PCT -ge 75 ] && [ $PCT -lt 100 ]; then
+        BLOCK="\U2587"
+    fi
+    if [ "$(pmset -g ps | grep -o 'Battery Power|charged')" ]; then
+        CHARGING=1
+    else
+        CHARGING=0
+    fi
+    # PCT_BLOCK="$pct% $block"
+}
+
+apply_color() {
+    if [ CHARGING ]; then
+        COLOR=$normal_color
+    else
+        if [ $PCT -lt 20 ]; then
+            COLOR=$warn_color
+        else
+            COLOR=$charging_color
+        fi
+    fi
+}
+
+default_setting
+battery_info
+apply_color
+echo -e "\e[$COLOR$PCT% $BLOCK\e[m"
