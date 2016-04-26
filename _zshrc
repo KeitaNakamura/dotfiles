@@ -11,6 +11,9 @@ autoload -U compinit; compinit
 # for zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+# alias for starting vim quickly
+alias v='vim .'
+
 
 # function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 # function is_osx() { [[ $OSTYPE == darwin* ]]; }
