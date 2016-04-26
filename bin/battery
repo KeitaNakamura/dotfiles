@@ -70,7 +70,7 @@ function get_meter() {
 # }
 
 function display() {
-  if [ {$MODE} = "shell" ]; then
+  if [ ${MODE} == "shell" ]; then
     if is_charging; then
       echo -e "\033[32m${DISPLAY}\033[m"
     else
@@ -80,7 +80,7 @@ function display() {
         echo -e "\033[34m${DISPLAY}\033[m"
       fi
     fi
-  elif [ {$MODE} = "tmux" ]; then
+  elif [ ${MODE} == "tmux" ]; then
     if is_charging; then
       echo -e "#[fg=colour2]${DISPLAY}#[default]"
     else
