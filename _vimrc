@@ -29,6 +29,7 @@ Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/vimproc.vim',   {'do': 'make'}
 " Plug 'Shougo/vimshell.vim'
+" Plug 'christoomey/vim-tmux-navigator'
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -73,11 +74,11 @@ call plug#end()
 
 " Global setting {{{1
 " Color {{{2
-colorscheme onedark
+colorscheme solarized
 set background=dark
 syntax on
-set cursorline " highlight current line
-hi clear CursorLine
+" set cursorline " highlight current line
+" hi clear CursorLine
 set colorcolumn=80
 " }}}
 " Search {{{2
@@ -126,6 +127,7 @@ set foldmethod=marker
 set vb t_vb= " disable beep sound
 set tabstop=4 " number of space for tab
 set shiftwidth=4 " width of auto indent
+set expandtab
 set backspace=indent,eol,start
 set encoding=utf-8
 set fileencodings=utf-8,sjis
@@ -136,6 +138,18 @@ let g:tex_flavor = 'latex'
 " }}}
 
 " Local setting {{{1
+" c++ {{{2
+function! s:sh()
+    set tabstop=2 " number of space for tab
+    set shiftwidth=2 " width of auto indent
+    set expandtab
+endfunction
+
+augroup vimrc-sh
+    autocmd!
+    autocmd FileType sh call s:sh()
+augroup END
+
 " c++ {{{2
 function! s:cpp()
 	" setlocal path+=/usr/local/include/eigen3
@@ -371,7 +385,7 @@ endif
 
 " Lightline {{{2
 let g:lightline = {
-\   'colorscheme': 'wombat',
+\   'colorscheme': 'solarized',
 \   'mode_map': { 'c': 'NORMAL' },
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]

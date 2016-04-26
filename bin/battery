@@ -1,44 +1,93 @@
 #!/bin/bash
 
-default_setting() {
-    warn_battery=20
-    warn_color="31m"     # red
-    charging_color="32m" # green
-    normal_color="34m"   # blue
+
+DISPLAY=""
+PERCENTAGE="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
+
+function get_percentage() {
+  echo "$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
 }
 
-battery_info() {
-    PCT="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
-    if [ $PCT -lt 25 ]; then
-        BLOCK="\U2581"
-    elif [ $PCT -ge 25 ] && [ $PCT -lt 50 ]; then
-        BLOCK="\U2583"
-    elif [ $PCT -ge 50 ] && [ $PCT -lt 75 ]; then
-        BLOCK="\U2585"
-    elif [ $PCT -ge 75 ] && [ $PCT -lt 100 ]; then
-        BLOCK="\U2587"
+function is_charging() {
+  pmset -g ps | grep -E "Battery Power|charged" >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+get_remain() {
+  local time_remain
+  time_remain="$(pmset -g ps | grep -o '[0-9]\+:[0-9]\+')"
+  if [ -z "$time_remain" ]; then
+    time_remain="no estimate"
+  fi
+  echo "$time_remain"
+}
+
+function get_meter() {
+  if is_charging; then
+    echo '|⚡︎⚡︎⚡︎⚡︎⚡︎|'
+  else
+    if [ $PERCENTAGE -le 20 ]; then
+      echo '|█    |'
+    elif [ $PERCENTAGE -gt 20 ] && [ $PERCENTAGE -le 40 ]; then
+      echo '|██   |'
+    elif [ $PERCENTAGE -gt 40 ] && [ $PERCENTAGE -le 60 ]; then
+      echo '|███  |'
+    elif [ $PERCENTAGE -gt 60 ] && [ $PERCENTAGE -le 80 ]; then
+      echo '|████ |'
+    elif [ $PERCENTAGE -gt 80 ] && [ $PERCENTAGE -le 100 ]; then
+      echo '|█████|'
     fi
-    if [ "$(pmset -g ps | grep -o 'Battery Power|charged')" ]; then
-        CHARGING=1
+  fi
+}
+
+# display() {
+  # if is_charging; then
+    # echo -e "\033[32m$PCT_BLOCK\033[m"
+  # else
+    # if [ $PCT -lt 20 ]; then
+      # echo -e "\033[31m$PCT_BLOCK\033[m"
+    # else
+      # echo -e "\033[34m$PCT_BLOCK\033[m"
+    # fi
+  # fi
+# }
+
+function get_color() {
+  if is_charging; then
+    echo "colour2"
+  else
+    if [ $PERCENTAGE -lt 20 ]; then
+      echo "red"
     else
-        CHARGING=0
+      echo "blue"
     fi
-    # PCT_BLOCK="$pct% $block"
+  fi
 }
 
-apply_color() {
-    if [ CHARGING ]; then
-        COLOR=$normal_color
-    else
-        if [ $PCT -lt 20 ]; then
-            COLOR=$warn_color
-        else
-            COLOR=$charging_color
-        fi
-    fi
-}
-
-default_setting
-battery_info
-apply_color
-echo -e "\e[$COLOR$PCT% $BLOCK\e[m"
+for i in "$@"
+do
+  case "$i" in
+    "-h")
+      echo "usage: battery [-p percentage][-m meter][-r remain]" 1>&2
+      exit
+      ;;
+    "-p")
+      DISPLAY="${DISPLAY}${PERCENTAGE}% "
+      ;;
+    "-m")
+      DISPLAY="${DISPLAY}$(get_meter) "
+      ;;
+    "-r")
+      DISPLAY="${DISPLAY}($(get_remain)) "
+      ;;
+    -*)
+      echo "$i: unknown option" 1>&2
+      exit 1
+      ;;
+  esac
+done
+echo -e "#[fg=$(get_color)]${DISPLAY}#[default]"
