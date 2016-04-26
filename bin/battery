@@ -2,8 +2,8 @@
 
 
 MODE="shell"
-DISPLAY=""
 PERCENTAGE="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
+DISPLAY="${PERCENTAGE}%"
 
 function get_percentage() {
   echo "$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
@@ -74,7 +74,7 @@ function display() {
     if is_charging; then
       echo -e "\033[32m${DISPLAY}\033[m"
     else
-      if [ $PCT -lt 20 ]; then
+      if [ $PERCENTAGE -lt 20 ]; then
         echo -e "\033[31m${DISPLAY}\033[m"
       else
         echo -e "\033[34m${DISPLAY}\033[m"
@@ -84,7 +84,7 @@ function display() {
     if is_charging; then
       echo -e "#[fg=colour2]${DISPLAY}#[default]"
     else
-      if [ $PCT -lt 20 ]; then
+      if [ $PERCENTAGE -lt 20 ]; then
         echo -e "#[fg=red]${DISPLAY}#[default]"
       else
         echo -e "#[fg=blue]${DISPLAY}#[default]"
@@ -97,20 +97,21 @@ for i in "$@"
 do
   case "$i" in
     "-h")
-      echo "usage: battery [-t tmux][-p percentage][-m meter][-r remain]" 1>&2
+      # echo "usage: battery [-t tmux][-p percentage][-m meter][-r remain]" 1>&2
+      echo "usage: battery [-t tmux][-m meter][-r remain]" 1>&2
       exit
       ;;
     "-t")
       MODE="tmux"
       ;;
-    "-p")
-      DISPLAY="${DISPLAY}${PERCENTAGE}% "
-      ;;
+    # "-p")
+      # DISPLAY="${DISPLAY}${PERCENTAGE}% "
+      # ;;
     "-m")
-      DISPLAY="${DISPLAY}$(get_meter) "
+      DISPLAY="${DISPLAY} $(get_meter)"
       ;;
     "-r")
-      DISPLAY="${DISPLAY}($(get_remain)) "
+      DISPLAY="${DISPLAY} ($(get_remain))"
       ;;
     -*)
       echo "$i: unknown option" 1>&2
