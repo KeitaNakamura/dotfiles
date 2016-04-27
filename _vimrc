@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 set helplang=ja,en
 
-Plug 'jiangmiao/auto-pairs' " auto close brackets
+" Plug 'jiangmiao/auto-pairs' " auto close brackets
 Plug 'rking/ag.vim' " for ag in 'ctrlp'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
