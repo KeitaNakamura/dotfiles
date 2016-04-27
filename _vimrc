@@ -139,6 +139,7 @@ let g:tex_flavor = 'latex'
 if !has('gui_running')
     set timeout timeoutlen=1000 ttimeoutlen=50
 endif
+set clipboard+=unnamed
 " }}}
 
 " Local setting {{{1
