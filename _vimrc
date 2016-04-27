@@ -32,10 +32,11 @@ Plug 'Shougo/vimproc.vim',   {'do': 'make'}
 " Plug 'christoomey/vim-tmux-navigator'
 
 " File explorer {{{2
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'ujihisa/unite-colorscheme'
 " Plug 'Shougo/vimfiler.vim'
+" Plug 'justinmk/vim-dirvish'
 Plug 'kien/ctrlp.vim'
 " }}}
 " Status line {{{2
@@ -365,10 +366,13 @@ let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
-augroup nerdtree-bugfix
+augroup nerdtree-keymap
     autocmd!
 augroup END
-autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
+autocmd nerdtree-keymap filetype nerdtree nmap <buffer> x po
+autocmd nerdtree-keymap filetype nerdtree nmap <buffer> l <S-C>cd
+autocmd nerdtree-keymap filetype nerdtree nmap <buffer> h u
+let NERDTreeChDirMode=2
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
@@ -376,6 +380,8 @@ autocmd nerdtree-bugfix filetype nerdtree nmap <buffer> x po
 " noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit -toggle <ENTER>
 " noremap <C-e> :VimFiler -split -simple -winwidth=35 -no-quit<ENTER>
 " noremap <C-e> :VimFilerExplorer -find -toggle<ENTER>
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_enable_auto_cd=1
 
 " CtrlP {{{2
 if executable('ag')
