@@ -1,30 +1,27 @@
 #!/bin/bash
 
+FREE=
+USED=
+TOTAL=
+
 function calculate_memory() {
   # vm_stat
   #  page size of 4096 bytes
-  VM_STAT=$(vm_stat)
-  PAGES_FREE=$(echo "$VM_STAT" | awk '/Pages free:/ {print $3}' | tr -d '.')
-  PAGES_ACTIVE=$(echo "$VM_STAT" | awk '/Pages active:/ {print $3}' | tr -d '.')
-  PAGES_INACTIVE=$(echo "$VM_STAT" | awk '/Pages inactive:/ {print $3}' | tr -d '.')
-  PAGES_SPECULATIVE=$(echo "$VM_STAT" | awk '/Pages speculative:/ {print $3}' | tr -d '.')
-  PAGES_WIRED=$(echo "$VM_STAT" | awk '/Pages wired down:/ {print $4}' | tr -d '.')
+  local info=$(vm_stat)
+  local pages_free=$(echo "$info" | awk '/Pages free:/ {print $3}' | tr -d '.')
+  local pages_active=$(echo "$info" | awk '/Pages active:/ {print $3}' | tr -d '.')
+  local pages_inactive=$(echo "$info" | awk '/Pages inactive:/ {print $3}' | tr -d '.')
+  local pages_speculative=$(echo "$info" | awk '/Pages speculative:/ {print $3}' | tr -d '.')
+  local pages_wired=$(echo "$info" | awk '/Pages wired down:/ {print $4}' | tr -d '.')
 
-  # 空きメモリ
-  FREE_MEM=$(($PAGES_FREE + $PAGES_SPECULATIVE))
-
-  # 使用中メモリ
-  USED_MEM=$(($PAGES_ACTIVE + $PAGES_INACTIVE + $PAGES_WIRED))
-
-  # 合計
-  TOTAL_MEM=$(($FREE_MEM + $USED_MEM))
-
-
-  # 使用中メモリ(%)
-  # 小数点第1位まで求めて後から小数点文字(ドット)を挿入
-  USED_MEM_PERCENT=$(echo "$(($USED_MEM * 1000 / $TOTAL_MEM))" | sed -e 's/\(.*\)\([0-9]\)/\1.\2/' -e 's/^\./0./')
-  echo "${USED_MEM_PERCENT}"
-
-  return 0
+  FREE=$(($pages_free + $pages_speculative))
+  USED=$(($pages_active + $pages_inactive + $pages_wired))
+  TOTAL=$(($FREE + $USED))
 }
+
+function get_used_percentage() {
+  echo "$(($USED * 1000 / $TOTAL))" | sed -e 's/\(.*\)\([0-9]\)/\1.\2/' -e 's/^\./0./'
+}
+
 calculate_memory
+get_used_percentage
