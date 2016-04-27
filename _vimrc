@@ -136,6 +136,9 @@ set spelllang=en,cjk
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
+if !has('gui_running')
+    set timeout timeoutlen=50
+endif
 " }}}
 
 " Local setting {{{1
