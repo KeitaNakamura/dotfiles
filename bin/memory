@@ -38,10 +38,10 @@ FOR_FREE_MAN=true
 TOTAL_MEMORY=$(sysctl -n 'hw.memsize')
 USED_MEMORY=$(get_used_memory)
 FREE_MEMORY=`expr $TOTAL_MEMORY - $USED_MEMORY`
-# PERCENTAGE=`expr 100 \* $USED_MEMORY / $TOTAL_MEMORY`
+PERCENTAGE=`expr 100 \* $USED_MEMORY / $TOTAL_MEMORY`
 
-# DISPLAY="$PERCENTAGE% ($(convert2gb $USED_MEMORY)G/$(convert2gb $TOTAL_MEMORY)G)"
-DISPLAY="$(convert2gb $USED_MEMORY)G/$(convert2gb $TOTAL_MEMORY)G"
+DISPLAY="$PERCENTAGE% ($(convert2gb $USED_MEMORY)G/$(convert2gb $TOTAL_MEMORY)G)"
+# DISPLAY="$(convert2gb $USED_MEMORY)G/$(convert2gb $TOTAL_MEMORY)G"
 # echo $(apply_color "$DISPLAY" $PERCENTAGE)
 echo $DISPLAY
 # echo $(convert2gb $FREE_MEMORY)G
