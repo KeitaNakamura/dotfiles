@@ -1,7 +1,13 @@
-"************************************************
+"        _                    
+" __   _(_)_ __ ___  _ __ ___ 
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+"   \_/ |_|_| |_| |_|_|  \___|
+"
+"
+
 let g:user  = "K.Nakamura"
 let g:email = "nakamura-keita-kn@ynu.jp"
-"************************************************
 
 " Installed plugins {{{1
 call plug#begin('~/.vim/plugged')
@@ -30,6 +36,7 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/vimproc.vim',   {'do': 'make'}
 " Plug 'Shougo/vimshell.vim'
 " Plug 'christoomey/vim-tmux-navigator'
+" Plug 'godlygeek/csapprox'
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree'
@@ -56,7 +63,7 @@ Plug 'nanotech/jellybeans.vim'          " jellybeans
 Plug 'vim-scripts/Lucius'               " lucius
 Plug 'vim-scripts/Zenburn'              " zenburn
 Plug 'mrkn/mrkn256.vim'                 " mrkn256
-Plug 'jpo/vim-railscasts-theme'         " railscasts
+" Plug 'jpo/vim-railscasts-theme'         " railscasts
 Plug 'therubymug/vim-pyte'              " pyte
 Plug 'tomasr/molokai'                   " molokai
 Plug 'chriskempson/vim-tomorrow-theme'  " tomorrow night
@@ -69,13 +76,18 @@ Plug 'sjl/badwolf'                      " badwolf
 Plug 'itchyny/landscape.vim'            " landscape
 Plug 'joshdick/onedark.vim'             " onedark in atom
 Plug 'gosukiwi/vim-atom-dark'           " atom-dark
+Plug 'lifepillar/vim-wwdc16-theme'
+Plug 'easysid/mod8.vim'
+Plug 'therealechan/vim-railscasts-theme'
+
+Plug 'cocopon/lightline-hybrid.vim'
 " }}}
 
 call plug#end()
 
 " Global setting {{{1
 " Color {{{2
-colorscheme solarized
+colorscheme railscasts-earthtone
 set background=dark
 syntax on
 " set cursorline " highlight current line
@@ -95,6 +107,7 @@ set number " line number
 set laststatus=2
 set nowrap
 set noshowmode
+set guioptions-=e " tab window for gui
 " disable left and right sides scroll bar
 set guioptions-=r
 set guioptions-=R
@@ -140,10 +153,49 @@ if !has('gui_running')
     set timeout timeoutlen=1000 ttimeoutlen=50
 endif
 set clipboard+=unnamed
+
+" get syntax information
+function! s:get_syn_id(transparent)
+    let synid = synID(line("."), col("."), 1)
+    if a:transparent
+        return synIDtrans(synid)
+    else
+        return synid
+    endif
+endfunction
+function! s:get_syn_attr(synid)
+    let name = synIDattr(a:synid, "name")
+    let ctermfg = synIDattr(a:synid, "fg", "cterm")
+    let ctermbg = synIDattr(a:synid, "bg", "cterm")
+    let guifg = synIDattr(a:synid, "fg", "gui")
+    let guibg = synIDattr(a:synid, "bg", "gui")
+    return {
+                \ "name": name,
+                \ "ctermfg": ctermfg,
+                \ "ctermbg": ctermbg,
+                \ "guifg": guifg,
+                \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+    let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+    echo "name: " . baseSyn.name .
+                \ " ctermfg: " . baseSyn.ctermfg .
+                \ " ctermbg: " . baseSyn.ctermbg .
+                \ " guifg: " . baseSyn.guifg .
+                \ " guibg: " . baseSyn.guibg
+    let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+    echo "link to"
+    echo "name: " . linkedSyn.name .
+                \ " ctermfg: " . linkedSyn.ctermfg .
+                \ " ctermbg: " . linkedSyn.ctermbg .
+                \ " guifg: " . linkedSyn.guifg .
+                \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()
 " }}}
 
 " Local setting {{{1
-" c++ {{{2
+" shell {{{2
 function! s:sh()
     set tabstop=2 " number of space for tab
     set shiftwidth=2 " width of auto indent
@@ -256,7 +308,7 @@ let g:indentLine_color_term = 239
 
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
-let g:templates_directory = '~/.vim/template'
+let g:templates_directory = '~/dotfiles/_vim/templates'
 
 " syntastic {{{2
 let g:syntastic_quiet_messages = { "level": "warnings" }
@@ -394,8 +446,13 @@ if executable('ag')
 endif
 
 " Lightline {{{2
+
+" let g:lightline.enable = {
+    " \ 'statusline': 1,
+    " \ 'tabline': 1
+    " \ }
 let g:lightline = {
-\   'colorscheme': 'solarized',
+\   'colorscheme': 'railscasts_earthtone',
 \   'mode_map': { 'c': 'NORMAL' },
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]

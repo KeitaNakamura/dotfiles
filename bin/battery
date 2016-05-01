@@ -1,10 +1,5 @@
 #!/bin/bash
 
-
-MODE="shell"
-PERCENTAGE="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
-DISPLAY="${PERCENTAGE}%"
-
 function get_percentage() {
   echo "$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
 }
@@ -18,7 +13,26 @@ function is_charging() {
   fi
 }
 
-get_remain() {
+function get_meter() {
+  local percentage=$1
+  if is_charging; then
+    echo '|⚡︎⚡︎⚡︎⚡︎⚡︎|'
+  else
+    if [ $percentage -le 20 ]; then
+      echo '|█    |'
+    elif [ $percentage -gt 20 ] && [ $percentage -le 40 ]; then
+      echo '|██   |'
+    elif [ $percentage -gt 40 ] && [ $percentage -le 60 ]; then
+      echo '|███  |'
+    elif [ $percentage -gt 60 ] && [ $percentage -le 80 ]; then
+      echo '|████ |'
+    elif [ $percentage -gt 80 ] && [ $percentage -le 100 ]; then
+      echo '|█████|'
+    fi
+  fi
+}
+
+function get_remain() {
   local time_remain
   time_remain="$(pmset -g ps | grep -o '[0-9]\+:[0-9]\+')"
   if [ -z "$time_remain" ]; then
@@ -27,88 +41,50 @@ get_remain() {
   echo "$time_remain"
 }
 
-function get_meter() {
-  if is_charging; then
-    echo '|⚡︎⚡︎⚡︎⚡︎⚡︎|'
-  else
-    if [ $PERCENTAGE -le 20 ]; then
-      echo '|█    |'
-    elif [ $PERCENTAGE -gt 20 ] && [ $PERCENTAGE -le 40 ]; then
-      echo '|██   |'
-    elif [ $PERCENTAGE -gt 40 ] && [ $PERCENTAGE -le 60 ]; then
-      echo '|███  |'
-    elif [ $PERCENTAGE -gt 60 ] && [ $PERCENTAGE -le 80 ]; then
-      echo '|████ |'
-    elif [ $PERCENTAGE -gt 80 ] && [ $PERCENTAGE -le 100 ]; then
-      echo '|█████|'
-    fi
-  fi
-}
-
-# display() {
-  # if is_charging; then
-    # echo -e "\033[32m$PCT_BLOCK\033[m"
-  # else
-    # if [ $PCT -lt 20 ]; then
-      # echo -e "\033[31m$PCT_BLOCK\033[m"
-    # else
-      # echo -e "\033[34m$PCT_BLOCK\033[m"
-    # fi
-  # fi
-# }
-
-# function get_color() {
-  # if is_charging; then
-    # echo "colour2"
-  # else
-    # if [ $PERCENTAGE -lt 20 ]; then
-      # echo "red"
-    # else
-      # echo "blue"
-    # fi
-  # fi
-# }
-
 function display() {
-  if [ ${MODE} == "shell" ]; then
+  mode=$1
+  percentage=$2
+  display=$3
+  if [ $mode == "shell" ]; then
     if is_charging; then
-      echo -e "\033[32m${DISPLAY}\033[m"
+      echo -e "\033[32m${display}\033[m"
     else
-      if [ $PERCENTAGE -lt 20 ]; then
-        echo -e "\033[31m${DISPLAY}\033[m"
+      if [ $percentage -lt 20 ]; then
+        echo -e "\033[31m${display}\033[m"
       else
-        echo -e "\033[34m${DISPLAY}\033[m"
+        echo -e "\033[34m${display}\033[m"
       fi
     fi
-  elif [ ${MODE} == "tmux" ]; then
+  elif [ $mode == "tmux" ]; then
     if is_charging; then
-      echo -e "#[fg=colour2]${DISPLAY}#[default]"
+      echo -e "#[fg=colour2]${display}#[default]"
     else
-      if [ $PERCENTAGE -lt 20 ]; then
-        echo -e "#[fg=red]${DISPLAY}#[default]"
+      if [ $percentage -lt 20 ]; then
+        echo -e "#[fg=red]${display}#[default]"
       else
-        echo -e "#[fg=blue]${DISPLAY}#[default]"
+        echo -e "#[fg=blue]${display}#[default]"
       fi
     fi
   fi
 }
+
+
+MODE="shell"
+PERCENTAGE="$(pmset -g ps | egrep -o '[0-9]+%' | tr -d %)"
+DISPLAY="${PERCENTAGE}%"
 
 for i in "$@"
 do
   case "$i" in
     "-h")
-      # echo "usage: battery [-t tmux][-p percentage][-m meter][-r remain]" 1>&2
       echo "usage: battery [-t tmux][-m meter][-r remain]" 1>&2
       exit
       ;;
     "-t")
       MODE="tmux"
       ;;
-    # "-p")
-      # DISPLAY="${DISPLAY}${PERCENTAGE}% "
-      # ;;
     "-m")
-      DISPLAY="${DISPLAY} $(get_meter)"
+      DISPLAY="${DISPLAY} $(get_meter $PERCENTAGE)"
       ;;
     "-r")
       DISPLAY="${DISPLAY} ($(get_remain))"
@@ -119,5 +95,4 @@ do
       ;;
   esac
 done
-# echo -e "#[fg=$(get_color)]${DISPLAY}#[default]"
-display
+display $MODE $PERCENTAGE "$DISPLAY"

@@ -93,7 +93,5 @@ if [ "$rate" = 0 ]; then
 fi
 
 # Outputs wifi
-#   example: "fun-wifi 351Mbs ▂ ▅   "
-# echo -e "${ssid} ${rate}Mbs ${signal}"
-# echo -e "#[fg=colour12]${ssid} ${rate}Mbs ${signal}#[default]"
-echo -e "#[fg=colour14]${ssid} ${rate}Mbs ${signal}#[default]"
+#   example: "fun-wifi 351Mbps ▂ ▅   "
+echo -e "${ssid} ${rate}Mbps ${signal}"
