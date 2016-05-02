@@ -197,9 +197,10 @@ command! SyntaxInfo call s:get_syn_info()
 " Local setting {{{1
 " shell {{{2
 function! s:sh()
-    set tabstop=2 " number of space for tab
-    set shiftwidth=2 " width of auto indent
-    set expandtab
+    setlocal tabstop=2 " number of space for tab
+    setlocal shiftwidth=2 " width of auto indent
+    setlocal foldmethod=indent
+    setlocal expandtab
 endfunction
 
 augroup vimrc-sh
@@ -258,7 +259,7 @@ augroup END
 " julia {{{2
 function! s:julia()
     setlocal expandtab
-	setlocal foldmethod=indent
+    setlocal foldmethod=indent
 endfunction
 
 augroup vimrc-julia
