@@ -78,16 +78,16 @@ Plug 'joshdick/onedark.vim'             " onedark in atom
 Plug 'gosukiwi/vim-atom-dark'           " atom-dark
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'easysid/mod8.vim'
-Plug 'therealechan/vim-railscasts-theme'
+" Plug 'therealechan/vim-railscasts-theme'
 
-Plug 'cocopon/lightline-hybrid.vim'
+Plug 'KeitaNakamura/lightline-railscasts.vim'
 " }}}
 
 call plug#end()
 
 " Global setting {{{1
 " Color {{{2
-colorscheme railscasts-earthtone
+colorscheme railscasts
 set background=dark
 syntax on
 " set cursorline " highlight current line
@@ -452,7 +452,7 @@ endif
     " \ 'tabline': 1
     " \ }
 let g:lightline = {
-\   'colorscheme': 'railscasts_earthtone',
+\   'colorscheme': 'railscasts',
 \   'mode_map': { 'c': 'NORMAL' },
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
