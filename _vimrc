@@ -102,6 +102,7 @@ set smartcase
 set incsearch
 " }}}
 " View {{{2
+set guicursor=n-v-c-i:block-Cursor
 set pumheight=10 " number of lists of completion
 set number " line number
 set laststatus=2
