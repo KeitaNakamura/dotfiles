@@ -1,15 +1,15 @@
 #!/bin/bash
 
 function timer_on() {
-  let seconds=$1*60 # minites -> seconds
-  local start=`expr $(date +%s) + $seconds`
-  echo -e "SWITCH: TIMER\nCOUNT: $seconds\nSTART: $start" > $TMPFILE
+  let seconds=$1*60 # minutes -> seconds
+  local last=`expr $(date +%s) + $seconds`
+  echo -e "SWITCH: TIMER\nLAST: $last" > $TMPFILE
 }
 function timer_off() { init; }
-function init() { echo -e "SWITCH: DATE\nCOUNT:\nSTART:\n" > $TMPFILE; }
-function get() { cat $TMPFILE | awk '/'$1'/ {print $2}'; } # $1: SWITCH, COUNT or START
+function init() { echo -e "SWITCH: DATE\nLAST:\n" > $TMPFILE; }
+function get() { cat $TMPFILE | awk '/'$1'/ {print $2}'; } # $1: SWITCH or LAST
 function countdown() {
-  let diff=$(get "START")-$(date +%s)
+  let diff=$(get "LAST")-$(date +%s)
   if [ $diff -lt 0 ]; then
     timer_off
     reattach-to-user-namespace osascript -e 'display notification "Tea is ready" with title "Timer" sound name ""'
@@ -17,21 +17,21 @@ function countdown() {
   fi
   # let hour="$diff / 3600"
   # let diff="$diff % 3600"
-  let minite="$diff / 60"
+  let minute="$diff / 60"
   let second="$diff % 60"
-  # printf "%02d:%02d:%02d" $hour $minite $second
-  printf "%02d:%02d" $minite $second
+  # printf "%02d:%02d:%02d" $hour $minute $second
+  printf "%02d:%02d" $minute $second
 }
 
 # temporary file
-TMPFILE="${TMPDIR}timerx_tmp"
+TMPFILE="${TMPDIR}timerx.tmp"
 ! [ -e $TMPFILE ] && init
 
 # check argument
 # --------------
 case "$1" in
   "-h")
-    echo "usage: timerx [minites][--off]" 1>&2
+    echo "usage: timerx [minutes|--off]" 1>&2
     exit
     ;;
   "--off")
@@ -55,5 +55,5 @@ SWITCH=$(get "SWITCH")
 if [ $SWITCH = "DATE" ]; then
   echo $(date "$@")
 elif [ $SWITCH = "TIMER" ]; then
-  countdown $(get "COUNT")
+  countdown
 fi
