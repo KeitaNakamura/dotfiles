@@ -1,7 +1,5 @@
-$latex = 'platex -kanji=utf8 -synctex=1 %O %S';
-# $latex = 'pdflatex -synctex=1 %O %S';
+$latex = 'uplatex -synctex=1 -interaction=nonstopmode';
 $dvipdf = 'dvipdfmx %O %S';
-$bibtex = 'pbibtex -kanji=utf8 %O %B';
-# $bibtex = 'bibtex %O %B';
-$pdf_mode = 3;
-$pvc_view_file_via_temporary = 0;
+$bibtex = 'upbibtex %O %B';
+$pdf_mode = 3; # generates pdf via dvipdfmx
+$pvc_view_file_via_temporary = 0; # necessary for Skim
