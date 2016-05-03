@@ -7,7 +7,7 @@ function timer_on() {
 }
 function timer_off() { init; }
 function init() { echo -e "SWITCH: DATE\nCOUNT:\nSTART:\n" > $TMPFILE; }
-function get() { cat $TMPFILE | awk '/'$1'/ {print $2}'; }
+function get() { cat $TMPFILE | awk '/'$1'/ {print $2}'; } # $1: SWITCH, COUNT or START
 function countdown() {
   let diff=$(get "START")-$(date +%s)
   if [ $diff -lt 0 ]; then
