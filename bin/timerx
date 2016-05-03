@@ -1,0 +1,59 @@
+#!/bin/bash
+
+function timer_on() {
+  let seconds=$1*60 # minites -> seconds
+  local start=`expr $(date +%s) + $seconds`
+  echo -e "SWITCH: TIMER\nCOUNT: $seconds\nSTART: $start" > $TMPFILE
+}
+function timer_off() { init; }
+function init() { echo -e "SWITCH: DATE\nCOUNT:\nSTART:\n" > $TMPFILE; }
+function get() { cat $TMPFILE | awk '/'$1'/ {print $2}'; }
+function countdown() {
+  let diff=$(get "START")-$(date +%s)
+  if [ $diff -lt 0 ]; then
+    timer_off
+    reattach-to-user-namespace osascript -e 'display notification "Tea is ready" with title "Timer" sound name ""'
+    exit
+  fi
+  # let hour="$diff / 3600"
+  # let diff="$diff % 3600"
+  let minite="$diff / 60"
+  let second="$diff % 60"
+  # printf "%02d:%02d:%02d" $hour $minite $second
+  printf "%02d:%02d" $minite $second
+}
+
+# temporary file
+TMPFILE="${TMPDIR}timer_tmp"
+! [ -e $TMPFILE ] && init
+
+# check argument
+# --------------
+case "$1" in
+  "-h")
+    echo "usage: timer [minites][--off]" 1>&2
+    exit
+    ;;
+  "--off")
+    timer_off
+    exit
+    ;;
+  -*|--*)
+    echo "$1: unknown option" 1>&2
+    exit 1
+    ;;
+esac
+expr "$1" + 1 >/dev/null 2>&1 # check if $1 is numeric or not
+if [ $? -lt 2 ]; then
+  timer_on $1
+  exit
+fi
+
+# check switch
+# ------------
+SWITCH=$(get "SWITCH")
+if [ $SWITCH = "DATE" ]; then
+  echo $(date "$@")
+elif [ $SWITCH = "TIMER" ]; then
+  countdown $(get "COUNT")
+fi
