@@ -24,14 +24,14 @@ function countdown() {
 }
 
 # temporary file
-TMPFILE="${TMPDIR}timer_tmp"
+TMPFILE="${TMPDIR}timerx_tmp"
 ! [ -e $TMPFILE ] && init
 
 # check argument
 # --------------
 case "$1" in
   "-h")
-    echo "usage: timer [minites][--off]" 1>&2
+    echo "usage: timerx [minites][--off]" 1>&2
     exit
     ;;
   "--off")
