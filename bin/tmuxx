@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ -z $TMUX ]; then
+  tmux has-session >/dev/null 2>&1
+  if [ $? = "0" ]; then
+    tmux list-session
+    echo "Tmux: attach? (y/N/num)"
+    read
+    if expr "$REPLY" : '[0-9]*' > /dev/null ; then
+      tmux attach -t "$REPLY"
+    else
+      case $REPLY in
+        'y'|'Y'|'')
+          tmux attach
+          ;;
+        *)
+          tmux
+          ;;
+      esac
+    fi
+  else
+    tmux
+  fi
+fi
