@@ -19,7 +19,8 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -U compinit; compinit
 
-TERM=xterm-256color
+# TERM=xterm-256color
+TERM=screen-256color
 autoload colors
 colors
 PROMPT="%{$fg[green]%}[%n]%(!.#.$) %{$reset_color%}"
