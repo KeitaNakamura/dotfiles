@@ -6,13 +6,15 @@
 #                         
 #
 
+export DOTPATH="$HOME/Dropbox/dotfiles"
+
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:$HOME/dotfiles/bin"
+export PATH="$PATH:${DOTPATH}/bin"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # enhancd
-source ~/dotfiles/sh/enhancd.sh
+source $DOTPATH/sh/enhancd.sh
 export ENHANCD_FILTER="fzf-tmux -d 30%"
 
 # alias to start vim quickly
