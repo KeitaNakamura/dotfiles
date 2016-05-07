@@ -3,24 +3,30 @@
 DOTPATH=`echo $(cd $(dirname $0) && pwd)`
 
 # vim
-mkdir -p ~/.vim
-ln -s -i ${DOTPATH}/_vim/spell ~/.vim/
-ln -s -i ${DOTPATH}/_vim/templates ~/.vim/
-ln -s -i ${DOTPATH}/_vimrc ~/.vimrc
-ln -s -i ${DOTPATH}/_gvimrc ~/.gvimrc
+mkdir -p ~/.vim/colors
+ln -sfv ${DOTPATH}/_vim/spell ~/.vim/
+ln -sfv ${DOTPATH}/_vim/templates ~/.vim/
+ln -sfv ${DOTPATH}/_vimrc ~/.vimrc
+ln -sfv ${DOTPATH}/_gvimrc ~/.gvimrc
+ln -sfv ${DOTPATH}/colorscheme/railscasts.vim/colors/railscasts.vim ~/.vim/colors/
+if ! [ -e '~/.vim/plugged' ]; then
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  vim +PlugInstall +qall
+fi
 
 # zsh
-ln -s -i ${DOTPATH}/_zshrc ~/.zshrc
+ln -sfv ${DOTPATH}/_zshrc ~/.zshrc
 
 # ctags
-ln -s -i ${DOTPATH}/ctags ~/.ctags
+ln -sfv ${DOTPATH}/ctags ~/.ctags
 
 # latexmk
-ln -s -i ${DOTPATH}/_latexmkrc ~/.latexmkrc
+ln -sfv ${DOTPATH}/_latexmkrc ~/.latexmkrc
 
 # matplotlib
 mkdir -p ~/.matplotlib
-ln -s -i ${DOTPATH}/_matplotlib/matplotlibrc ~/.matplotlib/
+ln -sfv ${DOTPATH}/_matplotlib/matplotlibrc ~/.matplotlib/
 
 # tmux
-ln -s -i ${DOTPATH}/tmux/_tmux.conf ~/.tmux.conf
+ln -sfv ${DOTPATH}/tmux/_tmux.conf ~/.tmux.conf
