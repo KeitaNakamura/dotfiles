@@ -1,0 +1,2 @@
+# right hand side of the status bar
+set-option -g status-right '%Y-%m-%d(%a) %H:%M'
