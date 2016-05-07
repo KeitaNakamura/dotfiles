@@ -11,6 +11,10 @@ export PATH="$PATH:$HOME/dotfiles/bin"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# enhancd
+source ~/dotfiles/sh/enhancd.sh
+export ENHANCD_FILTER="fzf-tmux -d 30%"
+
 # alias to start vim quickly
 alias v='vim .'
 
