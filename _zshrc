@@ -14,11 +14,11 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # enhancd
-source $DOTPATH/sh/enhancd.sh
-export ENHANCD_FILTER="fzf-tmux -d 30%"
+# source $DOTPATH/sh/enhancd.sh
+# export ENHANCD_FILTER="fzf-tmux -d 30%"
 
 # alias to start vim quickly
-alias v='vim .'
+# alias v='vim .'
 
 # for zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -33,3 +33,18 @@ PROMPT="%{$fg[green]%}[%n]%(!.#.$) %{$reset_color%}"
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+v() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir" && vim .
+}
