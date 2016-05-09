@@ -32,6 +32,10 @@ font.family          : serif
 font.size            : 14.0
 font.serif           : Times New Roman
 
+### LINES
+lines.linewidth      : 0.5     # line width in points
+lines.markersize     : 5       # markersize, in points
+
 ### AXES
 axes.titlesize       : large   # fontsize of the axes title
 axes.labelsize       : medium  # fontsize of the x any y labels
@@ -39,6 +43,9 @@ axes.labelsize       : medium  # fontsize of the x any y labels
 ### TICKS
 xtick.labelsize      : small   # fontsize of the tick labels
 ytick.labelsize      : small   # fontsize of the tick labels
+
+### GRIDS
+grid.linewidth       : 0.25    # in points
 
 ### Legend
 legend.fancybox      : False   # if True, use a rounded box for the
