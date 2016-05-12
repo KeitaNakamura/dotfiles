@@ -116,11 +116,11 @@ set guioptions-=l
 set guioptions-=L
 " shape of cursor in CUI
 if exists('$TMUX')
-	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 " }}}
 " Movement {{{2
@@ -151,150 +151,163 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 if !has('gui_running')
-    set timeout timeoutlen=1000 ttimeoutlen=50
+  set timeout timeoutlen=1000 ttimeoutlen=50
 endif
 set clipboard+=unnamed
 
 " get syntax information
 function! s:get_syn_id(transparent)
-    let synid = synID(line("."), col("."), 1)
-    if a:transparent
-        return synIDtrans(synid)
-    else
-        return synid
-    endif
+  let synid = synID(line("."), col("."), 1)
+  if a:transparent
+    return synIDtrans(synid)
+  else
+    return synid
+  endif
 endfunction
 function! s:get_syn_attr(synid)
-    let name = synIDattr(a:synid, "name")
-    let ctermfg = synIDattr(a:synid, "fg", "cterm")
-    let ctermbg = synIDattr(a:synid, "bg", "cterm")
-    let guifg = synIDattr(a:synid, "fg", "gui")
-    let guibg = synIDattr(a:synid, "bg", "gui")
-    return {
-                \ "name": name,
-                \ "ctermfg": ctermfg,
-                \ "ctermbg": ctermbg,
-                \ "guifg": guifg,
-                \ "guibg": guibg}
+  let name = synIDattr(a:synid, "name")
+  let ctermfg = synIDattr(a:synid, "fg", "cterm")
+  let ctermbg = synIDattr(a:synid, "bg", "cterm")
+  let guifg = synIDattr(a:synid, "fg", "gui")
+  let guibg = synIDattr(a:synid, "bg", "gui")
+  return {
+    \ "name": name,
+    \ "ctermfg": ctermfg,
+    \ "ctermbg": ctermbg,
+    \ "guifg": guifg,
+    \ "guibg": guibg}
 endfunction
 function! s:get_syn_info()
-    let baseSyn = s:get_syn_attr(s:get_syn_id(0))
-    echo "name: " . baseSyn.name .
-                \ " ctermfg: " . baseSyn.ctermfg .
-                \ " ctermbg: " . baseSyn.ctermbg .
-                \ " guifg: " . baseSyn.guifg .
-                \ " guibg: " . baseSyn.guibg
-    let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
-    echo "link to"
-    echo "name: " . linkedSyn.name .
-                \ " ctermfg: " . linkedSyn.ctermfg .
-                \ " ctermbg: " . linkedSyn.ctermbg .
-                \ " guifg: " . linkedSyn.guifg .
-                \ " guibg: " . linkedSyn.guibg
+  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+  echo "name: " . baseSyn.name .
+    \ " ctermfg: " . baseSyn.ctermfg .
+    \ " ctermbg: " . baseSyn.ctermbg .
+    \ " guifg: " . baseSyn.guifg .
+    \ " guibg: " . baseSyn.guibg
+  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+  echo "link to"
+  echo "name: " . linkedSyn.name .
+    \ " ctermfg: " . linkedSyn.ctermfg .
+    \ " ctermbg: " . linkedSyn.ctermbg .
+    \ " guifg: " . linkedSyn.guifg .
+    \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 " }}}
 
 " Local setting {{{1
+" vimscript {{{2
+function! s:vimscript()
+  setlocal tabstop=2 " number of space for tab
+  setlocal shiftwidth=2 " width of auto indent
+  setlocal expandtab
+endfunction
+
+augroup vimrc-vimscript
+  autocmd!
+  autocmd FileType vim call s:vimscript()
+augroup END
+
 " shell {{{2
 function! s:sh()
-    setlocal tabstop=2 " number of space for tab
-    setlocal shiftwidth=2 " width of auto indent
-    setlocal foldmethod=indent
-    setlocal expandtab
+  setlocal tabstop=2 " number of space for tab
+  setlocal shiftwidth=2 " width of auto indent
+  setlocal foldmethod=indent
+  setlocal expandtab
 endfunction
 
 augroup vimrc-sh
-    autocmd!
-    autocmd FileType sh call s:sh()
+  autocmd!
+  autocmd FileType sh call s:sh()
+  autocmd FileType zsh call s:sh()
 augroup END
 
 " c++ {{{2
 function! s:cpp()
-	" setlocal path+=/usr/local/include/eigen3
-    setlocal expandtab
-    setlocal autoindent
-    setlocal smartindent
-    setlocal cinoptions+=:0,g0
-	" setlocal foldmethod=syntax
-	" setlocal foldcolumn=1
-    " nnoremap <F5> :make build_run<cr>
-    " nnoremap <F6> :make run<cr>
-    nnoremap <buffer> <F7> :make<cr>
+  " setlocal path+=/usr/local/include/eigen3
+  setlocal expandtab
+  setlocal autoindent
+  setlocal smartindent
+  setlocal cinoptions+=:0,g0
+  " setlocal foldmethod=syntax
+  " setlocal foldcolumn=1
+  " nnoremap <F5> :make build_run<cr>
+  " nnoremap <F6> :make run<cr>
+  nnoremap <buffer> <F7> :make<cr>
 endfunction
 
 augroup vimrc-cpp
-    autocmd!
-    autocmd FileType cpp call s:cpp()
+  autocmd!
+  autocmd FileType cpp call s:cpp()
 augroup END
 
 " tex {{{2
 function! s:tex()
-	setlocal nocursorline
-	setlocal wrap
-	setlocal linebreak
-    setlocal expandtab
-    setlocal spell
-	" setlocal foldmethod=manual
-	setlocal tabstop=2
-	setlocal shiftwidth=2
+  setlocal nocursorline
+  setlocal wrap
+  setlocal linebreak
+  setlocal expandtab
+  setlocal spell
+  " setlocal foldmethod=manual
+  setlocal tabstop=2
+  setlocal shiftwidth=2
 endfunction
 
 augroup vimrc-tex
-    autocmd!
-    autocmd FileType tex call s:tex()
+  autocmd!
+  autocmd FileType tex call s:tex()
 augroup END
 
 " python {{{2
 function! s:python()
-    setlocal autoindent
-    " setlocal smartindent
-	setlocal indentkeys+=0#
+  setlocal autoindent
+  " setlocal smartindent
+  setlocal indentkeys+=0#
 endfunction
 
 augroup vimrc-phthon
-    autocmd!
-    autocmd FileType python call s:python()
+  autocmd!
+  autocmd FileType python call s:python()
 augroup END
 
 " julia {{{2
 function! s:julia()
-    setlocal expandtab
-    setlocal foldmethod=indent
+  setlocal expandtab
+  setlocal foldmethod=indent
 endfunction
 
 augroup vimrc-julia
-    autocmd!
-    autocmd FileType julia call s:julia()
-	" autocmd FileType julia nnoremap <buffer> <Leader>r :exec '!clear; julia' shellescape(@%, 1)<cr>
+  autocmd!
+  autocmd FileType julia call s:julia()
+  " autocmd FileType julia nnoremap <buffer> <Leader>r :exec '!clear; julia' shellescape(@%, 1)<cr>
 augroup END
 
 " fortran {{{2
 function! s:fortran()
-	let fortran_do_enddo=1
-	let fortran_free_source=1
-	let fortran_fold=1
-	filetype plugin indent on
-	setlocal smarttab
-    setlocal expandtab
-    setlocal smartindent
-    setlocal autoindent
-	setlocal tabstop=2
-	setlocal shiftwidth=2
+  let fortran_do_enddo=1
+  let fortran_free_source=1
+  let fortran_fold=1
+  filetype plugin indent on
+  setlocal smarttab
+  setlocal expandtab
+  setlocal smartindent
+  setlocal autoindent
+  setlocal tabstop=2
+  setlocal shiftwidth=2
 endfunction
 
 augroup vimrc-fortran
-    autocmd!
-    autocmd FileType fortran call s:fortran()
+  autocmd!
+  autocmd FileType fortran call s:fortran()
 augroup END
 " markdown {{{2
 function! s:markdown()
-	setlocal wrap
+  setlocal wrap
 endfunction
 
 augroup vimrc-markdown
-    autocmd!
-    autocmd FileType markdown call s:markdown()
+  autocmd!
+  autocmd FileType markdown call s:markdown()
 augroup END
 " Setting for each plugin {{{1
 " caw (comment out plugin) {{{2
@@ -319,20 +332,20 @@ let g:syntastic_error_symbol = '✗✗'
 " tagbar {{{2
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_julia = {
-    \ 'ctagstype' : 'julia',
-    \ 'kinds'     : ['a:abstract', 'i:immutable', 't:type', 'f:function', 'm:macro']
-    \ }
+  \ 'ctagstype' : 'julia',
+  \ 'kinds'     : ['a:abstract', 'i:immutable', 't:type', 'f:function', 'm:macro']
+  \ }
 let g:tagbar_type_tex = {
-	\ 'ctagstype' : 'latex',
-	\ 'kinds'     : [
-		\ 's:sections',
-		\ 'g:graphics:0:0',
-		\ 'l:labels',
-		\ 'r:refs:1:0',
-		\ 'p:pagerefs:1:0'
-	\ ],
-	\ 'sort'    : 0,
-\ }
+  \ 'ctagstype' : 'latex',
+  \ 'kinds'     : [
+  \ 's:sections',
+  \ 'g:graphics:0:0',
+  \ 'l:labels',
+  \ 'r:refs:1:0',
+  \ 'p:pagerefs:1:0'
+  \ ],
+  \ 'sort'    : 0,
+  \ }
 let g:tagbar_iconchars = ['▸', '▾']
 " for onedark color scheme with tagbar
 highlight TagbarSignature term=bold ctermfg=59 gui=italic guifg=#5C6670
@@ -342,8 +355,8 @@ let g:vim_markdown_folding_style_pythonic = 1
 
 " previm {{{2
 augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+  autocmd!
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 
 " Julia {{{2
@@ -364,28 +377,28 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 " for NeoComplete {{{3
 if !exists('g:neocomplete#sources#omni#input_patterns')
-let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.tex =
-	\ '\v\\%('
-	\ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
-	\ . '|hyperref\s*\[[^]]*'
-	\ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|%(include%(only)?|input)\s*\{[^}]*'
-	\ . ')'
+      \ '\v\\%('
+      \ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|%(include%(only)?|input)\s*\{[^}]*'
+      \ . ')'
 " }}}
 " for YouCompleteMe {{{3
 if !exists('g:ycm_semantic_triggers')
-let g:ycm_semantic_triggers = {}
+  let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers.tex = [
-	\ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-	\ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-	\ 're!\\hyperref\[[^]]*',
-	\ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-	\ 're!\\(include(only)?|input){[^}]*'
-	\ ]
+      \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+      \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+      \ 're!\\hyperref\[[^]]*',
+      \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+      \ 're!\\(include(only)?|input){[^}]*'
+      \ ]
 " }}}
 
 " jedi-vim {{{2
@@ -394,11 +407,14 @@ let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 " for NeoComplete {{{3
 if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 " }}}
 
+" vim-slime {{{2
+let g:slime_target = "tmux"
+" }}}
 " vim-clang {{{2
 " disable auto completion for vim-clang
 let g:clang_auto = 0
@@ -417,16 +433,16 @@ endif
 
 " for c and c++
 let g:neocomplete#force_omni_input_patterns.c =
-	  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 let g:neocomplete#force_omni_input_patterns.cpp =
-	  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 augroup nerdtree-keymap
-    autocmd!
+  autocmd!
 augroup END
 autocmd nerdtree-keymap filetype nerdtree nmap <buffer> x po
 autocmd nerdtree-keymap filetype nerdtree nmap <buffer> l <S-C>cd
@@ -451,29 +467,29 @@ endif
 " Lightline {{{2
 
 " let g:lightline.enable = {
-    " \ 'statusline': 1,
-    " \ 'tabline': 1
-    " \ }
+" \ 'statusline': 1,
+" \ 'tabline': 1
+" \ }
 let g:lightline = {
-\   'colorscheme': 'railscasts',
-\   'mode_map': { 'c': 'NORMAL' },
-\   'active': {
-\     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+\ 'colorscheme': 'railscasts',
+\ 'mode_map': { 'c': 'NORMAL' },
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+\ },
+\ 'component_function': {
+\   'modified': 'LightLineModified',
+\   'readonly': 'LightLineReadonly',
+\   'fugitive': 'LightLineFugitive',
+\   'filename': 'LightLineFilename',
+\   'fileformat': 'LightLineFileformat',
+\   'filetype': 'LightLineFiletype',
+\   'fileencoding': 'LightLineFileencoding',
+\   'mode': 'LightLineMode',
+\ },
+\   'component': {
+\     'readonly': '%{&readonly?"⭤":""}',
 \   },
-\   'component_function': {
-\     'modified': 'LightLineModified',
-\     'readonly': 'LightLineReadonly',
-\     'fugitive': 'LightLineFugitive',
-\     'filename': 'LightLineFilename',
-\     'fileformat': 'LightLineFileformat',
-\     'filetype': 'LightLineFiletype',
-\     'fileencoding': 'LightLineFileencoding',
-\     'mode': 'LightLineMode',
-\   },
-\     'component': {
-\     	'readonly': '%{&readonly?"⭤":""}',
-\     },
-\   }
+\ }
 
 function! LightLineModified()
   return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -486,14 +502,14 @@ endfunction
 function! LightLineFilename()
   let fname = expand('%:t')
   return fname == 'ControlP' ? g:lightline.ctrlp_item :
-		\ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ 'NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+       \ fname == '__Tagbar__' ? g:lightline.fname :
+       \ fname =~ 'NERD_tree' ? '' :
+       \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+       \ &ft == 'unite' ? unite#get_status_string() :
+       \ &ft == 'vimshell' ? vimshell#get_status_string() :
+       \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+       \ ('' != fname ? fname : '[No Name]') .
+       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 function! LightLineFugitive()
@@ -523,28 +539,28 @@ endfunction
 function! LightLineMode()
   let fname = expand('%:t')
   return fname == 'ControlP' ? 'CtrlP' :
-		\ fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+       \ fname == '__Tagbar__' ? 'Tagbar' :
+       \ fname =~ 'NERD_tree' ? 'NERDTree' :
+       \ &ft == 'unite' ? 'Unite' :
+       \ &ft == 'vimfiler' ? 'VimFiler' :
+       \ &ft == 'vimshell' ? 'VimShell' :
+       \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! CtrlPMark()
   if expand('%:t') =~ 'ControlP'
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
+                              \ , g:lightline.ctrlp_next], 0)
   else
     return ''
   endif
 endfunction
 
 let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
+\ 'main': 'CtrlPStatusFunc_1',
+\ 'prog': 'CtrlPStatusFunc_2',
+\ }
 
 function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
   let g:lightline.ctrlp_regex = a:regex
@@ -561,7 +577,7 @@ endfunction
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
 function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
+  let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
 
@@ -584,7 +600,7 @@ let g:neocomplete#enable_at_startup = 1
 " let g:neocomplete#enable_smart_case = 1
 " let g:neocomplete#enable_enable_camel_case_completion = 0
 " if !exists('g:neocomplete#keyword_patterns')
-" 	let g:neocomplete#keyword_patterns = {}
+"   let g:neocomplete#keyword_patterns = {}
 " endif
 " let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
