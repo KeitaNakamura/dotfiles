@@ -72,6 +72,7 @@ function __zcomplete::self-insert() {
 function __zcomplete::backward-delete-char() {
   ((CURSOR--))
   BUFFER="$LBUFFER"
+  __zcomplete::highlight
 }
 
 __zcomplete::complete-on
