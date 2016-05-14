@@ -118,6 +118,9 @@ function install_settings()
 
   # tmux
   ln -sfv ${DOTPATH}/tmux/_tmux.conf ~/.tmux.conf
+
+  # git
+  ln -sfv ${DOTPATH}/_gitignore_global ~/.gitignore_global
 }
 
 install_settings
