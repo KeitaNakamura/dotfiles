@@ -1,26 +1,24 @@
 autoload -U compinit
-zle -N zcom::complete-on
-zle -N zcom::complete-off
+zle -N __zcomplete::complete-on
+zle -N __zcomplete::complete-off
 compinit
 
-ZCOM_LIST_MAX=20
+ZCOMPLETE_LIST_MAX=20
+ZCOMPLETE_HIGHLIGHT_STYLE='fg=8'
 
-function zcom::binded-function()
-{
+function __zcomplete::binded-function() {
   lists="`zle -l`"
   echo "$lists" | awk '/'$1' / {print $2}' | sed -e "s/(\(.*\))/\1/"
 }
 
-function zcom::complete-on()
-{
-  ORIG_INSERT="`zcom::binded-function "self-insert"`"
-  ORIG_DELETE="`zcom::binded-function "backward-delete-char"`"
-  zle -N self-insert zcom::self-insert
-  zle -N backward-delete-char zcom::backward-delete-char
+function __zcomplete::complete-on() {
+  ORIG_INSERT="$(__zcomplete::binded-function "self-insert")"
+  ORIG_DELETE="$(__zcomplete::binded-function "backward-delete-char")"
+  zle -N self-insert __zcomplete::self-insert
+  zle -N backward-delete-char __zcomplete::backward-delete-char
 }
 
-function zcom::complete-off()
-{
+function __zcomplete::complete-off() {
   if [[ "$ORIG_INSERT" == "" ]]; then
     zle -A .self-insert self-insert
   else
@@ -33,8 +31,7 @@ function zcom::complete-off()
   fi
 }
 
-function zcom::limit-list()
-{
+function __zcomplete::limit-list() {
   if ((compstate[nmatches] <= 1)); then
     zle -M ""
   elif ((compstate[list_lines] > ZCOM_LIST_MAX)); then
@@ -43,22 +40,19 @@ function zcom::limit-list()
   fi
 }
 
-function zcom::predict()
-{
+function __zcomplete::predict() {
   cursor="$CURSOR"
-  comppostfuncs=( zcom::limit-list )
+  comppostfuncs=( __zcomplete::limit-list )
   zle complete-word
   CURSOR="$cursor"
 }
 
-function zcom::highlight()
-{
+function __zcomplete::highlight() {
   _zsh_highlight 2>/dev/null
   region_highlight+=("$CURSOR $#BUFFER fg=8")
 }
 
-function zcom::self-insert()
-{
+function __zcomplete::self-insert() {
   BUFFER="$LBUFFER"
   if zle .self-insert; then
     if
@@ -67,18 +61,17 @@ function zcom::self-insert()
       [[ "$KEYS[-1]" != " " ]] &&
       [[ "$PREBUFFER" == "" ]]
     then
-      zcom::predict
+      __zcomplete::predict
     else
       zle -M ""
     fi
   fi
-  zcom::highlight
+  __zcomplete::highlight
 }
 
-function zcom::backward-delete-char
-{
+function __zcomplete::backward-delete-char() {
   ((CURSOR--))
   BUFFER="$LBUFFER"
 }
 
-zcom::complete-on
+__zcomplete::complete-on
