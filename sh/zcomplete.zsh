@@ -1,7 +1,8 @@
-autoload -Uz compinit
+# Created by K.Nakamura on 2016-05-16.
+# e-mail: nakamura-keita-kn@ynu.jp
+
 zle -N __zcomplete::complete-on
 zle -N __zcomplete::complete-off
-compinit
 
 function __zcomplete::binded-function() {
   local lists="`zle -l`"
@@ -9,7 +10,7 @@ function __zcomplete::binded-function() {
 }
 
 function __zcomplete::complete-on() {
-  local widgets=("self-insert" "expand-or-complete" "backward-delete-char")
+  local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
   for w in "${widgets[@]}"
   do
     zle -N ${w}-orig "$(__zcomplete::binded-function "${w}")"
@@ -18,7 +19,7 @@ function __zcomplete::complete-on() {
 }
 
 function __zcomplete::complete-off() {
-  local widgets=("self-insert" "expand-or-complete" "backward-delete-char")
+  local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
   for w in "${widgets[@]}"
   do
     if [[ "$(__zcomplete::binded-function "${w}-orig")" == "" ]]; then
