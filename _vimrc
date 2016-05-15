@@ -323,7 +323,7 @@ let g:indentLine_color_term = 239
 
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
-let g:templates_directory = '~/dotfiles/_vim/templates'
+let g:templates_directory = '$DOTPATH/_vim/templates'
 
 " syntastic {{{2
 let g:syntastic_quiet_messages = { "level": "warnings" }
