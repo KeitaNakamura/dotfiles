@@ -13,26 +13,31 @@ export PATH="$PATH:${DOTPATH}/bin"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export LSCOLORS=exfxcxdxbxegedabagacad
+alias ls="ls -GF"
+
+# source $DOTPATH/sh/autocomplete.zsh
+
 # enhancd
 # source $DOTPATH/sh/enhancd.sh
 # export ENHANCD_FILTER="fzf-tmux -d 30%"
-
-# alias to start vim quickly
-# alias v='vim .'
 
 # for zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -U compinit; compinit
+zstyle ':completion:*' list-colors di=34 ln=35 ex=31
+zstyle ':completion:*:default' menu select=1
+
 
 # TERM=xterm-256color
 TERM=screen-256color
 autoload colors
 colors
-PROMPT="%{$fg[green]%}[%n]%(!.#.$) %{$reset_color%}"
+# PROMPT="%{$fg_bold[red]%}→ %{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%} %(!.#.$) "
+PROMPT="%{$fg_bold[red]%}→ %{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%} %# "
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
-RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
 # fd - cd to selected directory
 fd() {
@@ -48,3 +53,6 @@ v() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir" && vim .
 }
+
+source /Users/nakamura/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /Users/nakamura/Dropbox/dotfiles/sh/zcomplete.zsh
