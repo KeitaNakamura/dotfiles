@@ -4,12 +4,12 @@
 zle -N __zcomplete::complete-on
 zle -N __zcomplete::complete-off
 
-function __zcomplete::binded-function() {
+__zcomplete::binded-function() {
   local lists="`zle -l`"
   echo "$lists" | awk '/'^$1' / {print $2}' | sed -e "s/(\(.*\))/\1/"
 }
 
-function __zcomplete::complete-on() {
+__zcomplete::complete-on() {
   local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
   for w in "${widgets[@]}"
   do
@@ -18,7 +18,7 @@ function __zcomplete::complete-on() {
   done
 }
 
-function __zcomplete::complete-off() {
+__zcomplete::complete-off() {
   local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
   for w in "${widgets[@]}"
   do
@@ -31,18 +31,18 @@ function __zcomplete::complete-off() {
   done
 }
 
-function __zcomplete::limit-list() {
+__zcomplete::limit-list() {
   if ((compstate[list_lines] + BUFFERLINES + 2 > LINES)); then
     compstate[list]=''
     zle -M "Too many matches ($compstate[list_lines] lines)"
   fi
 }
 
-function __zcomplete::highlight() {
+__zcomplete::highlight() {
   _zsh_highlight 2>/dev/null
 }
 
-function __zcomplete::show-list {
+__zcomplete::show-list() {
   if
     ((CURSOR > 1)) && (
     [[ "$LBUFFER[-2,-1]" == '\ ' ]] ||
@@ -55,13 +55,13 @@ function __zcomplete::show-list {
   __zcomplete::highlight
 }
 
-function __zcomplete::self-insert() {
+__zcomplete::self-insert() {
   if zle .self-insert; then
       __zcomplete::show-list
   fi
 }
 
-function __zcomplete::expand-or-complete {
+__zcomplete::expand-or-complete() {
   if zle complete-word; then
       __zcomplete::show-list
   else
@@ -70,7 +70,7 @@ function __zcomplete::expand-or-complete {
   fi
 }
 
-function __zcomplete::backward-delete-char {
+__zcomplete::backward-delete-char() {
   if zle .backward-delete-char; then
     __zcomplete::show-list
   fi
