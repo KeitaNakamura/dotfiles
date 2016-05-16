@@ -209,6 +209,7 @@ augroup vimrc-vimscript
 augroup END
 
 " shell {{{2
+autocmd BufEnter *.zsh set filetype=sh
 function! s:sh()
   setlocal tabstop=2 " number of space for tab
   setlocal shiftwidth=2 " width of auto indent
