@@ -252,6 +252,7 @@ function! s:tex()
   " setlocal foldmethod=manual
   setlocal tabstop=2
   setlocal shiftwidth=2
+  setlocal colorcolumn=
 endfunction
 
 augroup vimrc-tex
