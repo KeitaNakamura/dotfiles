@@ -1,8 +1,9 @@
 # Created by K.Nakamura on 2016-05-16.
 # e-mail: nakamura-keita-kn@ynu.jp
 
-# zle -N zcomplete-on
-# zle -N zcomplete-off
+zle -N self-insert zcomplete-self-insert
+zle -N expand-or-complete zcomplete-expand-or-complete
+zle -N backward-delete-char zcomplete-backward-delete-char
 
 zcomplete-binded-function() {
   local lists="`zle -l`"
@@ -12,28 +13,6 @@ zcomplete-binded-function() {
   else
     echo ""
   fi
-}
-
-zcomplete-on() {
-  local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
-  for w in "${widgets[@]}"
-  do
-    zle -N ${w}-orig "$(zcomplete-binded-function "${w}")"
-    zle -N ${w} zcomplete-${w}
-  done
-}
-
-zcomplete-off() {
-  local widgets=('self-insert' 'expand-or-complete' 'backward-delete-char')
-  for w in "${widgets[@]}"
-  do
-    if [[ "$(zcomplete-binded-function "${w}-orig")" == "" ]]; then
-      zle -A .$w $w
-    else
-      zle -A ${w}-orig $w
-      zle -D ${w}-orig
-    fi
-  done
 }
 
 zcomplete-limit-list() {
@@ -46,10 +25,6 @@ zcomplete-limit-list() {
   fi
 }
 
-zcomplete-highlight() {
-  _zsh_highlight 2>/dev/null
-}
-
 zcomplete-show-list() {
   if
     ((CURSOR > 1)) && (
@@ -60,7 +35,6 @@ zcomplete-show-list() {
     comppostfuncs=( zcomplete-limit-list )
     zle list-choices
   fi
-  zcomplete-highlight
 }
 
 zcomplete-self-insert() {
@@ -74,7 +48,6 @@ zcomplete-expand-or-complete() {
       zcomplete-show-list
   else
     zle .expand-or-complete
-    zcomplete-highlight
   fi
 }
 
@@ -83,5 +56,3 @@ zcomplete-backward-delete-char() {
     zcomplete-show-list
   fi
 }
-
-zcomplete-on
