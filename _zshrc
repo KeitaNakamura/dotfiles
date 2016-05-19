@@ -22,8 +22,9 @@ alias ls="ls -GF"
 # source $DOTPATH/sh/enhancd.sh
 # export ENHANCD_FILTER="fzf-tmux -d 30%"
 
-# for zsh-completions
+# fpath
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($DOTPATH/zsh_plugins $fpath)
 
 autoload -U compinit; compinit
 zstyle ':completion:*' list-colors di=34 ln=35 ex=31
