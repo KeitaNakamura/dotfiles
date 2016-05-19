@@ -27,6 +27,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 fpath=($DOTPATH/zsh_plugins $fpath)
 
 autoload -U compinit; compinit
+autoload -Uz zcomplete; zcomplete
 zstyle ':completion:*' list-colors di=34 ln=35 ex=31
 zstyle ':completion:*:default' menu select=1
 
