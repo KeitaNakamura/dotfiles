@@ -56,7 +56,7 @@ legend.framealpha    : None    # opacity of of legend frame (e.g., 0.5)
 legend.scatterpoints : 1       # number of scatter points
 
 ### SAVING FIGURES
-savefig.dpi          : 300     # figure dots per inch
+savefig.dpi          : 400     # figure dots per inch
 savefig.bbox         : tight   # 'tight' or 'standard'.
 savefig.pad_inches   : 0.02    # Padding to be used when bbox is set to 'tight'
 savefig.transparent  : False   # setting that controls whether figures are saved with a
