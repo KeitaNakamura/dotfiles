@@ -79,6 +79,7 @@ Plug 'joshdick/onedark.vim'             " onedark in atom
 Plug 'gosukiwi/vim-atom-dark'           " atom-dark
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'easysid/mod8.vim'
+Plug 'junegunn/seoul256.vim'
 " Plug 'therealechan/vim-railscasts-theme'
 
 Plug 'KeitaNakamura/lightline-railscasts.vim'
