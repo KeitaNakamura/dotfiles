@@ -306,12 +306,19 @@ augroup vimrc-fortran
 augroup END
 " markdown {{{2
 function! s:markdown()
+  " setlocal foldmethod=manual
+  setlocal spell
   setlocal wrap
+  setlocal linebreak
+  setlocal tabstop=2
+  setlocal shiftwidth=2
+  setlocal colorcolumn=
 endfunction
 
 augroup vimrc-markdown
   autocmd!
   autocmd FileType markdown call s:markdown()
+  autocmd FileType pandoc call s:markdown()
 augroup END
 " Setting for each plugin {{{1
 " caw (comment out plugin) {{{2
@@ -323,6 +330,7 @@ let g:NERDSpaceDelims = 1
 let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt': '=#' }}
 
 " indentLine {{{2
+let g:indentLine_fileTypeExclude = ['pandoc', 'tex']
 let g:indentLine_color_term = 239
 
 " vim-template {{{2
@@ -350,6 +358,13 @@ let g:tagbar_type_tex = {
   \ ],
   \ 'sort'    : 0,
   \ }
+let g:tagbar_type_pandoc = {
+    \ 'ctagstype' : 'pandoc',
+    \ 'kinds' : [
+        \ 'h:Headline'
+    \ ],
+    \ 'sort' : 0,
+\ }
 let g:tagbar_iconchars = ['▸', '▾']
 " for onedark color scheme with tagbar
 highlight TagbarSignature term=bold ctermfg=59 gui=italic guifg=#5C6670
