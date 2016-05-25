@@ -95,6 +95,7 @@ syntax on
 " set cursorline " highlight current line
 " hi clear CursorLine
 set colorcolumn=80
+nnoremap <C-n> :set cursorline!<CR>
 " }}}
 " Search {{{2
 set hlsearch " highlight for search
