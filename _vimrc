@@ -25,8 +25,8 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'kannokanno/previm',       {'for': 'markdown'}
-Plug 'tyru/open-browser.vim',   {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 Plug 'scrooloose/syntastic'
 Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
@@ -356,6 +356,19 @@ highlight TagbarSignature term=bold ctermfg=59 gui=italic guifg=#5C6670
 
 " vim-markdown {{{2
 let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_math = 1
+
+" vim-pandoc {{{2
+let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+let g:pandoc#filetypes#pandoc_markdown = 1
+let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#folding#fdc = 0
+let g:pandoc#biblio#bibs = ['/Users/nakamura/Documents/BibTeX/library.bib']
+let g:pandoc#folding#fold_fenced_codeblocks = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.pandoc= '@'
 
 " previm {{{2
 augroup PrevimSettings
