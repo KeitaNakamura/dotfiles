@@ -34,10 +34,9 @@ Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/vimproc.vim',   {'do': 'make'}
+Plug 'tpope/vim-dispatch'
 Plug 'jpalardy/vim-slime'
-" Plug 'Shougo/vimshell.vim'
 " Plug 'christoomey/vim-tmux-navigator'
-" Plug 'godlygeek/csapprox'
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree'
