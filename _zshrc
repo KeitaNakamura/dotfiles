@@ -35,6 +35,7 @@ zstyle ':completion:*:default' menu select=1
 compdef -d brew # remove brew completions
 alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew" # remove pyenv path in Homebrew
 
+alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
 
 # TERM=xterm-256color
 TERM=screen-256color
