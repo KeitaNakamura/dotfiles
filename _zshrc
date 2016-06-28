@@ -31,6 +31,7 @@ autoload -Uz zcomplete; zcomplete
 zstyle ':completion:*' list-colors di=34 ln=35 ex=31
 zstyle ':completion:*:default' menu select=1
 
+compdef -d brew # remove brew completions
 
 # TERM=xterm-256color
 TERM=screen-256color
