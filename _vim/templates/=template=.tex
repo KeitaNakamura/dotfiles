@@ -1,23 +1,66 @@
 % date: %DATE%
-\documentclass[uplatex]{jsarticle}
-% \usepackage[margin=1in]{geometry}
+
+\newif\ifJAPANESE
+\newif\ifMSFONT
+\JAPANESEtrue
+\MSFONTfalse
+
+\documentclass{ltjsarticle}
+\usepackage{caption}
+\ifJAPANESE
+  \captionsetup[figure]{format=hang, labelsep=quad, labelfont=sf, name=図--}
+  \captionsetup[table]{format=hang, labelsep=quad, labelfont=sf, name=表--}
+  \newcommand{\figref}[1]{\textsf{図--\ref{#1}}}
+  \newcommand{\tabref}[1]{\textsf{表--\ref{#1}}}
+\else
+  \captionsetup[figure]{labelsep=period, labelfont=bf, name=Figure\ }
+  \captionsetup[table]{labelsep=period, labelfont=bf, name=Table\ }
+  \newcommand{\figref}[1]{Figure~\ref{#1}}
+  \newcommand{\tabref}[1]{Table~\ref{#1}}
+  \renewcommand{\refname}{References}
+  \usepackage[rm,up,bf,compact,topmarks,calcwidth,pagestyles]{titlesec}
+\fi
+
 \usepackage{amsmath}
-\usepackage{bm}
-\usepackage{newtxtext}
 \usepackage{booktabs}
-\usepackage[dvipdfmx]{graphicx}
 \usepackage[round]{natbib}
 \bibliographystyle{abbrvnat}
 % \usepackage{lineno}
 % \linenumbers*[1]
 
-%****** Header ******************
+%--------------------------------
+%       LuaLaTeX
+%--------------------------------
+\newcommand{\bm}{\symbf}
+\usepackage{luatexja}
+\usepackage[bold-style=ISO]{unicode-math}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n} % use original calligraphic alphabet
+\usepackage{fontspec}
+\ifMSFONT
+  \usepackage[ms]{luatexja-preset}
+  \setsansfont{Arial}
+  \setsansjfont{MS Gothic}
+\else
+  \usepackage[hiragino-pron,deluxe]{luatexja-preset}
+\fi
+\setmainfont{Times New Roman}
+
+%--------------------------------
+%       pLaTeX
+%--------------------------------
+% \usepackage[dvipdfmx]{graphicx}
+% \usepackage{bm}
+% \usepackage{newtxtext}
+
+%--------------------------------
+%       Header
+%--------------------------------
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \lhead{\large{%DATE%}}
 \chead{\large{}}
 \rhead{\large{Keita Nakamura}}
-%********************************
+
 
 % \renewcommand{\refname}{References}
 
