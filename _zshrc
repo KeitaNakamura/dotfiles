@@ -59,6 +59,7 @@ PROMPT="%{$fg_bold[red]%}→ %{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%} %# 
 PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 
+# pure prompt
 autoload -U promptinit && promptinit
 export PURE_PROMPT_SYMBOL="❯❯"
 prompt pure
