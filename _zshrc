@@ -6,26 +6,42 @@
 #                         
 #
 
+#------------------
+# Path Setting
+#------------------
+
+# for dotfiles
 export DOTPATH="$HOME/Dropbox/dotfiles"
-
-export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:${DOTPATH}/bin"
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
-# setting for pyenv
+# fpath
+fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($DOTPATH/zsh_plugins $fpath)
+
+# for Homebrew
+export PATH="/usr/local/sbin:$PATH"
+
+# for pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 if which pyenv > /dev/null; then
   eval "$(pyenv init -)"
 fi
+alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew" # remove pyenv path in Homebrew
+
+#------------------
+# Locale
+#------------------
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
+
+#------------------
+# Prompt
+#------------------
 
 export LSCOLORS=exfxcxdxbxegedabagacad
 alias ls="ls -GF"
-
-# fpath
-fpath=(/usr/local/share/zsh-completions $fpath)
-fpath=($DOTPATH/zsh_plugins $fpath)
 
 autoload -U compinit; compinit
 autoload -Uz zcomplete; zcomplete
@@ -33,9 +49,6 @@ zstyle ':completion:*' list-colors di=34 ln=35 ex=31
 zstyle ':completion:*:default' menu select=1
 
 compdef -d brew # remove brew completions
-alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew" # remove pyenv path in Homebrew
-
-alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
 
 # TERM=xterm-256color
 TERM=screen-256color
@@ -50,7 +63,15 @@ autoload -U promptinit && promptinit
 export PURE_PROMPT_SYMBOL="❯❯"
 prompt pure
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zsh syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#------------------
+# New Command
+#------------------
 
 # fd - cd to selected directory
 fd() {
@@ -66,7 +87,3 @@ v() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir" && vim .
 }
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
