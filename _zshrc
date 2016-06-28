@@ -13,6 +13,13 @@ export PATH="$PATH:${DOTPATH}/bin"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# setting for pyenv
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/bin:$PATH"
+if which pyenv > /dev/null; then
+  eval "$(pyenv init -)"
+fi
+
 export LSCOLORS=exfxcxdxbxegedabagacad
 alias ls="ls -GF"
 
@@ -26,6 +33,8 @@ zstyle ':completion:*' list-colors di=34 ln=35 ex=31
 zstyle ':completion:*:default' menu select=1
 
 compdef -d brew # remove brew completions
+alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew" # remove pyenv path in Homebrew
+
 
 # TERM=xterm-256color
 TERM=screen-256color
