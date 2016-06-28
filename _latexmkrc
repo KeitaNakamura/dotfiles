@@ -6,9 +6,10 @@
 # 
 #
 
-$latex = 'uplatex -synctex=1 -interaction=nonstopmode';
-$dvipdf = 'dvipdfmx %O %S';
-$bibtex = 'upbibtex %O %B';
-$max_repeat = 5;
-$pdf_mode = 3; # generates pdf via dvipdfmx
+$latex = 'lualatex -synctex=1 -interaction=nonstopmode';
+# $latex = 'platex -synctex=1 -interaction=nonstopmode';
+# $dvipdf = 'dvipdfmx %O %S';
+$bibtex = 'pbibtex %O %B';
+# $max_repeat = 5;
+# $pdf_mode = 3; # generates pdf via dvipdfmx
 $pvc_view_file_via_temporary = 0; # necessary for Skim
