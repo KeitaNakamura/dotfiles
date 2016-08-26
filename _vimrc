@@ -91,7 +91,7 @@ call plug#end()
 colorscheme railscasts
 set background=dark
 syntax on
-" set cursorline " highlight current line
+set cursorline " highlight current line
 " hi clear CursorLine
 set colorcolumn=80
 nnoremap <C-n> :set cursorline!<CR>
@@ -137,6 +137,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
+nnoremap Y y$
 " }}}
 " Others {{{2
 set shell=/bin/bash
@@ -155,7 +156,15 @@ let g:tex_flavor = 'latex'
 if !has('gui_running')
   set timeout timeoutlen=1000 ttimeoutlen=50
 endif
-set clipboard+=unnamed
+
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 " get syntax information
 function! s:get_syn_id(transparent)
