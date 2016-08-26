@@ -21,6 +21,7 @@
   \usepackage[rm,up,bf,compact,topmarks,calcwidth,pagestyles]{titlesec}
 \fi
 
+\usepackage[bottom]{footmisc} % prevent figure below the footnote
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage[round]{natbib}
@@ -34,7 +35,9 @@
 \newcommand{\bm}{\symbf}
 \usepackage{luatexja}
 \usepackage[bold-style=ISO]{unicode-math}
-\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n} % use original calligraphic alphabet
+\let\mathbfcal\relax  % remove the definition by unicode-math
+\DeclareMathAlphabet{\mathcal} {OMS}{cmsy}{m}{n} % use original calligraphic alphabet
+\DeclareMathAlphabet{\mathbfcal} {OMS}{cmsy}{b}{n} % use original calligraphic alphabet
 \usepackage{fontspec}
 \ifMSFONT
   \usepackage[ms]{luatexja-preset}
