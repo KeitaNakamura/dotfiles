@@ -481,13 +481,13 @@ let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " NERD tree {{{2
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
-augroup nerdtree-keymap
-  autocmd!
-augroup END
-autocmd nerdtree-keymap filetype nerdtree nmap <buffer> x po
-autocmd nerdtree-keymap filetype nerdtree nmap <buffer> l <S-C>cd
-autocmd nerdtree-keymap filetype nerdtree nmap <buffer> h u
+let NERDTreeMapChangeRoot='l'
+let NERDTreeMapUpdir='h'
+let NERDTreeCascadeSingleChildDir=0
+let NERDTreeCascadeOpenSingleChildDir=0
 let NERDTreeChDirMode=2
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 
 " vimfiler {{{2
 " noremap <C-e> :VimFilerBufferDir -split -simple -toggle <ENTER>
