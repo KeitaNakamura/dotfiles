@@ -121,6 +121,10 @@ function install_settings()
 
   # git
   ln -sfv ${DOTPATH}/_gitignore_global ~/.gitignore_global
+
+  # keyhac
+  mkdir -p ~/Library/Application\ Support/Keyhac
+  ln -sfv ${DOTPATH}/keyhac/config.py ~/Library/Application\ Support/Keyhac/
 }
 
 install_settings
