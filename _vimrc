@@ -27,16 +27,17 @@ Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
-Plug 'scrooloose/syntastic'
 Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
-Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'Shougo/vimproc.vim',   {'do': 'make'}
-Plug 'tpope/vim-dispatch'
 Plug 'jpalardy/vim-slime'
 " Plug 'christoomey/vim-tmux-navigator'
+if has('nvim')
+  Plug 'neomake/neomake'
+else
+  Plug 'scrooloose/syntastic'
+  Plug 'tpope/vim-dispatch'
+endif
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree'
@@ -52,7 +53,16 @@ Plug 'itchyny/lightline.vim'
 " Plug 'vim-airline/vim-airline'
 " }}}
 " Auto completion {{{2
-Plug 'Shougo/neocomplete.vim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'zchee/deoplete-jedi'
+  Plug 'zchee/deoplete-clang'
+else
+  Plug 'Shougo/vimproc.vim',   {'do': 'make'}
+  Plug 'Shougo/neocomplete.vim'
+  Plug 'davidhalter/jedi-vim', {'for': 'python'}
+  Plug 'justmao945/vim-clang', {'for': ['h', 'cpp']}
+endif
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 " }}}
 " Color scheme (:Unite colorscheme -auto-preview) {{{2
@@ -349,6 +359,13 @@ let g:templates_directory = '$DOTPATH/_vim/templates'
 let g:syntastic_quiet_messages = { "level": "warnings" }
 let g:syntastic_error_symbol = '✗✗'
 
+" neomake {{{2
+autocmd! BufWritePost * Neomake
+let g:neomake_error_sign = {'text': '✗✗', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+
 " tagbar {{{2
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_julia = {
@@ -427,6 +444,21 @@ let g:neocomplete#sources#omni#input_patterns.tex =
       \ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
       \ . '|%(include%(only)?|input)\s*\{[^}]*'
       \ . ')'
+" }}}
+" for Deoplete {{{3
+if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#omni#input_patterns.tex = '\\(?:'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ .')'
 " }}}
 " for YouCompleteMe {{{3
 if !exists('g:ycm_semantic_triggers')
@@ -645,6 +677,15 @@ let g:neocomplete#enable_at_startup = 1
 " let g:neocomplete#keyword_patterns._ = '\h\w*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Deoplete {{{2
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" for c++ {{{3
+let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang'
+" }}}
 
 " neoinclude {{{2
 if !exists('g:neoinclude#exts')
