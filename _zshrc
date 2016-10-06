@@ -76,6 +76,8 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # New Command
 #------------------
 
+alias vim=nvim
+
 # fd - cd to selected directory
 fd() {
   local dir
