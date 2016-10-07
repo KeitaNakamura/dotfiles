@@ -78,6 +78,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias vim=nvim
 
+# update tex live
+alias texupdate="sudo tlmgr update --self --all"
+
 # fd - cd to selected directory
 fd() {
   local dir
