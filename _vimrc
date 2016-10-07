@@ -430,6 +430,10 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 if has('nvim')
   let g:vimtex_latexmk_progname = 'nvr' " for neovim
+  " Setting of Skim should be following:
+  " Preset: Custom
+  " Command: nvr
+  " Arguments: -c "%line" "%file"
 endif
 
 " for NeoComplete {{{3
