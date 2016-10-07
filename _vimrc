@@ -428,6 +428,10 @@ let g:vimtex_quickfix_mode = 0
 let g:vimtex_indent_enabled = 0
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
+if has('nvim')
+  let g:vimtex_latexmk_progname = 'nvr' " for neovim
+endif
+
 " for NeoComplete {{{3
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
