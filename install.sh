@@ -36,12 +36,16 @@ function install_packages()
   brew install vim --with-lua
   brew install macvim --with-lua
   brew linkapps macvim
+  brew install neovim/neovim/neovim
 
   # Python
   # ------
   brew install python
   pip install matplotlib
   pip install jupyter
+  brew install python3
+  pip3 install neovim
+  pip3 install neovim-remote
 
   # Julia
   # -----
@@ -102,6 +106,11 @@ function install_settings()
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     vim +PlugInstall +qall
   fi
+
+  # neovim
+  mkdir ~/.config
+  ln -sfv ~/.vim ~/.config/nvim
+  ln -sfv ~/.vimrc ~/.config/nvim/init.vim
 
   # zsh
   ln -sfv ${DOTPATH}/_zshrc ~/.zshrc
