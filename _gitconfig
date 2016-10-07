@@ -1,0 +1,14 @@
+[core]
+    editor = /usr/local/bin/vim
+	excludesfile = /Users/nakamura/.gitignore_global
+[alias]
+    graph = log --graph --oneline --decorate --branches
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.2.4/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Keita Nakamura
+	email = nakamura-keita-kn@ynu.jp
