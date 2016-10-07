@@ -423,13 +423,9 @@ inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
 " vimtex {{{2
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_manual = 1 " improve performance
-" let g:vimtex_latexmk_continuous = 1
-" let g:vimtex_latexmk_background = 1
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_indent_enabled = 0
-" let g:vimtex_latexmk_build_dir = ''
-" let g:vimtex_view_general_viewer = '/usr/local/bin/displayline'
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 " for NeoComplete {{{3
