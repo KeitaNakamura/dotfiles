@@ -54,7 +54,7 @@ Plug 'itchyny/lightline.vim'
 " }}}
 " Auto completion {{{2
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
   Plug 'zchee/deoplete-jedi'
   Plug 'zchee/deoplete-clang'
 else
