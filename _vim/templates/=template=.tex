@@ -36,8 +36,10 @@
 \usepackage{luatexja}
 \usepackage[bold-style=ISO]{unicode-math}
 \let\mathbfcal\relax  % remove the definition by unicode-math
+\let\mathscr\relax  % remove the definition by unicode-math
 \DeclareMathAlphabet{\mathcal} {OMS}{cmsy}{m}{n} % use original calligraphic alphabet
 \DeclareMathAlphabet{\mathbfcal} {OMS}{cmsy}{b}{n} % use original calligraphic alphabet
+\DeclareMathAlphabet{\mathscr}{U}{rsfso}{m}{n}
 \usepackage{fontspec}
 \ifMSFONT
   \usepackage[ms]{luatexja-preset}
