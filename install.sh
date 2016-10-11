@@ -95,12 +95,11 @@ function install_applications()
 function install_settings()
 {
   # vim
-  mkdir -p ~/.vim/colors
+  mkdir ~/.vim
   ln -sfv ${DOTPATH}/_vim/spell ~/.vim/
   ln -sfv ${DOTPATH}/_vim/templates ~/.vim/
   ln -sfv ${DOTPATH}/_vimrc ~/.vimrc
   ln -sfv ${DOTPATH}/_gvimrc ~/.gvimrc
-  ln -sfv ${DOTPATH}/colorscheme/railscasts.vim/colors/railscasts.vim ~/.vim/colors/
   if ! [ -e '~/.vim/plugged' ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
