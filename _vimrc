@@ -22,6 +22,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'aperezdc/vim-template'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -31,6 +32,7 @@ Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'jpalardy/vim-slime'
+Plug 'KeitaNakamura/tex-conceal.vim'
 " Plug 'christoomey/vim-tmux-navigator'
 if has('nvim')
   Plug 'neomake/neomake'
@@ -91,6 +93,7 @@ Plug 'easysid/mod8.vim'
 Plug 'junegunn/seoul256.vim'
 " Plug 'therealechan/vim-railscasts-theme'
 
+Plug 'KeitaNakamura/railscasts.vim'
 Plug 'KeitaNakamura/lightline-railscasts.vim'
 " }}}
 
