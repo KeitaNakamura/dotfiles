@@ -11,6 +11,7 @@ let g:email = "nakamura-keita-kn@ynu.jp"
 
 " Installed plugins {{{1
 call plug#begin('~/.vim/plugged')
+let g:plug_shallow = 0
 
 Plug 'vim-jp/vimdoc-ja'
 set helplang=ja,en
