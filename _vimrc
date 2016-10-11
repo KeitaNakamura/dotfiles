@@ -33,7 +33,7 @@ Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'jpalardy/vim-slime'
-Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 " Plug 'christoomey/vim-tmux-navigator'
 if has('nvim')
   Plug 'neomake/neomake'
