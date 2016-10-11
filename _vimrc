@@ -350,6 +350,7 @@ let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt
 " indentLine {{{2
 let g:indentLine_fileTypeExclude = ['pandoc', 'tex']
 let g:indentLine_color_term = 239
+let g:indentLine_setColors = 0
 
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
