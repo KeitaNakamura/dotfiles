@@ -167,7 +167,7 @@ set fileencodings=utf-8,sjis
 set spelllang=en,cjk
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set conceallevel=2
-let g:tex_conceal="adgm"
+let g:tex_conceal="adgmb"
 let g:tex_flavor = 'latex'
 if !has('gui_running')
   set timeout timeoutlen=1000 ttimeoutlen=50
