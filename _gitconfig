@@ -11,4 +11,6 @@
 	trustExitCode = true
 [user]
 	name = Keita Nakamura
-	email = nakamura-keita-kn@ynu.jp
+	email = keita.nakamura.1109@gmail.com
+[commit]
+	template = /Users/nakamura/.stCommitMsg
