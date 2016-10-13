@@ -166,7 +166,6 @@ set encoding=utf-8
 set fileencodings=utf-8,sjis
 set spelllang=en,cjk
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-set conceallevel=2
 let g:tex_conceal="adgmb"
 let g:tex_flavor = 'latex'
 if !has('gui_running')
@@ -254,6 +253,7 @@ function! s:tex()
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal colorcolumn=
+  setlocal conceallevel=2
 endfunction
 
 augroup vimrc-tex
