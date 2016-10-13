@@ -20,7 +20,8 @@ set helplang=ja,en
 " Plug 'jiangmiao/auto-pairs' " auto close brackets
 Plug 'rking/ag.vim' " for ag in 'ctrlp'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'aperezdc/vim-template'
 Plug 'tpope/vim-surround'
@@ -331,7 +332,12 @@ let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt
 " indentLine {{{2
 let g:indentLine_fileTypeExclude = ['pandoc', 'tex']
 let g:indentLine_color_term = 239
-let g:indentLine_setColors = 0
+
+" indent-guides {{{2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tex']
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 
 " vim-template {{{2
 let g:templates_no_builtin_templates = 1
