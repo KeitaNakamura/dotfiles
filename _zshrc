@@ -20,6 +20,9 @@ fpath=($DOTPATH/zsh_plugins $fpath)
 
 # for Homebrew
 export PATH="/usr/local/sbin:$PATH"
+if [ -f ~/.brew_api_token ]; then
+  source ~/.brew_api_token
+fi
 
 # for pyenv
 # export PYENV_ROOT="${HOME}/.pyenv"
