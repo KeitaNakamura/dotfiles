@@ -24,14 +24,6 @@ if [ -f ~/.brew_api_token ]; then
   source ~/.brew_api_token
 fi
 
-# for pyenv
-# export PYENV_ROOT="${HOME}/.pyenv"
-# export PATH="${PYENV_ROOT}/bin:$PATH"
-# if which pyenv > /dev/null; then
-  # eval "$(pyenv init -)"
-# fi
-# alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew" # remove pyenv path in Homebrew
-
 #------------------
 # Locale
 #------------------
@@ -54,14 +46,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 compdef -d brew # remove brew completions
 
-# TERM=xterm-256color
-TERM=screen-256color
-autoload colors
-colors
-# PROMPT="%{$fg_bold[red]%}→ %{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%} %(!.#.$) "
-PROMPT="%{$fg_bold[red]%}→ %{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%} %# "
-PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
-SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+TERM=xterm-256color
+# TERM=screen-256color
 
 # pure prompt
 autoload -U promptinit && promptinit
