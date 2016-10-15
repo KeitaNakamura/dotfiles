@@ -7,7 +7,7 @@
 "
 
 let g:user  = "K.Nakamura"
-let g:email = "nakamura-keita-kn@ynu.jp"
+let g:email = "keita.nakamura.1109@gmail.com"
 
 " Installed plugins {{{1
 call plug#begin('~/.vim/plugged')
