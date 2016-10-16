@@ -62,6 +62,7 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
   Plug 'zchee/deoplete-jedi'
   Plug 'zchee/deoplete-clang'
+  " Plug 'JuliaEditorSupport/deoplete-julia'
 else
   Plug 'Shougo/vimproc.vim',   {'do': 'make'}
   Plug 'Shougo/neocomplete.vim'
