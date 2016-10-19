@@ -280,6 +280,7 @@ augroup END
 function! s:julia()
   setlocal expandtab
   setlocal foldmethod=indent
+  setlocal iskeyword+=!
 endfunction
 
 augroup vimrc-julia
