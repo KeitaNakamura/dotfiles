@@ -268,6 +268,7 @@ function! s:python()
   setlocal autoindent
   " setlocal smartindent
   setlocal indentkeys+=0#
+  setlocal foldmethod=indent
 endfunction
 
 augroup vimrc-phthon
@@ -408,6 +409,7 @@ augroup END
 " Julia {{{2
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
 inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
+let g:default_julia_versoin = "0.5" " not working
 
 " vimtex {{{2
 let g:vimtex_fold_enabled = 1
