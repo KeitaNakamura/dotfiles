@@ -52,7 +52,7 @@ TERM=xterm-256color
 # pure prompt
 autoload -U promptinit && promptinit
 export PURE_PROMPT_SYMBOL="❯❯"
-export PURE_GIT_UNTRACKED_DIRTY=0
+export PURE_GIT_UNTRACKED_DIRTY=1
 prompt pure
 
 # fzf
