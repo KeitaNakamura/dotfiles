@@ -271,6 +271,7 @@ function! s:python()
   " setlocal smartindent
   setlocal indentkeys+=0#
   setlocal foldmethod=indent
+  setlocal foldlevel=1
 endfunction
 
 augroup vimrc-phthon
@@ -282,6 +283,7 @@ augroup END
 function! s:julia()
   setlocal expandtab
   setlocal foldmethod=indent
+  setlocal foldlevel=1
 endfunction
 
 augroup vimrc-julia
