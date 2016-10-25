@@ -112,6 +112,8 @@ set cursorline " highlight current line
 " hi clear CursorLine
 set colorcolumn=80
 nnoremap <C-n> :set cursorline!<CR>
+noremap  <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
 " }}}
 " Search {{{2
 set hlsearch " highlight for search
