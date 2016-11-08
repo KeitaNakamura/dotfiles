@@ -120,10 +120,7 @@ call plug#end()
 let g:neodark#use_custom_terminal_theme=1
 " let g:neodark#use_256color=1
 colorscheme neodark
-syntax on
-" if has("termguicolors") " use true colors in terminal
-  " set termguicolors
-" endif
+
 set cursorline " highlight current line
 " hi clear CursorLine
 set colorcolumn=80
