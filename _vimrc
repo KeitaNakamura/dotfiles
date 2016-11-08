@@ -27,22 +27,30 @@ Plug 'aperezdc/vim-template'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Plug 'majutsushi/tagbar' ", {'on': 'TagbarToggle'}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
-Plug 'lervag/vimtex',        {'for': 'tex'}
+Plug 'lervag/vimtex',        {'for': 'tex', 'commit': '5506728'}
 Plug 'jpalardy/vim-slime'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 " Plug 'christoomey/vim-tmux-navigator'
 if has('nvim')
-  Plug 'neomake/neomake'
+  " Plug 'neomake/neomake'
 else
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-dispatch'
 endif
+
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
 
 " File explorer {{{2
 Plug 'scrooloose/nerdtree'
@@ -53,9 +61,10 @@ Plug 'ujihisa/unite-colorscheme'
 Plug 'kien/ctrlp.vim'
 " }}}
 " Status line {{{2
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 " Plug 'cocopon/lightline-hybrid.vim'
-" Plug 'vim-airline/vim-airline'
 " }}}
 " Auto completion {{{2
 if has('nvim')
@@ -92,11 +101,13 @@ Plug 'sjl/badwolf'                      " badwolf
 Plug 'itchyny/landscape.vim'            " landscape
 Plug 'joshdick/onedark.vim'             " onedark in atom
 Plug 'gosukiwi/vim-atom-dark'           " atom-dark
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'lifepillar/vim-wwdc16-theme'
 Plug 'easysid/mod8.vim'
 Plug 'junegunn/seoul256.vim'
 " Plug 'therealechan/vim-railscasts-theme'
 
+Plug 'KeitaNakamura/neodark.vim'
 Plug 'KeitaNakamura/railscasts.vim'
 Plug 'KeitaNakamura/lightline-railscasts.vim'
 " }}}
@@ -105,13 +116,18 @@ call plug#end()
 
 " Global setting {{{1
 " Color {{{2
-colorscheme railscasts
-set background=dark
+" let g:neodark#color='black'
+let g:neodark#use_custom_terminal_theme=1
+" let g:neodark#use_256color=1
+colorscheme neodark
 syntax on
+" if has("termguicolors") " use true colors in terminal
+  " set termguicolors
+" endif
 set cursorline " highlight current line
 " hi clear CursorLine
 set colorcolumn=80
-nnoremap <C-n> :set cursorline!<CR>
+nnoremap <silent> <C-n> :set cursorline!<CR>
 noremap  <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 " }}}
@@ -157,6 +173,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap Y y$
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " }}}
 " Others {{{2
 set shell=/bin/bash
@@ -253,7 +271,7 @@ function! s:tex()
   setlocal linebreak
   setlocal expandtab
   setlocal spell
-  " setlocal foldmethod=manual
+  setlocal foldmethod=manual
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal colorcolumn=
@@ -354,7 +372,7 @@ let g:syntastic_quiet_messages = { "level": "warnings" }
 let g:syntastic_error_symbol = '✗✗'
 
 " neomake {{{2
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 let g:neomake_error_sign = {'text': '✗✗', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
@@ -423,13 +441,13 @@ let g:vimtex_quickfix_mode = 0
 let g:vimtex_indent_enabled = 0
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
-if has('nvim')
-  let g:vimtex_latexmk_progname = 'nvr' " for neovim
-  " Setting of Skim should be following:
-  " Preset: Custom
-  " Command: nvr
-  " Arguments: -c "%line" "%file"
-endif
+" if has('nvim')
+  " let g:vimtex_latexmk_progname = 'nvr' " for neovim
+  " " Setting of Skim should be following:
+  " " Preset: Custom
+  " " Command: nvr
+  " " Arguments: -c "%line" "%file"
+" endif
 
 " for NeoComplete {{{3
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -535,14 +553,17 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
 endif
 
+" airline {{{2
+let g:airline_left_sep=' '
+let g:airline_right_sep=' '
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#tabline#enabled = 1
+
 " Lightline {{{2
 
-" let g:lightline.enable = {
-" \ 'statusline': 1,
-" \ 'tabline': 1
-" \ }
 let g:lightline = {
-\ 'colorscheme': 'railscasts',
+\ 'enable': {'statusline': 1, 'tabline': 0},
+\ 'colorscheme': 'neodark',
 \ 'mode_map': { 'c': 'NORMAL' },
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -674,13 +695,9 @@ let g:neocomplete#enable_at_startup = 1
 "   let g:neocomplete#keyword_patterns = {}
 " endif
 " let g:neocomplete#keyword_patterns._ = '\h\w*'
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " Deoplete {{{2
 let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 " for c++ {{{3
 let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang'
@@ -697,4 +714,19 @@ let g:neoinclude#exts.cpp = ['', 'h', 'hpp', 'hxx']
 set completeopt=menuone
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 " let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
+" }}}
+" UltiSnips {{{2
+" let g:UltiSnipsExpandTrigger = "<nop>"
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+" let g:UltiSnipsJumpForwardTrigger="<TAB>"
+" let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
+" }}}
+" neosnippet {{{2
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+" }}}
+" Highlighter {{{2
+let g:highlighter#auto_update = 2
+let g:highlighter#project_root_signs = ['.git']
 " }}}
