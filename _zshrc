@@ -6,17 +6,60 @@
 #                         
 #
 
+
+#------------------
+# zplug
+#------------------
+
+if [[ ! -d ~/.zplug ]]; then
+  curl -sL zplug.sh/installer | zsh
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
+source ~/.zplug/init.zsh
+
+zplug "zplug/zplug"
+
+# zplug "b4b4r07/zle-vimode"
+
+zplug 'zsh-users/zsh-completions'
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:19
+zplug "KeitaNakamura/tmux-utils", \
+  as:command, \
+  use:"bin/*"
+zplug "KeitaNakamura/autocomplete.zsh", \
+  nice:10, \
+  hook-load:"compdef -d brew" # remove completions for brew
+
+# pure prompt
+export PURE_PROMPT_SYMBOL="❯❯"
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+
+# zplug install and load
+export ZPLUG_PROTOCOL="SSH"
+zstyle :zplug:tag depth 0
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
 #------------------
 # Path Setting
 #------------------
+
+typeset -U path PATH fpath
 
 # for dotfiles
 export DOTPATH="$HOME/Dropbox/dotfiles"
 export PATH="$PATH:${DOTPATH}/bin"
 
 # fpath
-fpath=(/usr/local/share/zsh-completions $fpath)
-fpath=($DOTPATH/zsh_plugins $fpath)
+fpath=(/usr/local/share/zsh-completions/*(N-/) $fpath)
 
 # for Homebrew
 export PATH="/usr/local/sbin:$PATH"
@@ -29,46 +72,47 @@ fi
 #------------------
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
 
 #------------------
 # Prompt
 #------------------
 
-export LSCOLORS=exfxcxdxbxegedabagacad
-alias ls="ls -GF"
-
-autoload -U compinit; compinit
-autoload -Uz zcomplete; zcomplete
-zstyle ':completion:*' list-colors di=34 ln=35 ex=31
-zstyle ':completion:*:default' menu select=1
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-compdef -d brew # remove brew completions
-
 TERM=xterm-256color
 # TERM=screen-256color
 
-# pure prompt
-autoload -U promptinit && promptinit
-export PURE_PROMPT_SYMBOL="❯❯"
-export PURE_GIT_UNTRACKED_DIRTY=1
-prompt pure
+export CLICOLOR=true
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#------------------
+# zstyle
+#------------------
 
-# zsh syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+#------------------
+# setopt
+#------------------
+
+# unsetopt promptcr
+setopt interactivecomments
+ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
+
+#------------------
+# Alias
+#------------------
+
+alias vim=nvim
+alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
+
+# update tex live
+alias texupdate="sudo tlmgr update --self --all"
 
 #------------------
 # New Command
 #------------------
-
-alias vim=nvim
-
-# update tex live
-alias texupdate="sudo tlmgr update --self --all"
 
 # fd - cd to selected directory
 fd() {

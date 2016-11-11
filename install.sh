@@ -16,7 +16,6 @@ function install_packages()
   # Shell
   # -----
   brew install zsh
-  brew install zsh-completions
   ZSH_PATH="/usr/local/bin/zsh"
   sudo -sh -c "echo $ZSH_PATH >> /etc/shells"
   chsh -s $ZSH_PATH
