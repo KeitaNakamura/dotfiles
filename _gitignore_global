@@ -1,4 +1,19 @@
 *~
 .DS_Store
-*.swp
 _Trash
+
+
+### https://raw.github.com/github/gitignore/7b46307743513585b362bb78fc2e2009a2cba587/Global/Vim.gitignore
+
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
+
+

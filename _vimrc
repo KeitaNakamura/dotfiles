@@ -35,6 +35,7 @@ Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex', 'commit': '5506728'}
 Plug 'jpalardy/vim-slime'
+Plug 'henrik/vim-indexed-search'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet'
@@ -334,6 +335,7 @@ function! s:markdown()
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal colorcolumn=
+  setlocal foldlevel=2
 endfunction
 
 augroup vimrc-markdown
@@ -722,6 +724,9 @@ let g:ycm_global_ycm_extra_conf = '~/dotfiles/_ycm_extra_conf.py'
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
+" }}}
+" vim-indexed-search {{{2
+let g:indexed_search_numbered_only = 1
 " }}}
 " Highlighter {{{2
 let g:highlighter#auto_update = 2

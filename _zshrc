@@ -40,12 +40,7 @@ zplug "sindresorhus/pure"
 # zplug install and load
 export ZPLUG_PROTOCOL="SSH"
 zstyle :zplug:tag depth 0
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+zplug check || zplug install
 zplug load
 
 #------------------
@@ -105,7 +100,8 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 #------------------
 
 alias vim=nvim
-alias wine="env LC_ALL=ja_JP.UTF-8 wine" # use japanese language in Wine
+ # use japanese language in Wine and show nothing in console
+alias wine="env LC_ALL=ja_JP.UTF-8 WINEDEBUG=-all wine"
 
 # update tex live
 alias texupdate="sudo tlmgr update --self --all"
