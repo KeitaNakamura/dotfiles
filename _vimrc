@@ -29,8 +29,8 @@ Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar' ", {'on': 'TagbarToggle'}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 Plug 'JuliaLang/julia-vim'
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
 Plug 'lervag/vimtex',        {'for': 'tex', 'commit': '5506728'}
