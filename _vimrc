@@ -32,8 +32,9 @@ Plug 'majutsushi/tagbar' ", {'on': 'TagbarToggle'}
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax', {'for': 'markdown'}
 Plug 'JuliaLang/julia-vim'
+Plug 'fatih/vim-go', {'for': 'go'}
 Plug 'Shougo/neoinclude.vim', {'for': ['h', 'cpp']}
-Plug 'lervag/vimtex',        {'for': 'tex', 'commit': '5506728'}
+Plug 'lervag/vimtex',        {'for': 'tex'}
 Plug 'jpalardy/vim-slime'
 Plug 'henrik/vim-indexed-search'
 " Plug 'SirVer/ultisnips'
@@ -72,7 +73,6 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
   Plug 'zchee/deoplete-jedi'
   Plug 'zchee/deoplete-clang'
-  " Plug 'JuliaEditorSupport/deoplete-julia'
 else
   Plug 'Shougo/vimproc.vim',   {'do': 'make'}
   Plug 'Shougo/neocomplete.vim'
@@ -431,6 +431,14 @@ augroup END
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
 inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
 let g:default_julia_versoin = "0.5" " not working
+
+" Go {{{2
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " vimtex {{{2
 let g:vimtex_fold_enabled = 1
