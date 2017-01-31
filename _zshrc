@@ -24,12 +24,12 @@ zplug "zplug/zplug"
 
 zplug 'zsh-users/zsh-completions'
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", nice:19
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "KeitaNakamura/tmux-utils", \
   as:command, \
   use:"bin/*"
 zplug "KeitaNakamura/autocomplete.zsh", \
-  nice:10, \
+  defer:2, \
   hook-load:"compdef -d brew" # remove completions for brew
 
 # pure prompt
@@ -122,5 +122,17 @@ v() {
   local dir
   dir=$(find ${1:-*} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir" && vim .
+}
+
+gd() {
+  local dir
+  dir=$(ghq list --full-path | fzf +m)
+  cd "$dir"
+}
+
+gv() {
+  local dir
+  dir=$(ghq list --full-path | fzf +m)
   cd "$dir" && vim .
 }

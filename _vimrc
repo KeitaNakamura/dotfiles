@@ -39,8 +39,8 @@ Plug 'jpalardy/vim-slime'
 Plug 'henrik/vim-indexed-search'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 " Plug 'christoomey/vim-tmux-navigator'
@@ -332,8 +332,8 @@ function! s:markdown()
   setlocal spell
   setlocal wrap
   setlocal linebreak
-  setlocal tabstop=2
-  setlocal shiftwidth=2
+  " setlocal tabstop=2
+  " setlocal shiftwidth=2
   setlocal colorcolumn=
   setlocal foldlevel=2
 endfunction

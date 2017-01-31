@@ -12,5 +12,3 @@
 [user]
 	name = Keita Nakamura
 	email = keita.nakamura.1109@gmail.com
-[commit]
-	template = /Users/nakamura/.stCommitMsg
