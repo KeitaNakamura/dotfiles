@@ -41,7 +41,7 @@ Plug 'henrik/vim-indexed-search'
 " Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+" Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 " Plug 'christoomey/vim-tmux-navigator'
 if has('nvim')
@@ -117,7 +117,7 @@ call plug#end()
 
 " Global setting {{{1
 " Color {{{2
-" let g:neodark#color='black'
+" let g:neodark#background='#202020'
 let g:neodark#use_custom_terminal_theme=1
 " let g:neodark#use_256color=1
 colorscheme neodark
@@ -273,7 +273,8 @@ function! s:tex()
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal colorcolumn=
-  setlocal conceallevel=2
+  setlocal autoindent
+  " setlocal conceallevel=2
 endfunction
 
 augroup vimrc-tex
@@ -299,7 +300,7 @@ augroup END
 function! s:julia()
   setlocal expandtab
   setlocal foldmethod=indent
-  setlocal foldlevel=1
+  " setlocal foldlevel=1
 endfunction
 
 augroup vimrc-julia
@@ -445,7 +446,7 @@ let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_manual = 1 " improve performance
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_indent_enabled = 0
+let g:vimtex_indent_enabled = 1
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 " if has('nvim')

@@ -2,7 +2,7 @@
     editor = /usr/local/bin/vim
 	excludesfile = /Users/nakamura/.gitignore_global
 [alias]
-    graph = log --graph --oneline --decorate --branches
+    graph = log --graph --oneline --decorate --branches --remotes -30
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -12,3 +12,10 @@
 [user]
 	name = Keita Nakamura
 	email = keita.nakamura.1109@gmail.com
+[github]
+	user = KeitaNakamura
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[credential]
+	helper = osxkeychain

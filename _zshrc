@@ -22,9 +22,10 @@ zplug "zplug/zplug"
 
 # zplug "b4b4r07/zle-vimode"
 
-zplug 'zsh-users/zsh-completions'
+zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "dsanson/termpdf", as:command, use:"termpdf"
 zplug "KeitaNakamura/tmux-utils", \
   as:command, \
   use:"bin/*"
@@ -101,13 +102,22 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 
 alias vim=nvim
  # use japanese language in Wine and show nothing in console
+alias wine_debug="env LC_ALL=ja_JP.UTF-8 wine"
 alias wine="env LC_ALL=ja_JP.UTF-8 WINEDEBUG=-all wine"
+alias wine_use_opengl="echo -e \"[HKEY_CURRENT_USER\Software\Wine\Direct3D]\n\"DirectDrawRenderer\"=\"opengl\"\n\"     | wine regedit -"
+alias wine_use_gdi="echo -e \"[HKEY_CURRENT_USER\Software\Wine\Direct3D]\n\"DirectDrawRenderer\"=\"gdi\"\n\"     | wine regedit -"
 
 # update tex live
 alias texupdate="sudo tlmgr update --self --all"
 
 #------------------
-# New Command
+# Others
+#------------------
+
+export FZF_DEFAULT_OPTS='--bind=ctrl-k:kill-line'
+
+#------------------
+# New Commands
 #------------------
 
 # fd - cd to selected directory
