@@ -116,6 +116,9 @@ alias wine_use_gdi="echo -e \"[HKEY_CURRENT_USER\Software\Wine\Direct3D]\n\"Dire
 # update tex live
 alias texupdate="sudo tlmgr update --self --all"
 
+# julia
+alias julia=/Applications/Julia-0.6.app/Contents/Resources/julia/bin/julia
+
 #------------------
 # Others
 #------------------
