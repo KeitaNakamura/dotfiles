@@ -431,7 +431,6 @@ augroup END
 " Julia {{{2
 noremap <expr> <F7> LaTeXtoUnicode#Toggle()
 inoremap <expr> <F7> LaTeXtoUnicode#Toggle()
-let g:default_julia_versoin = "0.5" " not working
 
 " Go {{{2
 let g:go_highlight_functions = 1
