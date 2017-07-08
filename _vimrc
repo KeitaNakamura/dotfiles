@@ -273,8 +273,12 @@ function! s:tex()
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal colorcolumn=
-  setlocal autoindent
+  " setlocal autoindent
   " setlocal conceallevel=2
+
+  setlocal noautoindent
+  setlocal nosmartindent
+  setlocal indentexpr=
 endfunction
 
 augroup vimrc-tex
@@ -445,9 +449,22 @@ let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_manual = 1 " improve performance
 let g:vimtex_latexmk_options = '-pdfdvi'
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_indent_enabled = 1
+let g:vimtex_indent_enabled = 0
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
+" let g:vimtex_compiler_latexmk = {
+  " \ 'background' : 1,
+  " \ 'build_dir' : '',
+  " \ 'callback' : 1,
+  " \ 'continuous' : 1,
+  " \ 'options' : [
+  " \   '-pdfdvi',
+  " \   '-verbose',
+  " \   '-file-line-error',
+  " \   '-synctex=1',
+  " \   '-interaction=nonstopmode',
+  " \ ],
+  " \}
 " if has('nvim')
   " let g:vimtex_latexmk_progname = 'nvr' " for neovim
   " " Setting of Skim should be following:
