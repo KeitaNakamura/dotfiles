@@ -107,6 +107,7 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 #------------------
 
 alias vim=nvim
+alias vimtex="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
  # use japanese language in Wine and show nothing in console
 alias wine_debug="env LC_ALL=ja_JP.UTF-8 wine"
 alias wine="env LC_ALL=ja_JP.UTF-8 WINEDEBUG=-all wine"
