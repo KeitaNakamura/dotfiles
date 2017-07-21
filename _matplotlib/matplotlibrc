@@ -37,8 +37,11 @@ lines.linewidth      : 0.5     # line width in points
 lines.markersize     : 5       # markersize, in points
 
 ### AXES
-axes.titlesize       : large   # fontsize of the axes title
-axes.labelsize       : medium  # fontsize of the x any y labels
+axes.titlesize      : large   # fontsize of the axes title
+axes.labelsize      : medium  # fontsize of the x any y labels
+axes.autolimit_mode : round_numbers
+axes.xmargin        : 0
+axes.ymargin        : 0
 
 ### TICKS
 xtick.labelsize      : small   # fontsize of the tick labels
