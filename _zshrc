@@ -50,6 +50,9 @@ zstyle :zplug:tag depth 0
 zplug check || zplug install
 zplug load
 
+# jupyter
+export BROWSER=open
+
 #------------------
 # Path Setting
 #------------------
