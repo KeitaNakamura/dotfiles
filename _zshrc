@@ -122,6 +122,7 @@ alias texupdate="sudo tlmgr update --self --all"
 
 # julia
 alias julia=/Applications/Julia-0.6.app/Contents/Resources/julia/bin/julia
+alias julia-0.5=/Applications/Julia-0.5.app/Contents/Resources/julia/bin/julia
 
 #------------------
 # Others
