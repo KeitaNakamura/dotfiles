@@ -1,0 +1,27 @@
+[core]
+	editor = nvim
+	pager = LESSCHARSET=utf-8 less
+	quotepath = false
+	ignorecase = false
+[alias]
+    graph = "!f() {\
+        if git branch --remotes | grep gh-pages > /dev/null; then\
+            git log --graph --oneline --decorate --all -30 --not origin/gh-pages;\
+        else\
+            git log --graph --oneline --decorate --all -30;\
+        fi\
+        }; f"
+[user]
+	name = Keita Nakamura
+	email = keita.nakamura.1109@gmail.com
+[github]
+	user = KeitaNakamura
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[credential]
+	helper = osxkeychain
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
