@@ -54,7 +54,7 @@ export FZF_DEFAULT_OPTS='--bind=ctrl-k:kill-line'
 export iCloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
 # nvim
-# alias vim=nvim
+alias vim=nvim
 
 # locale
 export LC_ALL=en_US.UTF-8
