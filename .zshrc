@@ -8,40 +8,42 @@
 
 
 #------------------
-# Zinit
+# zplug
 #------------------
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-source "${ZINIT_HOME}/zinit.zsh"
+if [ ! -d "${HOME}/.zplug" ]; then
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  zsh
+fi
 
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
+source ~/.zplug/init.zsh
+zplug "zplug/zplug"
+
+zplug zsh-users/zsh-syntax-highlighting
+
+# zsh-autosuggestions
+zplug zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
 # auto complete
-zinit light "marlonrichert/zsh-autocomplete"
+zplug "marlonrichert/zsh-autocomplete"
 zstyle ':autocomplete:*' widget-style menu-select
 zstyle ':autocomplete:*' insert-unambiguous no
 
 # for tmux plugin 'tmux-statusbar'
-zinit ice as"command" pick"bin/*"
-zinit light KeitaNakamura/tmux-utils
+zplug "KeitaNakamura/tmux-utils", as:command, use:"bin/*"
 
 # pure prompt
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 export PURE_PROMPT_SYMBOL="❯❯"
-zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
-zinit light sindresorhus/pure
 zstyle :prompt:pure:git:branch color '#999999'
 
-# zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
-
-autoload -Uz compinit
-compinit
-
-zinit cdreplay -q
+zplug check || zplug install
+zplug load
 
 #------------------
-# Others
+# Settings
 #------------------
 
 setopt interactivecomments
