@@ -214,6 +214,11 @@ let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt
 let g:templates_no_builtin_templates = 1
 let g:templates_directory = '~/.vim/templates'
 
+"-----------+
+" julia-vim |
+"-----------+
+let g:latex_to_unicode_file_types = ".*"
+
 "--------------+
 " vim-markdown |
 "--------------+
