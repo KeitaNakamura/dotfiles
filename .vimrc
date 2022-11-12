@@ -32,8 +32,7 @@ Plug 'godlygeek/tabular'
 Plug 'JuliaLang/julia-vim'
 Plug 'preservim/vim-markdown'
 Plug 'cespare/vim-toml', { 'branch': 'main' }
-Plug 'lervag/vimtex', {'tag': 'v1.6'}
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 
 " navigation
 Plug 'scrooloose/nerdtree'
