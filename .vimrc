@@ -18,8 +18,7 @@ set helplang=ja,en
 
 " general
 Plug 'scrooloose/nerdcommenter'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'henrik/vim-indexed-search'
 Plug 'aperezdc/vim-template'
 
@@ -211,11 +210,6 @@ augroup END
 let g:NERDSpaceDelims = 1
 let g:NERDCustomDelimiters = {'julia': { 'left': '#', 'leftAlt': '#=', 'rightAlt': '=#' }}
 
-"----------+
-" deoplete |
-"----------+
-let g:deoplete#enable_at_startup = 1
-
 "--------------+
 " vim-template |
 "--------------+
@@ -234,10 +228,6 @@ let g:vim_markdown_math = 1
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_manual = 1 " improve performance
 let g:vimtex_indent_enabled = 0
-" for deoplete
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
 
 "----------+
 " nerdtree |
