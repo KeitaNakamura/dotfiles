@@ -29,6 +29,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 zplug "marlonrichert/zsh-autocomplete"
 zstyle ':autocomplete:*' widget-style menu-select
 zstyle ':autocomplete:*' insert-unambiguous no
+zstyle ':autocomplete:*' fzf-completion yes
 
 # for tmux plugin 'tmux-statusbar'
 zplug "KeitaNakamura/tmux-utils", as:command, use:"bin/*"
@@ -50,7 +51,24 @@ setopt interactivecomments
 ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 
 # fzf
-export FZF_DEFAULT_OPTS='--bind=ctrl-k:kill-line'
+export FZF_DEFAULT_OPTS='
+  --bind=ctrl-k:kill-line
+  --color=fg:#aabbc4,fg+:#aabbc4,bg:#1f2f38,bg+:#263a45,hl:#658595,hl+:#c99720
+  --color=border:#475c69,spinner:#639ee4,header:#658595,info:#639ee4,pointer:#b888e2,marker:#639ee4,prompt:#b888e2
+'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+_fzf_comprun() {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
+    ssh)          fzf "$@" --preview 'dig {}' ;;
+    *)            fzf "$@" ;;
+  esac
+}
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # for iCloud
 export iCloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
@@ -70,14 +88,6 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 #------------------
 # New Commands
 #------------------
-
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-*} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
 
 icloud_update() {
   local dir="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/__icolud_update__"
