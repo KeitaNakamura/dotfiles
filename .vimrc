@@ -34,7 +34,7 @@ Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'lervag/vimtex', {'for': 'tex'}
 
 " navigation
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim' " for ag in 'ctrlp'
 
