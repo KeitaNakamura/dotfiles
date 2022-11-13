@@ -235,7 +235,7 @@ let g:vimtex_indent_enabled = 0
 "----------+
 " nerdtree |
 "----------+
-nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+nnoremap <silent> <C-e> :NERDTreeToggle<CR>:call lightline#update()<CR>
 let NERDTreeMapChangeRoot='l'
 let NERDTreeMapUpdir='h'
 let NERDTreeCascadeSingleChildDir=0
@@ -256,98 +256,64 @@ endif
 " lightline |
 "-----------+
 let g:lightline = {
-\ 'enable': {'statusline': 1, 'tabline': 0},
-\ 'colorscheme': 'neodark',
-\ 'mode_map': { 'c': 'NORMAL' },
-\ 'active': {
-\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-\ },
-\ 'component_function': {
-\   'modified': 'LightLineModified',
-\   'readonly': 'LightLineReadonly',
-\   'fugitive': 'LightLineFugitive',
-\   'filename': 'LightLineFilename',
-\   'fileformat': 'LightLineFileformat',
-\   'filetype': 'LightLineFiletype',
-\   'fileencoding': 'LightLineFileencoding',
-\   'mode': 'LightLineMode',
-\ },
-\   'component': {
-\     'readonly': '%{&readonly?"⭤":""}',
-\   },
-\ }
-
-function! LightLineModified()
-  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+      \ 'enable': {'statusline': 1, 'tabline': 0},
+      \ 'colorscheme': 'neodark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ['ctrlpmark'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filetype': 'LightlineFiletype',
+      \   'fileencoding': 'LightlineFileencoding',
+      \   'mode': 'LightlineMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \ },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+function! LightlineModified()
+  return &ft ==# 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help\|vimfiler' && &readonly ? '⭤' : ''
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
-
-function! LightLineFilename()
+function! LightlineFilename()
   let fname = expand('%:t')
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-       \ fname == '__Tagbar__' ? g:lightline.fname :
-       \ fname =~ 'NERD_tree' ? '' :
-       \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-       \ &ft == 'unite' ? unite#get_status_string() :
-       \ &ft == 'vimshell' ? vimshell#get_status_string() :
-       \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-       \ ('' != fname ? fname : '[No Name]') .
-       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+  return fname ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname =~# '^NERD_tree' ? '' :
+        \ (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
+        \ (fname !=# '' ? fname : '[No Name]') .
+        \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
 endfunction
-
-function! LightLineFugitive()
-  try
-    if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = '⭠ '  " edit here for cool mark
-      let _ = fugitive#head()
-      return strlen(_) ? mark._ : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-
-function! LightLineFileformat()
+function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
 endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
 endfunction
-
-function! LightLineMode()
+function! LightlineMode()
   let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-       \ fname == '__Tagbar__' ? 'Tagbar' :
-       \ fname =~ 'NERD_tree' ? 'NERDTree' :
-       \ &ft == 'unite' ? 'Unite' :
-       \ &ft == 'vimfiler' ? 'VimFiler' :
-       \ &ft == 'vimshell' ? 'VimShell' :
-       \ winwidth(0) > 60 ? lightline#mode() : ''
+  return fname ==# 'ControlP' ? 'CtrlP' :
+        \ fname =~# 'NERD_tree' ? 'NERDTree' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-
 function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
+  if expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-                              \ , g:lightline.ctrlp_next], 0)
+          \ , g:lightline.ctrlp_next], 0)
   else
     return ''
   endif
 endfunction
-
 let g:ctrlp_status_func = {
-\ 'main': 'CtrlPStatusFunc_1',
-\ 'prog': 'CtrlPStatusFunc_2',
-\ }
-
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
 function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
   let g:lightline.ctrlp_regex = a:regex
   let g:lightline.ctrlp_prev = a:prev
@@ -355,18 +321,6 @@ function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
   let g:lightline.ctrlp_next = a:next
   return lightline#statusline(0)
 endfunction
-
 function! CtrlPStatusFunc_2(str)
   return lightline#statusline(0)
 endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
