@@ -35,8 +35,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 
 " navigation
 Plug 'preservim/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'rking/ag.vim' " for ag in 'ctrlp'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " view
 Plug 'KeitaNakamura/neodark.vim'
