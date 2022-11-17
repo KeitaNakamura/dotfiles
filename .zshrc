@@ -37,8 +37,12 @@ zplug "KeitaNakamura/tmux-utils", as:command, use:"bin/*"
 # pure prompt
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-export PURE_PROMPT_SYMBOL="❯❯"
+export PURE_PROMPT_SYMBOL="❯"
+zstyle :prompt:pure:prompt:success color 11
 zstyle :prompt:pure:git:branch color '#999999'
+zstyle :prompt:pure:git:dirty color '#999999'
+zstyle :prompt:pure:git:stash color yellow
+zstyle :prompt:pure:git:stash show yes
 
 zplug check || zplug install
 zplug load
