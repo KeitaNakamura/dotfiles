@@ -6,10 +6,9 @@
 #                         
 #
 
-
-#------------------
-# zplug
-#------------------
+#-------+
+# zplug |
+#-------+
 
 if [ ! -d "${HOME}/.zplug" ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -47,13 +46,14 @@ zstyle :prompt:pure:git:stash show yes
 zplug check || zplug install
 zplug load
 
-#------------------
-# Settings
-#------------------
+#----------+
+# Settings |
+#----------+
 
 # enable brew completion
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+# highlight
 setopt interactivecomments
 ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 
@@ -92,9 +92,9 @@ export CLICOLOR=true
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-#------------------
-# New Commands
-#------------------
+#--------------+
+# New Commands |
+#--------------+
 
 icloud_update() {
   local dir="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/__icolud_update__"
