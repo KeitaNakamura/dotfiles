@@ -51,6 +51,9 @@ zplug load
 # Settings
 #------------------
 
+# enable brew completion
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 setopt interactivecomments
 ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 
