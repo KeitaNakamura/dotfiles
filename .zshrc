@@ -18,10 +18,10 @@ fi
 source ~/.zplug/init.zsh
 zplug "zplug/zplug"
 
-zplug zsh-users/zsh-syntax-highlighting
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # zsh-autosuggestions
-zplug zsh-users/zsh-autosuggestions
+zplug "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
 # auto complete
