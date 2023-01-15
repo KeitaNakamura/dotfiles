@@ -199,6 +199,21 @@ augroup vimrc-markdown
   autocmd FileType pandoc call s:markdown()
 augroup END
 
+"------+
+" toml |
+"------+
+function! s:toml()
+  " for TOMLX.jl
+  syntax match TOMLJuliaMacro "@jl"
+  syntax match TOMLJuliaMacro "@julia"
+  hi link TOMLJuliaMacro Macro
+endfunction
+
+augroup vimrc-toml
+  autocmd!
+  autocmd FileType toml call s:toml()
+augroup END
+
 " Setting for each plugin {{{1
 
 "---------------+
