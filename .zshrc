@@ -7,35 +7,26 @@
 #
 
 #-------+
-# zplug |
+# zinit |
 #-------+
 
-if [ ! -d "${HOME}/.zplug" ]; then
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  zsh
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-source ~/.zplug/init.zsh
-zplug "zplug/zplug"
-
-zplug "zsh-users/zsh-syntax-highlighting"
-
-# zsh-autosuggestions
-zplug "zsh-users/zsh-autosuggestions"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
-
-# auto complete
-zplug "marlonrichert/zsh-autocomplete"
-zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:*' insert-unambiguous no
-zstyle ':autocomplete:*' fzf-completion yes
-
-# for tmux plugin 'tmux-statusbar'
-zplug "KeitaNakamura/tmux-utils", as:command, use:"bin/*"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
 
 # pure prompt
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light "sindresorhus/pure"
 export PURE_PROMPT_SYMBOL="❯"
 zstyle :prompt:pure:prompt:success color 11
 zstyle :prompt:pure:git:branch color '#999999'
@@ -43,8 +34,22 @@ zstyle :prompt:pure:git:dirty color '#999999'
 zstyle :prompt:pure:git:stash color yellow
 zstyle :prompt:pure:git:stash show yes
 
-zplug check || zplug install
-zplug load
+# zsh-syntax-highlighting
+zinit light "zsh-users/zsh-syntax-highlighting"
+
+# zsh-autosuggestions
+zinit light "zsh-users/zsh-autosuggestions"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
+
+# auto complete
+zinit light "marlonrichert/zsh-autocomplete"
+zstyle ':autocomplete:*' widget-style menu-select
+zstyle ':autocomplete:*' insert-unambiguous no
+zstyle ':autocomplete:*' fzf-completion yes
+
+# for `tmuxx`
+zinit ice as"command" pick"bin/*"
+zinit light "KeitaNakamura/tmux-utils"
 
 #----------+
 # Settings |
