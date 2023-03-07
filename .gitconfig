@@ -6,9 +6,9 @@
 [alias]
     graph = "!f() {\
         if git branch --remotes | grep gh-pages > /dev/null; then\
-            git log --graph --oneline --decorate --all -30 --not origin/gh-pages;\
+            git log --graph --oneline --decorate --all -40 --not origin/gh-pages;\
         else\
-            git log --graph --oneline --decorate --all -30;\
+            git log --graph --oneline --decorate --all -40;\
         fi\
         }; f"
 [user]
