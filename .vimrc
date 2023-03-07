@@ -39,6 +39,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " view
 Plug 'KeitaNakamura/neodark.vim'
+Plug 'KeitaNakamura/aurora.vim'
 Plug 'itchyny/lightline.vim'
 
 call plug#end()
@@ -47,7 +48,7 @@ call plug#end()
 
 " color
 set termguicolors
-colorscheme neodark
+colorscheme aurora
 set cursorline " highlight current line
 
 " to get true color in vim+tmux
@@ -271,7 +272,7 @@ endif
 "-----------+
 let g:lightline = {
       \ 'enable': {'statusline': 1, 'tabline': 0},
-      \ 'colorscheme': 'neodark',
+      \ 'colorscheme': 'aurora',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ['ctrlpmark'] ],
       \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
