@@ -65,8 +65,8 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 # fzf
 export FZF_DEFAULT_OPTS='
   --bind=ctrl-k:kill-line
-  --color=fg:#aabbc4,fg+:#aabbc4,bg:#1f2f38,bg+:#263a45,hl:#658595,hl+:#c99720
-  --color=border:#475c69,spinner:#639ee4,header:#658595,info:#639ee4,pointer:#b888e2,marker:#639ee4,prompt:#b888e2
+  --color=fg:bright-black,fg+:bright-black,bg:black,bg+:black,hl:bright-white,hl+:bright-yellow
+  --color=border:bright-black,spinner:bright-blue,header:bright-black,info:blue,pointer:magenta,marker:bright-blue,prompt:magenta
 '
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
