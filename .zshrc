@@ -41,11 +41,17 @@ zinit light "zsh-users/zsh-syntax-highlighting"
 zinit light "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
+# zsh-completions
+zinit light "zsh-users/zsh-completions"
+zstyle ':completion:::::default' menu yes select             # always say yes when showning menu (https://unix.stackexchange.com/questions/563774/how-to-tell-zsh-to-directly-enter-the-auto-completion-list)
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' # case-insensitive matching (https://superuser.com/questions/1092033/how-can-i-make-zsh-tab-completion-fix-capitalization-errors-for-directories-and)
+
 # auto complete
-zinit light "marlonrichert/zsh-autocomplete"
-zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:*' insert-unambiguous no
-zstyle ':autocomplete:*' fzf-completion yes
+# zinit light "marlonrichert/zsh-autocomplete"
+# bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+# bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+# # zstyle ':autocomplete:*' insert-unambiguous no
+# # zstyle ':autocomplete:*' fzf-completion yes
 
 # for `tmuxx`
 zinit ice as"command" pick"bin/*"
@@ -57,6 +63,8 @@ zinit light "KeitaNakamura/tmux-utils"
 
 # enable brew completion
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+autoload -Uz compinit
+compinit
 
 # highlight
 setopt interactivecomments
