@@ -48,6 +48,7 @@ call plug#end()
 
 " color
 set termguicolors
+" let g:aurora#smart_cursor=1
 colorscheme aurora
 set cursorline " highlight current line
 
@@ -99,6 +100,7 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set fileencodings=utf-8,sjis
 set spelllang=en,cjk
+set maxmempattern=10000 " fix E363: pattern uses more memory than 'maxmempattern', '1000' by default
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " tex
