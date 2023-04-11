@@ -47,10 +47,10 @@ colors:
     white:      '0x6C8493'
   bright:
     black:      '0x4D6477'
-    red:        '0xD197A2'
+    red:        '0xD280A1'
     green:      '0x67AFA7'
     yellow:     '0xC2993D'
     blue:       '0x76B2D2'
-    magenta:    '0x3D4958'
-    cyan:       '0x29313e'
+    magenta:    '0x29313E'
+    cyan:       '0x3D4958'
     white:      '0xADBBC3'
