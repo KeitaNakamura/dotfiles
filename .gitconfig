@@ -1,6 +1,6 @@
 [core]
 	editor = nvim
-	pager = LESSCHARSET=utf-8 less
+	pager = diff-so-fancy | less --tabs=4 -RFX
 	quotepath = false
 	ignorecase = false
 [alias]
@@ -16,12 +16,11 @@
 	email = keita.nakamura.1109@gmail.com
 [github]
 	user = KeitaNakamura
-[pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
 [credential]
 	helper = osxkeychain
 [pull]
 	rebase = false
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
