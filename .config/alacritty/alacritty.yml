@@ -51,6 +51,6 @@ colors:
     green:      '0x67AFA7'
     yellow:     '0xC2993D'
     blue:       '0x76B2D2'
-    magenta:    '0x29313E'
-    cyan:       '0x3D4958'
+    magenta:    '0x3D4958'
+    cyan:       '0x29313E'
     white:      '0xADBBC3'
