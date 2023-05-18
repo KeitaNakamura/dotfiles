@@ -83,6 +83,7 @@ _fzf_comprun() {
   shift
   case "$command" in
     cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    vim)          fzf "$@" --preview 'bat --theme=Aurora --color=always {} 2>/dev/null || tree -C {} | head -200' --preview-window '~3' ;;
     export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
     ssh)          fzf "$@" --preview 'dig {}' ;;
     *)            fzf "$@" ;;
