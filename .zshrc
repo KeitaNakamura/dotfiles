@@ -34,17 +34,11 @@ zstyle :prompt:pure:git:dirty color '#999999'
 zstyle :prompt:pure:git:stash color yellow
 zstyle :prompt:pure:git:stash show yes
 
-# zsh-syntax-highlighting
-zinit light "zsh-users/zsh-syntax-highlighting"
-
-# zsh-autosuggestions
-zinit light "zsh-users/zsh-autosuggestions"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
-
 # zsh-completions
 zinit light "zsh-users/zsh-completions"
 zstyle ':completion:::::default' menu yes select             # always say yes when showning menu (https://unix.stackexchange.com/questions/563774/how-to-tell-zsh-to-directly-enter-the-auto-completion-list)
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' # case-insensitive matching (https://superuser.com/questions/1092033/how-can-i-make-zsh-tab-completion-fix-capitalization-errors-for-directories-and)
+autoload -Uz compinit && compinit
 
 # auto complete
 # zinit light "marlonrichert/zsh-autocomplete"
@@ -53,18 +47,53 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' # case-insensitive 
 # # zstyle ':autocomplete:*' insert-unambiguous no
 # # zstyle ':autocomplete:*' fzf-completion yes
 
+# zsh-syntax-highlighting
+zinit light "zsh-users/zsh-syntax-highlighting"
+
+# zsh-autosuggestions
+zinit light "zsh-users/zsh-autosuggestions"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
+
+# fzf
+zinit ice from"gh-r" as"program"
+zinit light "junegunn/fzf"
+## fzf key bindings and fuzzy completion
+zinit ice depth"1" \
+  id-as"fzf-extensions" \
+  pick"/dev/null" \
+  multisrc"shell/{completion,key-bindings}.zsh"
+zinit light "junegunn/fzf"
+
+# bat
+zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat"
+zinit light "sharkdp/bat"
+
+# diff-so-fancy
+zinit ice from"gh-r" as"program"
+zinit light "so-fancy/diff-so-fancy"
+
 # for `tmuxx`
-zinit ice as"command" pick"bin/*"
+zinit ice as"program" pick"bin/*"
 zinit light "KeitaNakamura/tmux-utils"
 
 #----------+
 # Settings |
 #----------+
 
-# enable brew completion
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-autoload -Uz compinit
-compinit
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt INC_APPEND_HISTORY_TIME
+
+# enable zsh completion
+case "$OSTYPE" in
+  darwin*)
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  ;;
+  linux*)
+  ;;
+esac
 
 # highlight
 setopt interactivecomments
@@ -89,7 +118,6 @@ _fzf_comprun() {
     *)            fzf "$@" ;;
   esac
 }
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # for iCloud
 export iCloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
