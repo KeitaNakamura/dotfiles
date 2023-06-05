@@ -17,7 +17,7 @@
 [github]
 	user = KeitaNakamura
 [credential]
-	helper = osxkeychain
+	helper = store
 [pull]
 	rebase = false
 [init]
