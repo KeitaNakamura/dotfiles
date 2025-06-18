@@ -13,8 +13,8 @@ let g:email = "keita.nakamura.1109@gmail.com"
 call plug#begin('~/.vim/plugged')
 let g:plug_shallow = 0
 
-Plug 'vim-jp/vimdoc-ja'
-set helplang=ja,en
+" Plug 'vim-jp/vimdoc-ja'
+" set helplang=ja,en
 
 " general
 Plug 'scrooloose/nerdcommenter'
@@ -264,10 +264,7 @@ let g:NERDTreeDirArrowCollapsible = '-'
 "-------+
 " CtrlP |
 "-------+
-if executable('ag')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
-endif
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "-----------+
 " lightline |

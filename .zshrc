@@ -54,27 +54,18 @@ zinit light "zsh-users/zsh-syntax-highlighting"
 zinit light "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
-# fzf
-zinit ice from"gh-r" as"program"
-zinit light "junegunn/fzf"
-## fzf key bindings and fuzzy completion
-zinit ice depth"1" \
-  id-as"fzf-extensions" \
-  pick"/dev/null" \
-  multisrc"shell/{completion,key-bindings}.zsh"
-zinit light "junegunn/fzf"
-
-# bat
-zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat"
-zinit light "sharkdp/bat"
-
-# diff-so-fancy
-zinit ice from"gh-r" as"program"
-zinit light "so-fancy/diff-so-fancy"
-
-# for `tmuxx`
+# `tmuxx`
 zinit ice as"program" pick"bin/*"
 zinit light "KeitaNakamura/tmux-utils"
+
+# tmux plugin manager
+[ ! -d $HOME/.tmux/plugins/tpm ] &&
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
+# vim-plug
+[ ! -f $HOME/.local/share/nvim/site/autoload/plug.vim ] &&
+sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 #----------+
 # Settings |
@@ -100,6 +91,8 @@ setopt interactivecomments
 ZSH_HIGHLIGHT_STYLES[comment]='fg=red,bold'
 
 # fzf
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 export FZF_DEFAULT_OPTS='
   --bind=ctrl-k:kill-line
   --color=fg:bright-black,fg+:bright-black,bg:black,bg+:black,hl:bright-white,hl+:bright-yellow
@@ -134,11 +127,22 @@ export CLICOLOR=true
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
+# python
+if command -v pyenv > /dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 #--------------+
 # New Commands |
 #--------------+
 
 icloud_update() {
-  local dir="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/__icolud_update__"
-  mkdir "$dir" && sleep 1 && rm -r "$dir"
+  local dir="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/.__icolud_update__"
+  rm -rf "$dir" && mkdir "$dir" && sleep 1 && rm -r "$dir"
+}
+
+run() {
+  nohup "$@" > /dev/null 2>&1 &!
 }
